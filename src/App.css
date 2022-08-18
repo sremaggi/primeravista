@@ -13,6 +13,8 @@
   }
 }
 
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
