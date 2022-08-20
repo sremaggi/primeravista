@@ -2,6 +2,8 @@ import React from "react";
 import {Container,Row,Col} from 'react-grid-system';
 import styled from "styled-components";
 import { BsCalendarDate } from "react-icons/bs";
+import { FaBed } from "react-icons/fa";
+import { FcHome,FcCalendar, FcComments, FcMindMap, FcSms, FcLandscape, FcCellPhone } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 
@@ -10,30 +12,56 @@ function ButtonContainer() {
 
     return (
       <div>
-        <Row style={{height: 80,marginTop:5}}>
-            <Col style={{backgroundColor:'green',margin:2}}>
-            </Col>
-            <Col style={{margin:2,padding:5}}>
+        <Row style={{height: 80}}>
+        <Col style={{padding:1}}>
                <button onClick={()=>{
                 <Link to={"bookings"} />
-              }}  style={{width:"100%"}}>
+              }}  style={{width:"100%",height:"100%",backgroundColor:'green'}}>
               <Row style={{justifyContent:"center"}}>
-              <BsCalendarDate size={40}/>
+              <FcHome style={{margin:5,color:"white"}} size={40}/>
               </Row> 
-              <Row style={{justifyContent:"center"}}>
-              <p>Disponibilidad</p>
+              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              Información General
               </Row>   
               </button> 
-            
-
-
+            </Col>
+            <Col style={{padding:1}}>
+               <button onClick={()=>{
+                <Link to={"bookings"} />
+              }}  style={{width:"100%",height:"100%",backgroundColor:'green'}}>
+              <Row style={{justifyContent:"center",color:"white"}}>
+              <FcCalendar style={{margin:5}} size={40}/>
+              </Row> 
+              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              Disponibilidad
+              </Row>   
+              </button> 
             </Col>
         </Row>
-        <Row style={{height: 80,marginTop:30}}>
-            <Col style={{backgroundColor:'green',margin:2}}>
-        
+        <Row style={{height: 80}}>
+        <Col style={{padding:1}}>
+               <button onClick={()=>{
+                <Link to={"bookings"} />
+              }}  style={{width:"100%",backgroundColor:'green'}}>
+              <Row style={{justifyContent:"center"}}>
+              <FcSms style={{margin:5}} size={40}/>
+              </Row> 
+              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              Comentarios
+              </Row>   
+              </button> 
             </Col>
-            <Col style={{backgroundColor:'green',margin:2}}>
+            <Col style={{padding:1}}>
+               <button onClick={()=>{
+                <Link to={"bookings"} />
+              }}  style={{width:"100%",backgroundColor:'green'}}>
+              <Row style={{justifyContent:"center",color:"white"}}>
+              <FcCellPhone style={{margin:5}} size={40}/>
+              </Row> 
+              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              Contacto
+              </Row>   
+              </button> 
             </Col>
         </Row>
       </div>
