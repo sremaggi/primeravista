@@ -22,24 +22,19 @@ function NavbarLogin(props) {
             {props.title}
             </Col>    
             <Col style={{backgroundColor:"#353535",justifyContent:"center",display:"flex",flexDirection:"column"}}>
-            <Row style={{fontSize:12,display:"flex",padding:2,color:"purple",justifyContent:"center",color:"white"}}>
+            <Row style={{fontSize:8,display:"flex",padding:2,color:"purple",justifyContent:"center",color:"white"}}>
             Bienvenid@!
             </Row>  
-            <Row style={{backgroundColor:"green",padding:2,fontSize:12,fontWeight:"bold",color:"white",justifyContent:"center"}}>
+            <Row style={{backgroundColor:"green",padding:2,fontSize:10,fontWeight:"bold",color:"white",justifyContent:"center"}}>
             {context.user.given_name}
             </Row>
-            <Row style={{padding:2,fontSize:10,justifyContent:"center",color:"white"}}>
+            <Row style={{padding:2,fontSize:8,justifyContent:"center",color:"white"}}>
             Tienes 0 reservas activas
             </Row>
-
-
-            </Col>    
-      
-           
+            </Col>     
             <Link to={"/profile"}>
-            <img src={context.user.picture} height={80} style={{display:"flex",margin:1}} />
-            </Link>
-   
+            <img src={context.user.picture} height={60} style={{display:"flex",margin:1}}/>
+            </Link>  
             </Row>
             </NavContainer>
         </>
@@ -55,7 +50,6 @@ const NavContainer = styled.nav`
   padding: .4rem;
   background-color: #454545;
   display: flex;
-  align-items: center;
   justify-content:space-around;
   a{
     color: white;
@@ -68,19 +62,3 @@ const NavContainer = styled.nav`
   }
 `;
 
-
-/*<Col sm={9} style={{display:"flex",backgroundColor:"#F5F5F5",alignItems:"start",justifyContent:"end"}}>
-</Col>
-
-<Col sm={3} style={{display:"flex",backgroundColor:"#F5F5F5",alignItems:"center",justifyContent:"end"}}>
-<div style={{flexDirection:"column"}}>
-<p>{context.user.given_name}</p>
-<Link to={"/"}>
-<button onClick={()=>{
-    context.setUser({})
-}} title="salir" style={{display:"flex",width:"100%",justifyContent:"center",backgroundColor:"red",color:"white",alignContent:"center"}}>Cerrar Sesión</button>
-</Link>
-
-</div>
-<img src={context.user.picture} height={80} style={{display:"flex",margin:10}}/>
-</Col>*/

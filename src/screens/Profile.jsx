@@ -12,8 +12,9 @@ function Profile() {
     const context = useContext(Context)
     return (
         <div>
+                 <TitleContainer />
         <Container >
-        <TitleContainer />
+   
 
 
     
@@ -34,7 +35,6 @@ function Profile() {
         <Link to='/'>
 <button style={{backgroundColor:"red",color:"white",padding:10}} onClick={()=>{
     context.setUser({})
-    return <App />
 }}>Cerrar Sesión</button>
 </Link>
 

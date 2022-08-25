@@ -11,6 +11,7 @@ import Signin from "./screens/Signin";
 import WelcomeScreen from "./screens/Welcome";
 import BookingsScreen from "./screens/Bookings";
 import Profile from "./screens/Profile";
+import Request from "./screens/Request";
 
 
 export const Context = React.createContext({});
@@ -23,31 +24,20 @@ function App() {
 
   return (
        <main>
-        <BrowserRouter>
-     
         <Context.Provider  value={{
         user,
         setUser
       }}>
-       {Object.keys(user) != 0 ? 
-
+       {
        <Routes>
         <Route path="/" element={<WelcomeScreen/>}></Route>
-       <Route path="/signin" element={<HomeScreen/>}></Route>
-       <Route path="/profile" element={<Profile/>}></Route>
-       </Routes>
-
-       :
-
-       <Routes>
-        <Route path="/" element={<WelcomeScreen/>}></Route>
-        <Route path="/signin" element={<Signin/>}></Route>
-        <Route path="/profile" element={<Profile/>}></Route>
-        <Route path="/bookings" element={<BookingsScreen />}></Route>
+        <Route path="/Signin" element={<Signin/>}></Route>
+        <Route path="/Profile" element={<Profile/>}></Route>
+        <Route path="/Bookings" element={<BookingsScreen />}></Route>
+        <Route path="/Bookings/Request" element={<Request />}></Route>
        </Routes>
       }
       </Context.Provider>
-      </BrowserRouter>
        </main>
 
 

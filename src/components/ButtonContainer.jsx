@@ -26,8 +26,9 @@ function ButtonContainer() {
               </button> 
             </Col>
             <Col style={{padding:1}}>
+            <Link to={"/Bookings"} >
                <button onClick={()=>{
-                <Link to={"bookings"} />
+            
               }}  style={{width:"100%",height:"100%",backgroundColor:'green'}}>
               <Row style={{justifyContent:"center",color:"white"}}>
               <FcCalendar style={{margin:5}} size={40}/>
@@ -36,6 +37,7 @@ function ButtonContainer() {
               Disponibilidad
               </Row>   
               </button> 
+              </Link>
             </Col>
         </Row>
         <Row style={{height: 80}}>

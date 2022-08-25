@@ -10,14 +10,13 @@ function HomeScreen() {
 
     return (
         <div>
-        <Container >
+        <Container>
         <TitleContainer />
+        </Container>        
+
         <NavbarLogin title="Página de Inicio" />
-        <Row style={{marginTop:2}} >
-        <Col>
         <Gallery />
-        </Col>     
-        </Row>
+        <Container >
         <ButtonContainer />
        </Container>
        </div>

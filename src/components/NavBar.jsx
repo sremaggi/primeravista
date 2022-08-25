@@ -26,7 +26,7 @@ function Navbar(props) {
               </div>
    
                 
-                <Link to='signin'>
+                <Link to='/Signin'>
                   <button style={{display:"flex",alignContent:'center',justifyContent:'space-around', backgroundColor:'green',color:"white",padding:10}}>Iniciar Sesión<FcNext style={{display:'flex',justifyContent:'center',alignItems:'center',marginLeft:2}} size={15}/></button>
                 </Link>
  

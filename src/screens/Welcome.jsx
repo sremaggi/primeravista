@@ -9,14 +9,12 @@ function WelcomeScreen() {
     
     return (
         <div>
-       <Container >
-       <TitleContainer />
-        <Navbar />
-        <Row style={{marginTop:2}}>
-        <Col>
+         <Container>
+         <TitleContainer />
+            </Container>   
+            <Navbar />
         <Gallery />
-        </Col>     
-        </Row>
+       <Container >
         <ButtonContainer />
        </Container>
        </div>
