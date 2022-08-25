@@ -20,9 +20,6 @@ function TitleContainer() {
                    <Col style={{display:"flex",justifyContent:"center"}}>
                    Primera Vista
                    </Col>     
-           
-
-
                 </Row>
                 <Row  style={  {
                     display:"flex" ,
