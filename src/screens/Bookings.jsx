@@ -2,25 +2,25 @@ import React,{useContext} from "react";
 import styled from "styled-components";
 import {Container,Row,Col} from 'react-grid-system';
 import TitleContainer from "../components/TitleContainer";
-import { Context } from "../App";
+
 import NavbarLogin from "../components/NavBarLogin";
 import Navbar from "../components/NavBar";
 import CalendarComponent from "../components/Calendar";
+import { UserAuth } from "../context/AuthContext";
 
 
 
 
 function Bookings() {
-    const context = useContext(Context)
+    const {user} = UserAuth()
     return (
        <div>
              <Container >
              <TitleContainer />
-</Container>
+            </Container>
 
-        {Object.keys(context.user) != 0 ? <NavbarLogin title="Disponibilidad" />:<Navbar />}
-        <CalendarComponent />
-
+        {user?.displayName ? <NavbarLogin title="Disponibilidad" />:<Navbar />}
+        <CalendarComponent />   
        </div> 
   
     );

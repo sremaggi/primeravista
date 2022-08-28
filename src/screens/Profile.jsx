@@ -5,14 +5,27 @@ import TitleContainer from "../components/TitleContainer";
 import NavbarLogin from "../components/NavBarLogin";
 import App, { Context } from "../App";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
+import { collection, addDoc,getDocs} from "firebase/firestore"; 
+import GetMyReqs from "../components/GetMyReq";
 
 
 
 function Profile() {
-    const context = useContext(Context)
+    const { user, logOut } = UserAuth();
+    console.log("USER ",user)
+    
+
+  const handleSignOut = async () => {
+    try {
+      await logOut()
+    } catch (error) {
+      console.log(error)
+    }
+  }
     return (
         <div>
-                 <TitleContainer />
+         <TitleContainer />
         <Container >
    
 
@@ -23,22 +36,37 @@ function Profile() {
         </Row>
         <div style={{marginTop:10,backgroundColor:"white",justifyContent:"center"}}>
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
-        <img src={context.user.picture} height={100} style={{display:"flex",margin:5}} />
+        <img src={user.photoURL} height={100} style={{display:"flex",margin:5}} />
         </Row>
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
-        {context.user.name}
+        {user.displayName}
         </Row>
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
-        {context.user.email}
+        {user.email}
         </Row>
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
         <Link to='/'>
-<button style={{backgroundColor:"red",color:"white",padding:10}} onClick={()=>{
-    context.setUser({})
-}}>Cerrar Sesión</button>
+<button style={{backgroundColor:"red",color:"white",padding:10}} onClick={handleSignOut}>Cerrar Sesión</button>
 </Link>
 
         </Row>
+        <Row style={{display:"flex",padding:10,marginTop:5,justifyContent:"center",marginTop:50,fontSize:25}}>
+          
+          Mis Solicitudes
+          </Row>
+          <GetMyReqs />
+        {user.email == "seba.rf96@gmail.com" ?
+        <div style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center",flexDirection:"column",padding:10}}>
+        Rol: Admin  
+        <button style={{backgroundColor:"purple",padding:20,color:"white",fontSize:20}}> Panel de administración</button>
+        </div>          
+        : 
+        <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
+         Rol: Usuario
+        </Row>
+        }
+
+
         </div>
        </Container>
        </div>

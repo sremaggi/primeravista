@@ -5,9 +5,11 @@ import { es } from 'date-fns/locale'
 import {Container,Row,Col} from 'react-grid-system';
 import { addDays, format} from "date-fns";
 import { Context } from "../App";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { UserAuth } from '../context/AuthContext';
+import Request from '../screens/Request';
 
 
 const bookings = [{
@@ -157,7 +159,8 @@ function customDayContent(day) {
 
 
 function CalendarComponent() {
-    const context = useContext(Context)
+  const navigate = useNavigate();
+   const {user} = UserAuth();
     const [state, setState] = useState([
         {
             startDate:new Date(),
@@ -257,20 +260,38 @@ locale={es}
 
  </Row>
  <Row style={{display:"flex",justifyContent:"center"}}>
-   {Object.keys(context.user) != 0 ? 
-   <Link to={"/Bookings/Request"}>
+   {user?.displayName ? 
+
         <button 
+        onClick={()=>{
+          navigate('/bookings/request', {state:{ 
+            mount: (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
+            + (getLowDemand(state)*85000) + (getHighDemand(state)*105000) ,
+            startDate:{y:state[0].startDate.getFullYear(),
+              m:state[0].startDate.getMonth(),
+              d:state[0].startDate.getUTCDate()},
+            finishDate:{y:state[0].endDate.getFullYear(),
+              m:state[0].endDate.getMonth(),
+              d:state[0].endDate.getUTCDate()},
+            days:{
+              hd: getHighDemand(state),
+              ld: getLowDemand(state),
+              nd: ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state))),
+              total:((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1
+            }  
+          }})
+        }}
     style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Realizar solicitud</button>
-   </Link>
+ 
     :
-    <Link to={"/Bookings"}>
+
         <button 
     onClick={()=>{
      alert("Debes iniciar sesión para poder realizar una solicitud.")
         
     }}
     style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Realizar solicitud</button>
-    </Link>}
+  }
 
    
  </Row>

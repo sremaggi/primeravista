@@ -1,17 +1,16 @@
 import React, { useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FaSignInAlt } from "react-icons/fa";
-import { Context } from "../App";
 import {Container,Row,Col} from 'react-grid-system';
+import { UserAuth } from "../context/AuthContext";
 
 
 
 
 
 function NavbarLogin(props) {
-  const context = useContext(Context)
 
+  const {user} = UserAuth()
 
     return (
         <>  
@@ -26,14 +25,14 @@ function NavbarLogin(props) {
             Bienvenid@!
             </Row>  
             <Row style={{backgroundColor:"green",padding:2,fontSize:10,fontWeight:"bold",color:"white",justifyContent:"center"}}>
-            {context.user.given_name}
+            {user.displayName}
             </Row>
             <Row style={{padding:2,fontSize:8,justifyContent:"center",color:"white"}}>
             Tienes 0 reservas activas
             </Row>
             </Col>     
             <Link to={"/profile"}>
-            <img src={context.user.picture} height={60} style={{display:"flex",margin:1}}/>
+            <img src={user.photoURL} height={60} style={{display:"flex",margin:1}}/>
             </Link>  
             </Row>
             </NavContainer>

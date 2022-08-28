@@ -20,7 +20,7 @@
     "@testing-library/user-event": "^13.5.0",
     "date-fns": "^2.29.2",
     "dotenv": "^16.0.1",
-    "firebase": "^9.9.2",
+    "firebase": "^9.9.3",
     "fs": "0.0.1-security",
     "gapi-script": "^1.2.0",
     "jwt-decode": "^3.1.2",
@@ -30,6 +30,7 @@
     "react-calendar": "^3.7.0",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-facebook-login-button": "^2.0.3",
     "react-gapi": "^1.0.2",
     "react-google-button": "^0.7.2",
     "react-google-login": "^5.2.2",
@@ -46,7 +47,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },

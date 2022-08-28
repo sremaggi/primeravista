@@ -1,58 +1,36 @@
-import React, { useEffect,useState,useContext } from "react";
+import React, { useEffect} from "react";
 import {
-    BrowserRouter,
-    Routes,
-    Route,
-    useHref,
-    Link
+    useNavigate
   } from "react-router-dom";
-
-import jwtDecode from "jwt-decode";
 import styled from "styled-components";
-import HomeScreen from "./Home";
-import {Container,Row,Col} from 'react-grid-system';
-import { Context } from "../App";
+import {Container,Row} from 'react-grid-system';
 import TitleContainer from "../components/TitleContainer";
-
-const {REACT_APP_CLIENT_ID} = process.env;
-
-
+import GoogleButton from "react-google-button";
+import { UserAuth } from "../context/AuthContext";
+import SigninForm from "../components/FormSignIn";
 
 function Signin() {
-    const context = useContext(Context)
-
-
-    function handleCallBackResponse(response){
-      var userObject = jwtDecode(response.credential)
-
-      context.setUser(userObject)
-
-      
-
-    }
-    useEffect(()=>{
-      /* global google*/ 
-  
-      if (google.accounts.id){
-        google.accounts.id.initialize({
-          client_id:REACT_APP_CLIENT_ID,
-          callback: handleCallBackResponse,
-         })
-         google.accounts.id.renderButton(
-          document.getElementById("signInDiv"),
-          {theme:"outline",size:"large"}
-         )
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)
+    const navigate = useNavigate();
+    const {googleSignIn,setUser,user} = UserAuth();
+    const handleGoogleSignin = async () =>{
+      try {
+          await googleSignIn();
+      }catch(e){
+        alert(e)
       }
-      
-  
-    },[context.user])
-    return (
-      
+    }
+    useEffect(() => {
+      if (user != null) {
+        navigate('/Home');
+      }
+    }, [user]);
 
-      <div>
-        {Object.keys(context.user) == 0 ? 
-        <div> 
-                 <Container> 
+    return (
+
+       <div> 
+       <Container> 
        <TitleContainer/>
        </Container>
          <Row style={{justifyContent:"center",backgroundColor:"#454545",color:"white",padding:5}}>
@@ -61,25 +39,26 @@ function Signin() {
          <Container>
          <DivContainer>
          <Row style={{justifyContent:"center",color:"white",padding:5}}>
-         <img  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2Fkrika3.jpeg?alt=media&token=0609ac50-a4d1-4be3-909a-41c798ba7eab" height={80} width={80} style={{display:"flex",margin:1,borderRadius:100}}/>
+         <img  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2Fkrika3.jpeg?alt=media&token=0609ac50-a4d1-4be3-909a-41c798ba7eab" height={100} width={100} style={{display:"flex",margin:1,borderRadius:100}}/>
          </Row>
- 
-         <Row style={{justifyContent:"center"}}>
-         <p style={{fontSize:13,width:"100%",display:"flex",justifyContent:"center"}}>Te recomendamos ingresar con tu cuenta de google.</p>  
+   
+         <SigninForm />
 
-         <div id="signInDiv" style={{display:"flex",marginTop:1}}></div>
- 
+         <Row style={{justifyContent:"center",margin:2}}>
+
+         {
+          isSafari || isChrome ? 
+          <div >
+            <p>o ingresa con tu cuenta de google!</p>
+          <GoogleButton title="google" style={{padding:1}} onClick={handleGoogleSignin}>Iniciar Sesión</GoogleButton>
+          </div>
+          :
+          <p style={{fontSize:10,width:"100%",display:"flex",justifyContent:"center"}}>Para iniciar Sesión con google entra directamente en Safari o Chrome</p> 
+          }
          </Row>
          </DivContainer>
         </Container>
         </div>
-        :<HomeScreen />}
-
-      </div>
-
-  
-
-
 
     );
 }

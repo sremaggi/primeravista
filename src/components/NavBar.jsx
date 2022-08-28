@@ -2,19 +2,18 @@ import React, { useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FcNext } from "react-icons/fc";
-import { Context } from "../App";
+
 
 
 
 
 
 function Navbar(props) {
-  const context = useContext(Context)
+
 
 
     return (
-        <>  
-            
+        <div>  
             <NavContainer>
               <div style={{display:'flex',flexDirection:'column'}}>
               <div style={{display:'flex',color:"white",fontWeight:'bold'}}>
@@ -26,12 +25,12 @@ function Navbar(props) {
               </div>
    
                 
-                <Link to='/Signin'>
+                <Link to={"/signin"}>
                   <button style={{display:"flex",alignContent:'center',justifyContent:'space-around', backgroundColor:'green',color:"white",padding:10}}>Iniciar Sesión<FcNext style={{display:'flex',justifyContent:'center',alignItems:'center',marginLeft:2}} size={15}/></button>
                 </Link>
  
             </NavContainer>
-        </>
+        </div>
     );
 }
 

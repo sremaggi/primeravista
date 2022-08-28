@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import RegistrationForm from "../components/FormSignUp";
+import TitleContainer from "../components/TitleContainer";
 
 
 
 function Signup() {
     return (
-       <Container>
-        Signup
-       </Container>
+        <div>
+    <TitleContainer/>       
+     <RegistrationForm />
+        </div>
+
     );
 }
 

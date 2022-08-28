@@ -23,7 +23,6 @@ function TitleContainer() {
                 </Row>
                 <Row  style={  {
                     display:"flex" ,
-         
                     fontFamily:"fantasy",
                     fontSize:13,
                     height:40 ,         
@@ -31,10 +30,7 @@ function TitleContainer() {
                     }}>
                    <Col style={{display:"flex",justifyContent:"center"}}>
                    <SubTitle> Hospedaje frente al mar</SubTitle>
-                   </Col>     
-             
-
-
+                   </Col>   
                 </Row>
 </div>
 

@@ -5,6 +5,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Link,
 } from "react-router-dom";
 import HomeScreen from "./screens/Home";
 import Signin from "./screens/Signin";
@@ -12,6 +13,9 @@ import WelcomeScreen from "./screens/Welcome";
 import BookingsScreen from "./screens/Bookings";
 import Profile from "./screens/Profile";
 import Request from "./screens/Request";
+import { AuthContextProvider} from "./context/AuthContext";
+import Protected from "./components/Protected";
+import Signup from "./screens/Signup";
 
 
 export const Context = React.createContext({});
@@ -19,32 +23,20 @@ export const Context = React.createContext({});
 
 function App() {
 
-
-  const [user,setUser] = useState({})
-
   return (
-       <main>
-        <Context.Provider  value={{
-        user,
-        setUser
-      }}>
-       {
+      <AuthContextProvider>
        <Routes>
-        <Route path="/" element={<WelcomeScreen/>}></Route>
-        <Route path="/Signin" element={<Signin/>}></Route>
-        <Route path="/Profile" element={<Profile/>}></Route>
-        <Route path="/Bookings" element={<BookingsScreen />}></Route>
-        <Route path="/Bookings/Request" element={<Request />}></Route>
+        <Route path="/" element={<WelcomeScreen/>} />
+        <Route path="/home" element={<Protected><HomeScreen/></Protected>} />
+        <Route path="/profile" element={<Protected><Profile/></Protected>} />
+        <Route path="/bookings" element={<BookingsScreen/>} />
+        <Route path="/signin" element={<Signin/>} />
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/bookings/request" element={<Request />} />
+        <Route path="*" element={<Protected><HomeScreen/></Protected>} />
        </Routes>
-      }
-      </Context.Provider>
-       </main>
 
-
-     
-       
-
-
+      </AuthContextProvider>
   );
 }
 
