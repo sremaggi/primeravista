@@ -3,31 +3,24 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
 import { Col, Container, Row } from "react-grid-system";
-import { Link, useNavigate } from "react-router-dom";
-import ReactLoading from 'react-loading';
+import { Link } from "react-router-dom";
 
+function GetAllReqs() {
 
-function GetMyReqs() {
-    const navigate = useNavigate()
     const [documents, setDocuments] = useState([]);
-    const [loadDocs,setLoadDocs] = useState(false)
     const {user} = UserAuth();
      //Firebase Collection Reference query
- 
-      if (user?.displayName){
-        const q = query(collection(firestore, "requests"),where("user.email", "==", user.email))
+     const q = query(collection(firestore, "requests"))
+     useEffect(() => {
         const getDocuments = async () => {
-         const data = await getDocs(q);
-         setDocuments(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-         setLoadDocs(true)
-     };
-     getDocuments();
-      }
+            const data = await getDocs(q);
+            setDocuments(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        };
 
+        getDocuments();
+    }, []);
 
-
-
-
+    console.log(documents)
 
     return (
         <Container>
@@ -72,14 +65,12 @@ function GetMyReqs() {
           </>
 
         ))}
-                <div style={{display:"flex",justifyContent:"center"}}>
-            {loadDocs ? "" :<ReactLoading type={"spinningBubbles"} color={"green"} height={40} width={40} />}
-            </div>
+    
       </Container>
     );
 }
 
-export default GetMyReqs;
+export default GetAllReqs;
 
 
 

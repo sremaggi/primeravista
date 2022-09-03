@@ -34,7 +34,7 @@ function SigninForm() {
                 
                 <label style={{fontSize:12,padding:5}}>Correo electronico</label>
                 <input   
-                        style={{padding:20,backgroundColor:"#EFFFED",height:20}}
+                        style={{padding:20,height:20}}
                         placeholder='Correo electronico'
                          type="text" 
                          value={email}
@@ -45,7 +45,7 @@ function SigninForm() {
                 </div>
                 <label style={{fontSize:12,padding:5}}>Contraseña</label>
                 <input placeholder='Contraseña'
-              style={{padding:20,backgroundColor:"#EFFFED"}}
+              style={{padding:20}}
                     type="password"
                     value={pwd}
                     onChange={(e) => setPwd(e.target.value)}

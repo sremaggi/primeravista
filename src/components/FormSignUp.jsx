@@ -5,30 +5,33 @@ import { getAuth, createUserWithEmailAndPassword,updateProfile} from "firebase/a
 import { auth, storage } from '../firebase';
 import { UserAuth } from '../context/AuthContext';
 import {ref,uploadBytesResumable,getDownloadURL} from "firebase/storage"
+import ReactLoading from 'react-loading';
 import {
     useNavigate
   } from "react-router-dom";
 
 function RegistrationForm() {
+    const [loadDocs,setLoadDocs] = useState(true)
     const navigate = useNavigate();
     const [file, setFile] = useState("");
-    const {user,setUser} = UserAuth();
+    const {setUser} = UserAuth();
     const [email,setEmail] = useState();
     const [pwd,setPwd] = useState("");
     const [confirmPwd,setConfirmPwd] = useState("");
-    const [name,setName] = useState();
-    const [surname,setSurname] = useState();
-    const [phone,setPhone] = useState();
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [urlImage,setUrl] = useState(null);
+    const [name,setName] = useState("");
+    const [surname,setSurname] = useState("");
+    const [phone,setPhone] = useState("");
+
        // progress
        const [percent, setPercent] = useState(0);
 
     function handleUpload() {
+        setLoadDocs(false)
         if (!file) {
+            setLoadDocs(true)
             alert("Elige una foto de perfil!")
         }
-        const storageRef = ref(storage, `/usersImages/${file.name}`)
+        const storageRef = ref(storage, `/usersImages/${file.name+new Date().toDateString()}`)
        const uploadTask = uploadBytesResumable(storageRef, file)
        uploadTask.on(
         "state_changed",
@@ -44,7 +47,36 @@ function RegistrationForm() {
         () => {
             // download url
             getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                setUrl(url)
+            
+                createUserWithEmailAndPassword(auth,email,pwd)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log('USER',user)
+                console.log('USER CREDENTIAL',userCredential)
+
+        
+                console.log("URL",url)
+                updateProfile(user,{
+                    displayName: name + " " + surname, 
+                    photoURL: url,
+                    phoneNumber:phone,
+                  }).then(()=>{
+                    setLoadDocs(true)
+                    alert("Usuario creado correctamente ",user.displayName)
+                    setUser(user)
+                    navigate("/Home")
+                  }).catch(e=>{
+                    setLoadDocs(true)
+                    alert(e)
+                  })
+
+              })
+              .catch((error) => {
+                setLoadDocs(true)
+                alert(error)
+              })
+              
             });
         },
 
@@ -97,7 +129,7 @@ function RegistrationForm() {
         />
                 <input   
                 style={{padding:20,backgroundColor:"#EFFFED",height:20}}
-                placeholder='Telefono'
+                placeholder='Teléfono'
                  type="text" 
                  value={phone}
                  onChange={(e) => setPhone(e.target.value)}
@@ -112,8 +144,6 @@ function RegistrationForm() {
                         {isEmailValid(email) && <p style={{fontSize:10,display:"flex",color:"red",padding:10}}>Email no valido</p>}
                         <label style={{fontSize:12,padding:5}}>Foto de perfil</label>
                         <input style={{height:30}} type="file" accept="image/*" onChange={handleChange}/>
-            <button style={{backgroundColor:"gold",color:"black",padding:10}} onClick={handleUpload}>Confirmar foto</button>
-            <p style={{fontSize:10,display:"flex",justifyContent:"center"}}>{percent}% Subiendo</p>
                         <input   
                 style={{padding:20,backgroundColor:"#EFFFED",height:20}}
                 placeholder='Password'
@@ -127,36 +157,21 @@ function RegistrationForm() {
             value={confirmPwd}
             onChange={(e) => setConfirmPwd(e.target.value)}
         />
-                                {(pwd == confirmPwd )
-                                ? <p style={{fontSize:10,display:"flex",color:"green",padding:10}}>Contraseñas coinciden</p>
+                                {(pwd == confirmPwd  )
+                                ? ""
                                :<p style={{fontSize:10,display:"flex",color:"red",padding:10}}>Contraseñas no coinciden</p>}
-        <button 
-        onClick={()=>{createUserWithEmailAndPassword(auth,email,pwd)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log('USER',user)
-                console.log('USER CREDENTIAL',userCredential)
-                console.log(urlImage)
-                updateProfile(user,{
-                    displayName: name + " " + surname, 
-                    photoURL: urlImage,
-                    phoneNumber:phone,
-                  }).then(()=>{
-                    alert("Usuario creado correctamente ",user.displayName)
-                    setUser(user)
-                    navigate("/Home")
-                  }).catch(e=>{
-                    alert(e)
-                  })
+        {name != "" && surname != "" && phone != "" && file != ""
+            && pwd != "" && confirmPwd != "" && loadDocs ==true ?
+            <button 
+            onClick={handleUpload}
+            style={{backgroundColor:"#3CAFFF",color:"white",padding:5}}><h3 style={{fontSize:14}}>Crear cuenta</h3></button>
+            :<p style={{display:"flex",justifyContent:"center",color:"red"}}>Debes rellenar todos los campos</p>
 
-              })
-              .catch((error) => {
-                console.log(error)
-              })}
-        
         }
-        style={{backgroundColor:"#3CAFFF",color:"white",padding:5}}><h3 style={{fontSize:14}}>Crear cuenta</h3></button>
+                    <div style={{display:"flex",justifyContent:"center"}}>
+            {loadDocs ? "" :<ReactLoading type={"spinningBubbles"} color={"green"} height={40} width={40} />}
+            </div>   
+
    
 
         

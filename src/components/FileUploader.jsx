@@ -11,7 +11,7 @@ export const FileUploader = ({props}) => {
         };
 return (
     <div>
-            <input type="file" onChange={handleFileInput} />
+            <input type="file" accept="image/*" onChange={handleFileInput} />
            <button onClick={e => fileInput.current && fileInput.current.click()} />
     </div>
 )

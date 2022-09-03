@@ -13,31 +13,60 @@ import Request from '../screens/Request';
 
 
 const bookings = [{
-    startDate:new Date(2022,8,9),
-    endDate: new Date(2022,8,10),
+    startDate:new Date(2022,8,16),
+    endDate: new Date(2022,8,19),
     key: 'selection',
     color:'red',
-    disabled: true,
-  },{
-    startDate:new Date(2022,8,12),
-    endDate: new Date(2022,8,14),
-    key: 'selection',
-    color:'red',
-
     disabled: true,
   }]
 
   const highDemands = [{
-    startDate:new Date(2022,8,18),
+    startDate:new Date(2022,8,16),
     endDate: new Date(2022,8,19),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,9,7),
+    endDate: new Date(2022,9,10),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,9,28),
+    endDate: new Date(2022,9,31),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
   }]
 
   const lowDemands = [{
-    startDate:new Date(2022,8,26),
-    endDate: new Date(2022,8,27),
+    startDate:new Date(2022,8,23),
+    endDate: new Date(2022,8,25),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,8,30),
+    endDate: new Date(2022,9,2),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,9,14),
+    endDate: new Date(2022,9,16),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,9,21),
+    endDate: new Date(2022,9,23),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,10,4),
+    endDate: new Date(2022,10,6),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
@@ -181,17 +210,17 @@ function CalendarComponent() {
         <Col   style={{color:"black",justifyContent:"center",display:"flex",fontSize:10,alignItems:"center"}}>
         Reservado
         </Col>
-        <Col style={{backgroundColor:"yellow",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
-        {state[0].endDate != null ? getLowDemand(state) :""}
+        <Col style={{backgroundColor:"green",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
+
         </Col>
         <Col   style={{color:"black",justifyContent:"center",display:"flex",fontSize:10,alignItems:"center"}}>
-        Tarifa media
+        Selección
         </Col>
-        <Col style={{backgroundColor:"orange",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
-        {state[0].endDate != null ? getHighDemand(state) :""}
+        <Col style={{backgroundColor:"grey",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
+     
         </Col>
         <Col   style={{color:"black",justifyContent:"center",display:"flex",fontSize:10,alignItems:"center"}}>
-        Tarifa alta
+        No disponible
         </Col>
         </Row>
         </Container>   
@@ -200,11 +229,11 @@ function CalendarComponent() {
 
 editableDateInputs={true}
 onChange={item => setState([item.selection].concat(bookings))}
-dayContentRenderer={customDayContent}
+
 moveRangeOnFirstSelection={false}
 ranges={state}
 minDate={addDays(new Date(),0)}
-maxDate={addDays(new Date(), 200)}
+maxDate={addDays(new Date(), 70)}
 direction="vertical"
 rangeColors={["white","white","white",]}
 color="#FFF4D1"
@@ -243,20 +272,13 @@ locale={es}
  </Row> 
 
  <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
-    <Col style={{display:"flex",justifyContent:"center"}}>
+    <Col style={{display:"flex",justifyContent:"end"}}>
     Dias
     </Col>
-    <Col style={{display:"flex",justifyContent:"center"}}>
+    <Col style={{display:"flex",justifyContent:"start"}}>
     { ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1}
     </Col>
-    <Col style={{display:"flex",justifyContent:"center"}}>
-    Monto
-    </Col>
-    <Col style={{display:"flex",justifyContent:"center"}}>
-    ${(((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
-      + (getLowDemand(state)*85000) + (getHighDemand(state)*105000)
-    }
-    </Col>
+
 
  </Row>
  <Row style={{display:"flex",justifyContent:"center"}}>

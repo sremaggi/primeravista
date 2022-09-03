@@ -50,7 +50,7 @@ function Profile() {
 </Link>
 
         </Row>
-        <Row style={{display:"flex",padding:10,marginTop:5,justifyContent:"center",marginTop:50,fontSize:25}}>
+        <Row style={{display:"flex",padding:10,marginTop:5,justifyContent:"center",marginTop:20,fontSize:18}}>
           
           Mis Solicitudes
           </Row>

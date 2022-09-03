@@ -1,13 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import InfoContainer from "../components/infoContainer";
+import Navbar from "../components/NavBar";
+import NavbarLogin from "../components/NavBarLogin";
+import TitleContainer from "../components/TitleContainer";
+import { UserAuth } from "../context/AuthContext";
 
 
 
 function Information() {
+    const {user} = UserAuth()
     return (
-       <Container>
-        Information
-       </Container>
+        <>
+        <TitleContainer />
+        {user?.displayName ? <NavbarLogin />: <Navbar />}
+        <InfoContainer />
+       </>
     );
 }
 

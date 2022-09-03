@@ -1,8 +1,7 @@
 import React from "react";
 import {Container,Row,Col} from 'react-grid-system';
 import styled from "styled-components";
-import { BsCalendarDate } from "react-icons/bs";
-import { FaBed } from "react-icons/fa";
+
 import { FcHome,FcCalendar, FcComments, FcMindMap, FcSms, FcLandscape, FcCellPhone } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
@@ -11,61 +10,54 @@ import { Link } from "react-router-dom";
 function ButtonContainer() {
 
     return (
-      <div>
-        <Row style={{height: 80}}>
-        <Col style={{padding:1}}>
-               <button onClick={()=>{
-                <Link to={"bookings"} />
-              }}  style={{width:"100%",height:"100%",backgroundColor:'green'}}>
-              <Row style={{justifyContent:"center"}}>
+      <div style={{width:"100%"}}>
+        <Row style={{marginRight:10,marginLeft:10,margin:2,alignContent:"center",alignItems:"center"}}>
+        <Col xs={6} md={6} lg={6} style={{backgroundColor:'#448123',padding:15}} >
+        <Link to={"/information"} style={{textDecoration:"none"}} >
+              <Row style={{display:"flex",justifyContent:"center"}}>
               <FcHome style={{margin:5,color:"white"}} size={40}/>
               </Row> 
               <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
               Información General
               </Row>   
-              </button> 
-            </Col>
-            <Col style={{padding:1}}>
-            <Link to={"/Bookings"} >
-               <button onClick={()=>{
-            
-              }}  style={{width:"100%",height:"100%",backgroundColor:'green'}}>
-              <Row style={{justifyContent:"center",color:"white"}}>
+              </Link>
+        </Col>
+            <Col xs={6} md={6} lg={6} style={{backgroundColor:'#509929',padding:15}}>
+            <Link to={"/bookings"}  style={{textDecoration:"none"}}>
+              <Row style={{display:"flex",justifyContent:"center",color:"white"}}>
               <FcCalendar style={{margin:5}} size={40}/>
               </Row> 
               <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
-              Disponibilidad
+              Reservar
               </Row>   
-              </button> 
+ 
               </Link>
             </Col>
-        </Row>
-        <Row style={{height: 80}}>
-        <Col style={{padding:1}}>
-               <button onClick={()=>{
-                <Link to={"bookings"} />
-              }}  style={{width:"100%",backgroundColor:'green'}}>
-              <Row style={{justifyContent:"center"}}>
-              <FcSms style={{margin:5}} size={40}/>
+            </Row>
+        
+            <Row style={{marginRight:10,marginLeft:10,margin:2}}>
+        <Col xs={6} md={6} lg={6} style={{backgroundColor:'#509929',padding:15}} >
+        <Link to={"/comments"}   style={{textDecoration:"none"}}>
+              <Row style={{display:"flex",justifyContent:"center"}}>
+              <FcSms style={{margin:5,color:"white"}} size={40}/>
               </Row> 
               <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
               Comentarios
               </Row>   
-              </button> 
-            </Col>
-            <Col style={{padding:1}}>
-               <button onClick={()=>{
-                <Link to={"bookings"} />
-              }}  style={{width:"100%",backgroundColor:'green'}}>
-              <Row style={{justifyContent:"center",color:"white"}}>
+              </Link>
+        </Col>
+            <Col xs={6} md={6} lg={6} style={{backgroundColor:'#448123',padding:15}}>
+            <Link to={"/contact"}  style={{textDecoration:"none"}}>
+              <Row style={{display:"flex",justifyContent:"center",color:"white"}}>
               <FcCellPhone style={{margin:5}} size={40}/>
               </Row> 
               <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
               Contacto
               </Row>   
-              </button> 
+ 
+              </Link>
             </Col>
-        </Row>
+            </Row>
       </div>
     );
 }
@@ -73,8 +65,3 @@ function ButtonContainer() {
 export default ButtonContainer;
 
 
-const GoogleButtonContainer = styled.div `
-display: flex;
-  justify-content: center;
-
-`;

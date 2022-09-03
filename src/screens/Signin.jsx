@@ -10,6 +10,7 @@ import { UserAuth } from "../context/AuthContext";
 import SigninForm from "../components/FormSignIn";
 
 function Signin() {
+
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ function Signin() {
         alert(e)
       }
     }
+
     useEffect(() => {
       if (user != null) {
         navigate('/Home');
@@ -36,6 +38,18 @@ function Signin() {
          <Row style={{justifyContent:"center",backgroundColor:"#454545",color:"white",padding:5}}>
          Iniciar Sesión
          </Row>
+         <Row style={{justifyContent:"center",margin:2}}>
+
+{
+ isSafari || isChrome ? 
+ <div >
+   <p style={{fontSize:10,justifyContent:"center",display:"flex",color:"purple"}}>Te recomendamos ingresar con tu cuenta google!</p>
+ <GoogleButton title="google" style={{padding:1}} onClick={handleGoogleSignin}>Iniciar Sesión</GoogleButton>
+ </div>
+ :
+ <p style={{fontSize:10,width:"100%",display:"flex",justifyContent:"center"}}>Para iniciar Sesión con google entra directamente en Safari o Chrome</p> 
+ }
+</Row>
          <Container>
          <DivContainer>
          <Row style={{justifyContent:"center",color:"white",padding:5}}>
@@ -44,18 +58,7 @@ function Signin() {
    
          <SigninForm />
 
-         <Row style={{justifyContent:"center",margin:2}}>
 
-         {
-          isSafari || isChrome ? 
-          <div >
-            <p>o ingresa con tu cuenta de google!</p>
-          <GoogleButton title="google" style={{padding:1}} onClick={handleGoogleSignin}>Iniciar Sesión</GoogleButton>
-          </div>
-          :
-          <p style={{fontSize:10,width:"100%",display:"flex",justifyContent:"center"}}>Para iniciar Sesión con google entra directamente en Safari o Chrome</p> 
-          }
-         </Row>
          </DivContainer>
         </Container>
         </div>
@@ -68,7 +71,7 @@ export default Signin;
 
 const DivContainer = styled.nav `
 display:"flex" ;
-background-color:white ;
+
 
 
 

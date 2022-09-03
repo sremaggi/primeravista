@@ -19,9 +19,10 @@ function WelcomeScreen() {
             </Container>   
             <Navbar />
         <Gallery />
-       <Container >
+
+     
         <ButtonContainer />
-       </Container>
+
         </div>
         }
         </div>

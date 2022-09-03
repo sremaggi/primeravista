@@ -1,14 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import {Row,Col} from 'react-grid-system';
+import { Link } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
 
 
 function TitleContainer() {
-
+    const {user}= UserAuth();
 
     return (
                 <div style={{}}>
+                <Link style={{textDecoration:"none"}}  to={user?.displayName ? "/home":"/"}>
+              
                 <Row  style={  {
                     display:"flex" ,
                     fontFamily:"fantasy",
@@ -22,6 +26,7 @@ function TitleContainer() {
                    </Col>     
                 </Row>
                 <Row  style={  {
+
                     display:"flex" ,
                     fontFamily:"fantasy",
                     fontSize:13,
@@ -32,6 +37,7 @@ function TitleContainer() {
                    <SubTitle> Hospedaje frente al mar</SubTitle>
                    </Col>   
                 </Row>
+                </Link> 
 </div>
 
 

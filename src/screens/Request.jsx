@@ -15,6 +15,8 @@ function Request() {
     const {user} = UserAuth();
     const [name,setName] = useState(user.displayName);
     const [email,setEmail] = useState(user.email);
+    const [qty,setQty] = useState(0);
+
     const [phone,setPhone] = useState("");
     const {state} = useLocation();
     const { mount,startDate,finishDate,days } = state;
@@ -42,44 +44,13 @@ function Request() {
             {finishDate.y + " / " +  finishDate.m + " / "+ finishDate.d}
             </Col>
         </Row>
-        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#F1F1F1  "}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,fontWeight:"bold"}}>
-            Tarifa normal
-            </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            {days.nd}
-            </Col>
-        </Row>
-        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#FFE7B3  "}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,fontWeight:"bold"}}>
-            Tarifa media
-            </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            {days.ld}
-            </Col>
-        </Row>
-        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#FCC85A"}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,fontWeight:"bold"}}>
-            Tarifa alta
-            </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            {days.hd}
-            </Col>
-        </Row>
+
         <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#C7FDEB  "}}>
             <Col  style={{display:"flex",justifyContent:"center",fontSize:15,fontWeight:"bold"}}>
             Dias totales
             </Col>
             <Col style={{display:"flex",justifyContent:"center"}}>
             {days.hd + days.ld + days.nd}
-            </Col>
-        </Row>
-        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#F7F5BD"}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,fontWeight:"bold"}}>
-            Monto
-            </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            ${mount}
             </Col>
         </Row>
         <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#DEDEDE"}}>
@@ -124,18 +95,33 @@ function Request() {
         />
             </Col>
         </Row>
+        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#DEDEDE"}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,fontWeight:"bold"}}>
+            Cantidad de personas
+            </Col>
+            <Col style={{display:"flex"}}>
+            <input   
+                style={{padding:10,backgroundColor:"#EFFFED",height:20,width:"100%"}}
+                placeholder='personas'
+                 type="number" 
+                 value={qty}
+                 onChange={(e) => setQty(e.target.value)}
+        />
+            </Col>
+        </Row>
         <Row>
             <button
             
             onClick={()=>{
-                if (phone.length <= 8){
-                    alert("Debe ingresar numero de telefono!")
+                if (phone.length <= 8 || qty < 1){
+                    alert("Datos incorrectos!")
                 }else{
                     addDoc(collection(firestore, "requests"), { mount,startDate,finishDate,days,
                         user:{
                             name: user.displayName,
                             email:user.email,
                             phone: phone,
+                            qty:qty,
                         },
                         timestamp: new Date(),
                         approved: false,
