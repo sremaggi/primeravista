@@ -9,7 +9,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { UserAuth } from '../context/AuthContext';
-import Request from '../screens/Request';
+
 
 
 const bookings = [{
@@ -27,46 +27,40 @@ const bookings = [{
     disabled: true,
     showDateDisplay: false,
   },{
-    startDate:new Date(2022,9,7),
-    endDate: new Date(2022,9,10),
+    startDate:new Date(2022,9,8),
+    endDate: new Date(2022,9,9),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
   },{
-    startDate:new Date(2022,9,28),
-    endDate: new Date(2022,9,31),
+    startDate:new Date(2022,9,29),
+    endDate: new Date(2022,9,30),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
   }]
 
   const lowDemands = [{
-    startDate:new Date(2022,8,23),
-    endDate: new Date(2022,8,25),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  },{
-    startDate:new Date(2022,8,30),
-    endDate: new Date(2022,9,2),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  },{
-    startDate:new Date(2022,9,14),
+    startDate:new Date(2022,9,16),
     endDate: new Date(2022,9,16),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
   },{
-    startDate:new Date(2022,9,21),
+    startDate:new Date(2022,9,23),
     endDate: new Date(2022,9,23),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
   },{
-    startDate:new Date(2022,10,4),
+    startDate:new Date(2022,10,6),
     endDate: new Date(2022,10,6),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,10,13),
+    endDate: new Date(2022,10,13),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
@@ -192,35 +186,34 @@ function CalendarComponent() {
    const {user} = UserAuth();
     const [state, setState] = useState([
         {
-            startDate:new Date(),
-            endDate: new Date(),
+            startDate:new Date(2022,7,1),
+            endDate: new Date(2022,7,1),
             key: 'selection',
             color:'#7FA251',
             showDateDisplay: false,
           }
-      ].concat(bookings));
-      console.log(getDatesInRange(state[0].startDate,state[0].endDate))
+      ]);
+ 
 
     return (
         <div>
  <Container style={{backgroundColor:"white"}}>
                <Row style={{display:"flex",backgroundColor:"white",color:"white",justifyContent:"center",marginTop:10}}>
-        <Col style={{backgroundColor:"red"}}>
-        </Col>
-        <Col   style={{color:"black",justifyContent:"center",display:"flex",fontSize:10,alignItems:"center"}}>
-        Reservado
-        </Col>
-        <Col style={{backgroundColor:"green",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
 
-        </Col>
-        <Col   style={{color:"black",justifyContent:"center",display:"flex",fontSize:10,alignItems:"center"}}>
-        Selección
-        </Col>
-        <Col style={{backgroundColor:"grey",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
-     
-        </Col>
-        <Col   style={{color:"black",justifyContent:"center",display:"flex",fontSize:10,alignItems:"center"}}>
+        <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4} style={{flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
+        <Row style={{backgroundColor:"grey",display:"flex",width:"100%",justifyContent:"center",color:"white",padding:1,fontSize:10}}>
         No disponible
+        </Row>
+        <Row style={{backgroundColor:"#7FA251",display:"flex",width:"100%",justifyContent:"center",color:"white",padding:1,fontSize:10}}>
+          Selección
+        </Row>
+        </Col>
+        <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:10,color:"white"}}>
+        <Row style={{backgroundColor:"#00537C",padding:5,borderRadius:100,margin:2}}>
+        Realiza tu solicitud y nos contactaremos contigo a la brevedad
+        </Row>
+
+        
         </Col>
         </Row>
         </Container>   
@@ -228,22 +221,35 @@ function CalendarComponent() {
     <DateRange
 
 editableDateInputs={true}
-onChange={item => setState([item.selection].concat(bookings))}
-
+onChange={item => setState([item.selection])}
 moveRangeOnFirstSelection={false}
 ranges={state}
+//dayContentRenderer={customDayContent}
 minDate={addDays(new Date(),0)}
 maxDate={addDays(new Date(), 70)}
+disabledDates={[
+  new Date(2022,8,9),
+  new Date(2022,8,10),
+  new Date(2022,8,11),
+  new Date(2022,8,16),
+  new Date(2022,8,17),
+  new Date(2022,8,18),
+  new Date(2022,8,19),
+  new Date(2022,9,7),
+  new Date(2022,9,8),
+]}
 direction="vertical"
-rangeColors={["white","white","white",]}
 color="#FFF4D1"
-scroll={{ enabled: true,// defaults monthWidth * months
-calendarHeight: 240,}}
+scroll={{ enabled: true,
+
+}}
 locale={es}
 />
+
     </div>             
 
 <Container>
+  
 <Row style={{display:"flex",color:"white",justifyContent:"center",padding:10}}>
         <Col style={{backgroundColor:"#7FA251",padding:5,fontSize:12}}>
         <Row style={{display:"flex",justifyContent:"center"}}>
@@ -270,19 +276,51 @@ locale={es}
         </Row>    
         </Col>
  </Row> 
-
+ <Row style={{backgroundColor:"red",padding:5,borderRadius:100,margin:5,fontSize:10,display:"flex",justifyContent:"center",color:"white"}}>
+        Si reservas más de 6 días, aplicamos un descuento para tu tarifa
+        </Row>
  <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
     <Col style={{display:"flex",justifyContent:"end"}}>
-    Dias
+    Días Solicitados
     </Col>
-    <Col style={{display:"flex",justifyContent:"start"}}>
+    <Col style={{display:"flex",justifyContent:"center"}}>
     { ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1}
     </Col>
 
 
  </Row>
+ 
+ <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
+    <Col style={{display:"flex",justifyContent:"end"}}>
+    Monto Aproximado
+    </Col>
+    <Col style={{display:"flex",justifyContent:"center"}}>
+    ${ state[0].endDate != null ? 
+    (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
+    (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
+    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000) *0.95 :
+    (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
+    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
+    :""}
+    </Col>
+
+
+ </Row>
+ <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
+    <Col style={{display:"flex",justifyContent:"end"}}>
+    Descuento
+    </Col>
+    <Col style={{display:"flex",justifyContent:"center"}}>
+    { (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 
+    ? "5 %" : "0 %"}
+
+    </Col>
+
+
+ </Row>
+ 
  <Row style={{display:"flex",justifyContent:"center"}}>
-   {user?.displayName ? 
+   {user?.displayName && (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 1  ? 
 
         <button 
         onClick={()=>{
@@ -303,16 +341,16 @@ locale={es}
             }  
           }})
         }}
-    style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Realizar solicitud</button>
+    style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}>  Ir a Realizar solicitud</button>
  
     :
 
         <button 
     onClick={()=>{
-     alert("Debes iniciar sesión para poder realizar una solicitud.")
+     alert("Debes iniciar sesión y hacer una selección para realizar una solicitud.")
         
     }}
-    style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Realizar solicitud</button>
+    style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Ir a Realizar solicitud</button>
   }
 
    

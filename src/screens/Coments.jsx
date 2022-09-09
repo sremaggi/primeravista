@@ -34,9 +34,8 @@ function Coments() {
     };
 
     return (
-       <div style={{display:"flex",flexDirection:"column"}}>
-       <TitleContainer />
-       {user?.displayName ? <NavbarLogin title="Comentarios" />:<Navbar />}
+       <Container >
+       <NavbarLogin />
        <div style={{display:"flex",justifyContent:"center"}}>
        
        <button 
@@ -48,12 +47,10 @@ function Coments() {
        </button>
 
        </div>
-       <div>
-   
-    </div>
+
        <GetAllMyComments />
 
-       </div>
+       </Container>
     );
 }
 

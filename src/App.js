@@ -20,6 +20,8 @@ import Signup from "./screens/Signup";
 import Coments from "./screens/Coments";
 import ComentsCreate from "./screens/CreateComments";
 import Information from "./screens/Information";
+import NotFound from "./screens/NotFound";
+import Contact from "./screens/Contact";
 
 
 
@@ -27,13 +29,8 @@ import Information from "./screens/Information";
 
 function App() {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (performance.navigation.type === 1) {
-      navigate("/")
-    } else {
-      console.log("This page is not reloaded");
-    }
-  });
+
+
   return (
       <AuthContextProvider>
        <Routes>
@@ -41,13 +38,14 @@ function App() {
         <Route path="/home" element={<Protected><HomeScreen/></Protected>} />
         <Route path="/profile" element={<Protected><Profile/></Protected>} />
         <Route path="/bookings" element={<BookingsScreen/>} />
+        <Route path="/contact" element={<Contact/>} />
         <Route path="/information" element={<Information/>} />
         <Route path="/signin" element={<Signin/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/comments" element={<Coments/>} />
-        <Route path="/comments/create" element={<ComentsCreate/>} />
-        <Route path="/bookings/request" element={<Request />} />
-        <Route path="*" element={<Protected><WelcomeScreen/></Protected>} />
+        <Route path="/comments/create" element={<Protected><ComentsCreate/></Protected>} />
+        <Route path="/bookings/request" element={<Protected><Request /></Protected>} />
+        <Route path="*" element={<NotFound/>} />
        </Routes>
 
       </AuthContextProvider>

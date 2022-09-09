@@ -6,22 +6,22 @@ import ButtonContainer from "../components/ButtonContainer";
 import NavbarLogin from "../components/NavBarLogin";
 
 
-function HomeScreen() {
+function NotFound() {
 
+          window.location.replace('https://primeravistade.cl');
+    
     return (
    
         <Container style={{width:"100%"}}>
-     
-     <NavbarLogin title="Primera Vista" />
-        <Gallery  />
-
-        <ButtonContainer />
+            <Row>
+                Redirect...
+            </Row>
        </Container>
 
     );
 }
 
-export default HomeScreen;
+export default NotFound;
 
 
 

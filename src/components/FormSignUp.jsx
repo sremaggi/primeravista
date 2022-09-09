@@ -51,12 +51,7 @@ function RegistrationForm() {
                 createUserWithEmailAndPassword(auth,email,pwd)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
-                console.log('USER',user)
-                console.log('USER CREDENTIAL',userCredential)
-
-        
-                console.log("URL",url)
+                const user = userCredential.user;        
                 updateProfile(user,{
                     displayName: name + " " + surname, 
                     photoURL: url,
@@ -102,11 +97,9 @@ function RegistrationForm() {
           return null;
       };
     return(
-        <div style={{display:"flex",flexDirection:"column",justifyItems:"center"}}>
+        <div style={{display:"flex",flexDirection:"column",justifyItems:"center",marginTop:5}}>
   
-         <div style={{justifyContent:"center",backgroundColor:"#454545",color:"white",padding:10,display:"flex"}}>
-            Registrarse
-         </div>
+ 
         
 
          <div style={{justifyContent:"center",color:"white",padding:5,display:"flex"}}>
@@ -114,28 +107,28 @@ function RegistrationForm() {
          </div>
      
         <input   
-                style={{padding:20,backgroundColor:"#EFFFED",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20}}
                 placeholder='Nombre'
                  type="text" 
                  value={name}
                  onChange={(e) => setName(e.target.value)}
         />
                 <input   
-                style={{padding:20,backgroundColor:"#EFFFED",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20}}
                 placeholder='Apellido'
                  type="text" 
                  value={surname}
                  onChange={(e) => setSurname(e.target.value)}
         />
                 <input   
-                style={{padding:20,backgroundColor:"#EFFFED",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20}}
                 placeholder='Teléfono'
                  type="text" 
                  value={phone}
                  onChange={(e) => setPhone(e.target.value)}
         />
                 <input   
-                style={{padding:20,backgroundColor:"#EFFFED",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20}}
                 placeholder='Email'
                  type="text" 
                  value={email}
@@ -145,14 +138,14 @@ function RegistrationForm() {
                         <label style={{fontSize:12,padding:5}}>Foto de perfil</label>
                         <input style={{height:30}} type="file" accept="image/*" onChange={handleChange}/>
                         <input   
-                style={{padding:20,backgroundColor:"#EFFFED",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20}}
                 placeholder='Password'
                  type="password" 
                  value={pwd}
                  onChange={(e) => setPwd(e.target.value)}
         />
         <input placeholder='ConfirmPassword'
-      style={{padding:20,backgroundColor:"#EFFFED"}}
+      style={{padding:20,backgroundColor:"white"}}
             type="password"
             value={confirmPwd}
             onChange={(e) => setConfirmPwd(e.target.value)}

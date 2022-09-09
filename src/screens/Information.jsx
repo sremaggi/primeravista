@@ -1,4 +1,5 @@
 import React from "react";
+import {Container,Row} from 'react-grid-system';
 import styled from "styled-components";
 import InfoContainer from "../components/infoContainer";
 import Navbar from "../components/NavBar";
@@ -11,17 +12,14 @@ import { UserAuth } from "../context/AuthContext";
 function Information() {
     const {user} = UserAuth()
     return (
-        <>
-        <TitleContainer />
-        {user?.displayName ? <NavbarLogin />: <Navbar />}
+        <Container>
+
+        <NavbarLogin />
         <InfoContainer />
-       </>
+       </Container>
     );
 }
 
 export default Information;
 
 
-const Container = styled.div `
-display: flex;
-`;

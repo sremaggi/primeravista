@@ -12,6 +12,7 @@ function GetAllMyComments() {
     const [documents, setDocuments] = useState([]);
     const [loadDocs,setLoadDocs] = useState(false)
     const {user} = UserAuth();
+    
      //Firebase Collection Reference query
      const q = query(collection(firestore, "comments"),where("active","==",true))
      useEffect(() => {
@@ -27,13 +28,13 @@ function GetAllMyComments() {
     console.log(documents)
 
     return (
-        <>
+        < div style={{margin:10}}>
   
         {documents.map(d => (
         <>
-                  <Row style={{display:"flex",backgroundColor:"green"}}>
-                  <img style={{display:"flex",width:200,height:150,marginTop:2,marginBottom:2}} src={d.img}></img>
-            <Col style={{display:"flex",backgroundColor:"white",margin:2,flexDirection:"column"}}>
+              <Row style={{display:"flex",backgroundColor:"black",borderColor:"green",borderWidth:1,marginTop:2}}>
+             <img style={{display:"flex",width:200,height:150}} src={d.img}></img>
+            <Col style={{display:"flex",backgroundColor:"white",flexDirection:"column"}}>
             <Row style={{display:"flex",margin:1,fontSize:5}}>
              <Col style={{display:"flex",justifyContent:"space-between"}}>
              <ReactStars  size={12} value={d.stars} />
@@ -71,7 +72,7 @@ function GetAllMyComments() {
             {loadDocs ? "" :<ReactLoading type={"spinningBubbles"} color={"green"} height={40} width={40} />}
             </div>
 
-      </>
+      </ div>
     );
 }
 

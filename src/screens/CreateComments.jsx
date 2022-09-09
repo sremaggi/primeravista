@@ -6,7 +6,6 @@ import TitleContainer from "../components/TitleContainer";
 import { UserAuth } from "../context/AuthContext";
 import {Link, useNavigate } from 'react-router-dom';
 import {ref,uploadBytesResumable,getDownloadURL} from "firebase/storage"
-import {BsPencil} from "react-icons/bs"
 import ReactStars from 'react-rating-stars-component'
 import ReactLoading from 'react-loading';
 
@@ -115,8 +114,7 @@ function ComentsCreate() {
 
 
     return (
-       <div>
-       <TitleContainer />
+       <Container>
        {user?.displayName ? <NavbarLogin title="Crear comentario" />:<Navbar />}
 
        <Container>
@@ -129,6 +127,11 @@ function ComentsCreate() {
             </Col>
         </Row>
         <Row style={{display:"flex",padding:10,justifyContent:"center",alignItems:"center"}}>
+            Cuentanos que te ha parecido tu experiencia en Primera Vista Hospedaje.
+
+            </Row>
+            <Row style={{display:"flex",padding:10,justifyContent:"center",alignItems:"center"}}>
+
             <ReactStars {...example} />
             </Row>
         <Row> 
@@ -166,7 +169,7 @@ function ComentsCreate() {
        </Container>
 
  
-       </div>
+       </Container>
     );
 }
 

@@ -13,9 +13,7 @@ import GetMyReqs from "../components/GetMyReq";
 
 function Profile() {
     const { user, logOut } = UserAuth();
-    console.log("USER ",user)
     
-
   const handleSignOut = async () => {
     try {
       await logOut()
@@ -25,15 +23,8 @@ function Profile() {
   }
     return (
         <div>
-         <TitleContainer />
         <Container >
-   
-
-
-    
-        <Row style={{justifyContent:"center",backgroundColor:"#454545",color:"white",padding:5}}>
-        Mi Perfil
-        </Row>
+        <NavbarLogin />
         <div style={{marginTop:10,backgroundColor:"white",justifyContent:"center"}}>
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
         <img src={user.photoURL} height={100} style={{display:"flex",margin:5}} />

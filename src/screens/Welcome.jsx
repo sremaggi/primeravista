@@ -6,25 +6,21 @@ import Navbar from "../components/NavBar";
 import TitleContainer from "../components/TitleContainer";
 import { UserAuth } from "../context/AuthContext";
 import HomeScreen from "./Home";
+import NavbarLogin from "../components/NavBarLogin";
 
 function WelcomeScreen() {
     const {user} = UserAuth();
 
     return (
         <div>
-        {user?.displayName  ? <HomeScreen></HomeScreen> :
-          <div>  
-         <Container>
-         <TitleContainer />
-            </Container>   
-            <Navbar />
-        <Gallery />
-
      
-        <ButtonContainer />
+         <Container>
+         <NavbarLogin />
+         <Gallery />
+         <ButtonContainer />
+            </Container>   
 
-        </div>
-        }
+        
         </div>
     );
 }

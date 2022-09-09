@@ -10,24 +10,24 @@ import { Link } from "react-router-dom";
 function ButtonContainer() {
 
     return (
-      <div style={{width:"100%"}}>
-        <Row style={{marginRight:10,marginLeft:10,margin:2,alignContent:"center",alignItems:"center"}}>
-        <Col xs={6} md={6} lg={6} style={{backgroundColor:'#448123',padding:15}} >
+      <Container  style={{marginTop:5,marginBottom:10,backgroundColor:"#144903"}}>
+        <Row style={{alignContent:"center"}}>
+        <Col style={{backgroundColor:'#007C15',padding:10,marginTop:2,marginBottom:1,marginLeft:2,marginRight:1}} >
         <Link to={"/information"} style={{textDecoration:"none"}} >
               <Row style={{display:"flex",justifyContent:"center"}}>
-              <FcHome style={{margin:5,color:"white"}} size={40}/>
+              <FcHome style={{margin:5,color:"white"}} size={30}/>
               </Row> 
-              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              <Row style={{justifyContent:"center",color:"white" ,fontSize:15}}>
               Información General
               </Row>   
               </Link>
         </Col>
-            <Col xs={6} md={6} lg={6} style={{backgroundColor:'#509929',padding:15}}>
+            <Col style={{backgroundColor:'#007C15',padding:10,marginTop:2,marginBottom:1,marginLeft:1,marginRight:2}}>
             <Link to={"/bookings"}  style={{textDecoration:"none"}}>
               <Row style={{display:"flex",justifyContent:"center",color:"white"}}>
-              <FcCalendar style={{margin:5}} size={40}/>
+              <FcCalendar style={{margin:5}} size={30}/>
               </Row> 
-              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              <Row style={{justifyContent:"center",color:"white",fontSize:15}}>
               Reservar
               </Row>   
  
@@ -35,30 +35,30 @@ function ButtonContainer() {
             </Col>
             </Row>
         
-            <Row style={{marginRight:10,marginLeft:10,margin:2}}>
-        <Col xs={6} md={6} lg={6} style={{backgroundColor:'#509929',padding:15}} >
+            <Row style={{alignContent:"center"}} >
+        <Col style={{backgroundColor:'#007C15',padding:10,marginTop:1,marginBottom:2,marginLeft:2,marginRight:1}} >
         <Link to={"/comments"}   style={{textDecoration:"none"}}>
               <Row style={{display:"flex",justifyContent:"center"}}>
-              <FcSms style={{margin:5,color:"white"}} size={40}/>
+              <FcSms style={{margin:5,color:"white"}} size={30}/>
               </Row> 
-              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              <Row style={{justifyContent:"center",color:"white",fontSize:15}}>
               Comentarios
               </Row>   
               </Link>
         </Col>
-            <Col xs={6} md={6} lg={6} style={{backgroundColor:'#448123',padding:15}}>
+            <Col style={{backgroundColor:'#007C15',padding:10,marginTop:1,marginBottom:2,marginLeft:1,marginRight:2}}>
             <Link to={"/contact"}  style={{textDecoration:"none"}}>
               <Row style={{display:"flex",justifyContent:"center",color:"white"}}>
-              <FcCellPhone style={{margin:5}} size={40}/>
+              <FcCellPhone style={{margin:5}} size={30}/>
               </Row> 
-              <Row style={{justifyContent:"center",color:"white",fontWeight:'bold'}}>
+              <Row style={{justifyContent:"center",color:"white",fontSize:15}}>
               Contacto
               </Row>   
  
               </Link>
             </Col>
             </Row>
-      </div>
+      </Container>
     );
 }
 

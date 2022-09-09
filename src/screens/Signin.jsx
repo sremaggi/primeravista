@@ -8,6 +8,7 @@ import TitleContainer from "../components/TitleContainer";
 import GoogleButton from "react-google-button";
 import { UserAuth } from "../context/AuthContext";
 import SigninForm from "../components/FormSignIn";
+import NavbarLogin from "../components/NavBarLogin";
 
 function Signin() {
 
@@ -33,11 +34,8 @@ function Signin() {
 
        <div> 
        <Container> 
-       <TitleContainer/>
-       </Container>
-         <Row style={{justifyContent:"center",backgroundColor:"#454545",color:"white",padding:5}}>
-         Iniciar Sesión
-         </Row>
+    
+        <NavbarLogin />
          <Row style={{justifyContent:"center",margin:2}}>
 
 {
@@ -50,7 +48,7 @@ function Signin() {
  <p style={{fontSize:10,width:"100%",display:"flex",justifyContent:"center"}}>Para iniciar Sesión con google entra directamente en Safari o Chrome</p> 
  }
 </Row>
-         <Container>
+ 
          <DivContainer>
          <Row style={{justifyContent:"center",color:"white",padding:5}}>
          <img  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2Fkrika3.jpeg?alt=media&token=0609ac50-a4d1-4be3-909a-41c798ba7eab" height={100} width={100} style={{display:"flex",margin:1,borderRadius:100}}/>

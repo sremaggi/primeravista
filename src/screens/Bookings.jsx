@@ -18,14 +18,12 @@ function Bookings() {
 
     
     return (
-       <div>
-             <Container >
-             <TitleContainer />
-            </Container>
 
-        {user?.displayName ? <NavbarLogin title="Disponibilidad" />:<Navbar />}
-        <CalendarComponent />   
-       </div> 
+             <Container >
+        <NavbarLogin />
+        <CalendarComponent />  
+        </Container> 
+    
   
     );
 }

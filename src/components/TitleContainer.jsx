@@ -10,35 +10,20 @@ function TitleContainer() {
     const {user}= UserAuth();
 
     return (
-                <div style={{}}>
-                <Link style={{textDecoration:"none"}}  to={user?.displayName ? "/home":"/"}>
-              
-                <Row  style={  {
-                    display:"flex" ,
-                    fontFamily:"fantasy",
-                    fontSize:20,
-                    height:30 ,
-                    fontWeight:"bold",            
-                    color: "black"
-                    }}>
-                   <Col style={{display:"flex",justifyContent:"center"}}>
+        
+                <Link style={{textDecoration:"none",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:"yellow",width:"100%",height:"100%"}}  to={user?.displayName ? "/home":"/"}>
+       
+             
                    Primera Vista
-                   </Col>     
-                </Row>
+                
+     
                 <Row  style={  {
 
-                    display:"flex" ,
-                    fontFamily:"fantasy",
-                    fontSize:13,
-                    height:40 ,         
-                    color: "black",
                     }}>
-                   <Col style={{display:"flex",justifyContent:"center"}}>
-                   <SubTitle> Hospedaje frente al mar</SubTitle>
-                   </Col>   
+           
                 </Row>
                 </Link> 
-</div>
+
 
 
     );
