@@ -27,7 +27,7 @@ function NavbarLogin(props) {
            <GoHome />
             </div>
             <div style={{display:"flex",justifyContent:"center",color:"white"}}>
-            PrimeraVista
+            Primera Vista
             </div>
             <div style={{display:"flex",justifyContent:"center",margin:1,fontSize:10,color:"white"}}>
             Increible casa frente al mar

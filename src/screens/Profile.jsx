@@ -4,7 +4,7 @@ import {Container,Row,Col} from 'react-grid-system';
 import TitleContainer from "../components/TitleContainer";
 import NavbarLogin from "../components/NavBarLogin";
 import App, { Context } from "../App";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { collection, addDoc,getDocs} from "firebase/firestore"; 
 import GetMyReqs from "../components/GetMyReq";
@@ -13,7 +13,7 @@ import GetMyReqs from "../components/GetMyReq";
 
 function Profile() {
     const { user, logOut } = UserAuth();
-    
+    const {navigate} = useNavigate();
   const handleSignOut = async () => {
     try {
       await logOut()
@@ -46,10 +46,17 @@ function Profile() {
           Mis Solicitudes
           </Row>
           <GetMyReqs />
-        {user.email == "seba.rf96@gmail.com" ?
+        {user.email == "seba.rf96@gmail.com" || user.email == "ant.niasbravo@gmail.com" ?
         <div style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center",flexDirection:"column",padding:10}}>
-        Rol: Admin  
-        <button style={{backgroundColor:"purple",padding:20,color:"white",fontSize:20}}> Panel de administración</button>
+        Rol: Admin
+        <Link 
+        style={{display:"flex",marginTop:5,textDecoration:"none",backgroundColor:"white",justifyContent:"center",flexDirection:"column",padding:10}}
+        to={"/admin"}>
+        <button 
+    
+    style={{backgroundColor:"purple",padding:20,color:"white",fontSize:20}}> Panel de administración</button>
+        </Link>
+
         </div>          
         : 
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>

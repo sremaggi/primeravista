@@ -31,11 +31,11 @@ function Request() {
 
 
     return (
-       <Container style={{backgroundColor:"white",marginTop:1,width:"100%"}}>
+       <Container style={{marginTop:1,width:"100%"}}>
         <NavbarLogin title={"Solicitud de Reserva"} />
    
-        <Row style={{display:"flex",margin:10,padding:20,backgroundColor:"#393E3A",borderRadius:100}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:13,color:"white"}}>
+        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#393E3A",borderRadius:100}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:9,color:"white"}}>
             Completa los detalles de tu solicitud para poder brindarte una mejor experiencia al momento de contactarnos
             </Col>
          
@@ -143,7 +143,7 @@ function Request() {
             Monto aproximado
             </Col>
             <Col style={{display:"flex",justifyContent:"center"}}>
-            ${(days.hd + days.ld + days.nd)>6 ? mount*0.95 : mount}
+            ${(days.hd + days.ld + days.nd)>6 ? mount*0.90 : mount}
             </Col>
         </Row>
         <Row style={{display:"flex",justifyContent:"center",marginTop:5}}>

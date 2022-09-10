@@ -6,7 +6,7 @@ class Gallery extends React.Component {
     render() {
         return (
             <div style={{width:"100%",marginTop:4}}>
-                <Carousel showIndicators={true} showThumbs={false} autoPlay interval="3000" transitionTime="50" infiniteLoop>
+                <Carousel showIndicators={true}  showThumbs={false} showStatus={false} interval="3000" transitionTime="50" infiniteLoop>
                 <div>
                         <img height={450} src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2FIMG_2537.jpg?alt=media&token=b86c0087-f047-4f3a-b81c-ea9b17ed43fc" alt="" />
                         <p style={{backgroundColor:"green"}} className="legend">Fachada principal</p>

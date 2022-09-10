@@ -155,7 +155,7 @@ function customDayContent(day) {
             })
         })
     })
-    console.log('low demand',count)
+
     return count
   }
 
@@ -176,7 +176,7 @@ function customDayContent(day) {
             })
         })
     })
-    console.log('high demand',count)
+
     return count
   }
 
@@ -201,15 +201,15 @@ function CalendarComponent() {
                <Row style={{display:"flex",backgroundColor:"white",color:"white",justifyContent:"center",marginTop:10}}>
 
         <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4} style={{flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
-        <Row style={{backgroundColor:"grey",display:"flex",width:"100%",justifyContent:"center",color:"white",padding:1,fontSize:10}}>
+        <Row style={{backgroundColor:"#CDCDCD",display:"flex",width:"100%",justifyContent:"center",padding:1,fontSize:10}}>
         No disponible
         </Row>
         <Row style={{backgroundColor:"#7FA251",display:"flex",width:"100%",justifyContent:"center",color:"white",padding:1,fontSize:10}}>
           Selección
         </Row>
         </Col>
-        <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:10,color:"white"}}>
-        <Row style={{backgroundColor:"#00537C",padding:5,borderRadius:100,margin:2}}>
+        <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{backgroundColor:"#00537C",flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:10,color:"white"}}>
+        <Row style={{padding:10,margin:2}}>
         Realiza tu solicitud y nos contactaremos contigo a la brevedad
         </Row>
 
@@ -277,14 +277,14 @@ locale={es}
         </Col>
  </Row> 
  <Row style={{backgroundColor:"red",padding:5,borderRadius:100,margin:5,fontSize:10,display:"flex",justifyContent:"center",color:"white"}}>
-        Si reservas más de 6 días, aplicamos un descuento para tu tarifa
+        Si reservas más de 5 noches, aplicamos un descuento para tu tarifa
         </Row>
  <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
     <Col style={{display:"flex",justifyContent:"end"}}>
-    Días Solicitados
+    Noches Solicitadas
     </Col>
     <Col style={{display:"flex",justifyContent:"center"}}>
-    { ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1}
+    { ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))}
     </Col>
 
 
@@ -298,7 +298,7 @@ locale={es}
     ${ state[0].endDate != null ? 
     (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
     (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
-    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000) *0.95 :
+    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000) *0.90 :
     (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
     ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
     :""}
@@ -312,7 +312,7 @@ locale={es}
     </Col>
     <Col style={{display:"flex",justifyContent:"center"}}>
     { (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 
-    ? "5 %" : "0 %"}
+    ? "10 %" : "0 %"}
 
     </Col>
 
@@ -347,7 +347,7 @@ locale={es}
 
         <button 
     onClick={()=>{
-     alert("Debes iniciar sesión y hacer una selección para realizar una solicitud.")
+     alert("Debes \n 1.Iniciar sesión. \n 2.Seleccionar almenos una noche. \n Luego podrás realizar una solicitud")
         
     }}
     style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Ir a Realizar solicitud</button>

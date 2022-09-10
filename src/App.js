@@ -22,6 +22,8 @@ import ComentsCreate from "./screens/CreateComments";
 import Information from "./screens/Information";
 import NotFound from "./screens/NotFound";
 import Contact from "./screens/Contact";
+import Admin from "./screens/Admin";
+import MyRequest from "./screens/MyRequest";
 
 
 
@@ -37,6 +39,8 @@ function App() {
         <Route path="/" element={<WelcomeScreen/>} />
         <Route path="/home" element={<Protected><HomeScreen/></Protected>} />
         <Route path="/profile" element={<Protected><Profile/></Protected>} />
+        <Route path="/myRequest" element={<Protected><MyRequest/></Protected>} />
+        <Route path="/admin" element={<Protected><Admin/></Protected>} />
         <Route path="/bookings" element={<BookingsScreen/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/information" element={<Information/>} />

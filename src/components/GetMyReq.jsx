@@ -17,9 +17,14 @@ function GetMyReqs() {
       if (user?.displayName){
         const q = query(collection(firestore, "requests"),where("user.email", "==", user.email))
         const getDocuments = async () => {
-         const data = await getDocs(q);
-         setDocuments(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-         setLoadDocs(true)
+          try{
+            const data = await getDocs(q);
+            setDocuments(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+            setLoadDocs(true)
+          }catch(e){
+            console.log(e)
+          }
+     
      };
      getDocuments();
       }
@@ -33,13 +38,13 @@ function GetMyReqs() {
         <Container>
   
         {documents.map(d => (
-        <>
+        <Link to={"/myRequest"} state={{ doc: d }} style={{textDecoration:"none",color:"black"}}>
           <Row style={{backgroundColor:"#E3E3E3",display:"flex",justifyContent:"space-around"}}>
             <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center"}}>
-            LLegada 
+            <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
+            LLegada
             </Row>
-            <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center"}}>
+            <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
             {(d.startDate.y )+" "} 
             / {(d.startDate.d > 10 ? d.startDate.m+" " : `0${d.startDate.m} `)} 
              / {(d.startDate.d > 10 ? d.startDate.d+" " : `0${d.startDate.d}`)}
@@ -48,10 +53,10 @@ function GetMyReqs() {
             </Col>
 
             <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center"}}>
+            <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
             Salida 
             </Row>
-            <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center"}}>
+            <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
             {(d.startDate.y )+" "} 
             / {(d.finishDate.d > 10 ? d.finishDate.m+" " : `0${d.finishDate.m} `)} 
              / {(d.finishDate.d > 10 ? d.finishDate.d+" " : `0${d.finishDate.d}`)}
@@ -60,16 +65,16 @@ function GetMyReqs() {
             </Col>
     
             <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#B3D5D3    ",display:"flex",padding:5,justifyContent:"center",fontSize:13}}>
+            <Row style={{backgroundColor:"#B3D5D3    ",display:"flex",padding:5,justifyContent:"center",fontSize:8}}>
             Telefono: {d.user.phone} 
             </Row>
-            <Row style={{backgroundColor:"white",display:"flex",padding:5,justifyContent:"center",fontSize:13}}>
+            <Row style={{backgroundColor:"white",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
              {d.approved == true ? <div style={{color:"green",fontWeight:"bold"}}> { "Aceptado!"}</div>:<div style={{color:"orange",fontWeight:"bold"}}>{" "+ " En espera"}</div>} 
             </Row>
             </Col>
           </Row>
 
-          </>
+          </Link>
 
         ))}
                 <div style={{display:"flex",justifyContent:"center"}}>
