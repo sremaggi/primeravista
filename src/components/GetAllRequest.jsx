@@ -26,16 +26,13 @@ function GetAllRequest() {
       }
 
 
-
-
-
-
     return (
         <Container>
   
         {documents.map(d => (
-        <>
-          <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:1,padding:3,color:"white",fontSize:10}}>
+        <Row  style={{backgroundColor:"grey",display:"flex",justifyContent:"center",marginTop:20,padding:3,color:"white",fontSize:10,flexDirection:"column"}}>
+          id: {d.id} 
+          <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:10,padding:3,color:"white",fontSize:10}}>
               {d.user.name}
           </Row>
           <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:1,padding:3,color:"white",fontSize:10}}>
@@ -107,7 +104,7 @@ function GetAllRequest() {
           }
 
 
-          </>
+          </Row>
 
         ))}
                 <div style={{display:"flex",justifyContent:"center",marginTop:10}}>

@@ -59,7 +59,7 @@ function Request() {
 
         <Row style={{display:"flex",padding:10,backgroundColor:"#C7FDEB"}}>
             <Col  style={{display:"flex",justifyContent:"center",fontSize:15}}>
-            Dias totales
+            Noches totales
             </Col>
             <Col style={{display:"flex",justifyContent:"center"}}>
             {days.hd + days.ld + days.nd}

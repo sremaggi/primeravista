@@ -118,15 +118,8 @@ function ComentsCreate() {
        {user?.displayName ? <NavbarLogin title="Crear comentario" />:<Navbar />}
 
        <Container>
-        <Row style={{marginTop:10}}>
-            <Col style={{display:"flex",flexDirection:"column",padding:10}}>
-            <label style={{fontSize:12,padding:5}}>Escoge tu mejor foto en Primera vista hospedaje!</label>
-                        <input style={{height:30}} type="file" accept="image/*"  onEnded={()=>{console.log("termine")}} onChange={handleChange}/>
 
-
-            </Col>
-        </Row>
-        <Row style={{display:"flex",padding:10,justifyContent:"center",alignItems:"center"}}>
+        <Row style={{backgroundColor:"#00537C",color:"white",display:"flex",padding:10,justifyContent:"center",alignItems:"center",fontSize:14,marginTop:10}}>
             Cuentanos que te ha parecido tu experiencia en Primera Vista Hospedaje.
 
             </Row>
@@ -146,11 +139,22 @@ function ComentsCreate() {
         onChange={handleMessageChange}
         />
         </Row>
+        <Row >
+        <Col style={{display:"flex",flexDirection:"column",padding:10,justifyContent:"center"}}>
+            <input style={{height:30,justifyContent:"center",display:"flex"}} type="file" accept="image/*"   onChange={handleChange}/>
+            </Col>
+            <Col style={{display:"flex",flexDirection:"column",padding:10,justifyContent:"center"}}>
+            <label style={{backgroundColor:"#355037",color:"white",fontSize:12,padding:5,justifyContent:"center",display:"flex"}}>Escoge tu mejor foto en Primera vista hospedaje!</label>
+                        
 
+
+            </Col>
+
+        </Row>
          
          
 
-        <Row style={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
+        <Row style={{display:"flex",justifyContent:"center",flexDirection:"column",marginTop:10}}>
             { file != "" && stars >0 && message != "" && loadDocs == true
             ?             <button 
             onClick={handleUpload}

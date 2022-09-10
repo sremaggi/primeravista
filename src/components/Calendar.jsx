@@ -186,8 +186,8 @@ function CalendarComponent() {
    const {user} = UserAuth();
     const [state, setState] = useState([
         {
-            startDate:new Date(2022,7,1),
-            endDate: new Date(2022,7,1),
+            startDate:new Date(2022,8,1),
+            endDate: new Date(2022,8,1),
             key: 'selection',
             color:'#7FA251',
             showDateDisplay: false,
