@@ -23,8 +23,10 @@ function MyRequest() {
     
 
     return (
+        <div>
+            <NavbarLogin title="Primera Vista" />
     <Container style={{width:"100%"}}>
-     <NavbarLogin title="Primera Vista" />
+     
      <Container>
      <Row style={{display:"flex",justifyContent:"center",padding:8,marginTop:10,color:"white",backgroundColor:"#2C5C90"}}>
         {doc.approved ? "Mi Reserva":"Mi Solicitud"}
@@ -111,6 +113,7 @@ Comentario
      </Container>
    
     </Container>
+    </div>
 
     );
 }

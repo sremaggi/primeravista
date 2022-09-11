@@ -18,12 +18,13 @@ function Bookings() {
 
     
     return (
-
+            <div>
+                 <NavbarLogin />
              <Container >
-        <NavbarLogin />
+
         <CalendarComponent />  
         </Container> 
-    
+        </div>
   
     );
 }

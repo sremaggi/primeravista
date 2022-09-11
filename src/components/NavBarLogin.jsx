@@ -6,6 +6,9 @@ import { UserAuth } from "../context/AuthContext";
 import TitleContainer from "./TitleContainer";
 import {GoHome } from "react-icons/go";
 import {FaRegUserCircle } from "react-icons/fa";
+import { width } from "@mui/system";
+import SocialButtons from "./SocialButtons";
+
 
 
 
@@ -19,23 +22,36 @@ function NavbarLogin(props) {
     return (
     
             
-            <Container style={{marginTop:5,backgroundColor:"#144903",padding:3}}>
+            <div style={{marginTop:5,backgroundColor:"#144903",padding:3}}>
+
             <Row style={{ display:"flex"}}>
+
             <Col sm={8} xs={8} md={10} lg={10} xl={10} xxl={10} xxxl={10}  style={{ display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <Link style={{flexDirection:"column",textDecoration:"none",backgroundColor:"#0B6A2C",width:"100%",height:"100%",justifyContent:"center",display:"flex"}} to={user?.displayName ? "/home":"/"}>
-            <div style={{display:"flex",justifyContent:"center",color:"white",margin:2}}>
-           <GoHome />
+            <div style={{alignItems:"start",display:"flex",justifyContent:"center"}}>
+            <SocialButtons size="10" sizeFont="0" />
             </div>
-            <div style={{display:"flex",justifyContent:"center",color:"white"}}>
-            Primera Vista
+            <Link style={{textDecoration:"none",height:"100%",justifyContent:"start",display:"flex"}} to={user?.displayName ? "/home":"/"}>
+            <div style={{display:"flex",justifyContent:"center",color:"white",flexDirection:"row",alignItems:"center",fontSize:9}}>
+            <img src={require('../assets/img/3.jpg') } width={90} height={"100%"} style={{borderRadius:100}}></img>
+            <div style={{marginLeft:5,display:"flex",flexDirection:"column"}}>
+              <div style={{display:"flex",fontSize:12}}>
+              Primera Vista
+              </div>
+              <div style={{display:"flex",fontSize:7}}>
+              Increible casa frente al mar
+              </div>
+       
             </div>
-            <div style={{display:"flex",justifyContent:"center",margin:1,fontSize:10,color:"white"}}>
-            Increible casa frente al mar
+            
             </div>
+      
+    
+    
   
   
           
             </Link>
+  
             </Col>
 
             {user?.displayName ? 
@@ -84,7 +100,7 @@ function NavbarLogin(props) {
       
       
             </Row>
-            </Container>
+            </div>
     
     );
 }

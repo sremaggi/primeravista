@@ -11,8 +11,8 @@ import GetMyReqs from "../components/GetMyReq";
 function Admin() {
 
     return (
-   
-        <Container style={{width:"100%"}}>
+        
+        <div style={{width:"100%"}}>
      
      <NavbarLogin title="Primera Vista" />
      <Container>
@@ -22,7 +22,7 @@ function Admin() {
      <GetAllReqs />
      </Container>
        
-       </Container>
+       </div>
 
     );
 }

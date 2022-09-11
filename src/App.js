@@ -24,6 +24,9 @@ import NotFound from "./screens/NotFound";
 import Contact from "./screens/Contact";
 import Admin from "./screens/Admin";
 import MyRequest from "./screens/MyRequest";
+import InfornmationBedRoom from "./screens/InformationBedRoom";
+import InfornmationBath from "./screens/InformationKitchen";
+import InfornmationKitchen from "./screens/InformationKitchen";
 
 
 
@@ -44,6 +47,8 @@ function App() {
         <Route path="/bookings" element={<BookingsScreen/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/information" element={<Information/>} />
+        <Route path="/information/bedroom" element={<InfornmationBedRoom/>} />
+        <Route path="/information/kitchen" element={<InfornmationKitchen/>} />
         <Route path="/signin" element={<Signin/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/comments" element={<Coments/>} />

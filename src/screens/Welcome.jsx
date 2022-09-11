@@ -7,6 +7,7 @@ import TitleContainer from "../components/TitleContainer";
 import { UserAuth } from "../context/AuthContext";
 import HomeScreen from "./Home";
 import NavbarLogin from "../components/NavBarLogin";
+import SocialButtons from "../components/SocialButtons";
 
 function WelcomeScreen() {
     const {user} = UserAuth();
@@ -14,11 +15,20 @@ function WelcomeScreen() {
     return (
         <div>
      
-         <Container>
+   
          <NavbarLogin />
-         <Gallery />
-         <ButtonContainer />
-            </Container>   
+         <Row>
+            <Col sm={12} xs={12} md={5.9} lg={5.9} xl={5.9} xxl={5.9} xxxl={5.9} >
+            <Gallery />
+            </Col>
+            <Col sm={12} xs={12} md={5.9} lg={5.9} xl={5.9} xxl={5.9} xxxl={5.9} style={{marginBottom:10,alignContent:"center"}} >
+            <ButtonContainer />
+   
+            </Col>
+         </Row>
+         
+        
+       
 
         
         </div>

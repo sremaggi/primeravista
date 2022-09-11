@@ -12,11 +12,14 @@ import { UserAuth } from "../context/AuthContext";
 function Information() {
     const {user} = UserAuth()
     return (
+        <div>
+             <NavbarLogin />
         <Container>
 
-        <NavbarLogin />
+       
         <InfoContainer />
        </Container>
+       </div>
     );
 }
 

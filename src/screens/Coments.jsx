@@ -34,8 +34,10 @@ function Coments() {
     };
 
     return (
+      <div>
+         <NavbarLogin />
        <Container >
-       <NavbarLogin />
+      
        <div style={{display:"flex",justifyContent:"center"}}>
        
        <button 
@@ -51,6 +53,7 @@ function Coments() {
        <GetAllMyComments />
 
        </Container>
+       </div>
     );
 }
 

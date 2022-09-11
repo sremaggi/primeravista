@@ -12,7 +12,7 @@ function InfoDescription(props) {
     return (
         
       <>
-        <Row style={{display:"flex",justifyContent:"center",marginTop:3,padding:5,fontSize:12, backgroundColor:"#DCDCDC",fontSize:13}}>
+        <Row style={{display:"flex",justifyContent:"center",marginTop:3,padding:5,fontSize:12, backgroundColor:"#F3F3F3",fontSize:13}}>
         <Col style={{display:"flex",justifyContent:"center"}}>
         {props.title}
         </Col>

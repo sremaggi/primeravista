@@ -24,11 +24,7 @@ function Signin() {
       }
     }
 
-    useEffect(() => {
-      if (user != null) {
-        navigate('/Home');
-      }
-    }, [user]);
+ 
 
     return (
 
