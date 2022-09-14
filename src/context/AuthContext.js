@@ -1,4 +1,4 @@
-import { useContext,createContext, useEffect,useState } from "react";
+import { useContext,createContext, useEffect,useState, useLayoutEffect } from "react";
 import { 
     GoogleAuthProvider,
     FacebookAuthProvider,
@@ -8,10 +8,12 @@ import {
     onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({children}) =>{
     const [user,setUser] = useState({});
+
 
     const googleSignIn = () =>{
         const provider = new GoogleAuthProvider()
@@ -32,6 +34,8 @@ export const AuthContextProvider = ({children}) =>{
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser)
+
+            
         })
         return ()=>{
             unsubscribe();
@@ -45,6 +49,8 @@ export const AuthContextProvider = ({children}) =>{
         )
 
 }
+
+
 
 
 export const UserAuth = ()=>{

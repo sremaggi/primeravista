@@ -114,8 +114,10 @@ function ComentsCreate() {
 
 
     return (
+        <div>
+            {user?.displayName ? <NavbarLogin title="Crear comentario" />:<Navbar />}
        <Container>
-       {user?.displayName ? <NavbarLogin title="Crear comentario" />:<Navbar />}
+       
 
        <Container>
 
@@ -174,6 +176,7 @@ function ComentsCreate() {
 
  
        </Container>
+       </div>
     );
 }
 

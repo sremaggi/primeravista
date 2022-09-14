@@ -31,8 +31,10 @@ function Request() {
 
 
     return (
+        <div>
+                    <NavbarLogin title={"Solicitud de Reserva"} />
        <Container style={{marginTop:1,width:"100%"}}>
-        <NavbarLogin title={"Solicitud de Reserva"} />
+
    
         <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#393E3A",borderRadius:100}}>
             <Col  style={{display:"flex",justifyContent:"center",fontSize:9,color:"white"}}>
@@ -194,6 +196,7 @@ function Request() {
   
    
        </Container>
+       </div>
     );
 }
 

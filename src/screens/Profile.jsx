@@ -23,8 +23,9 @@ function Profile() {
   }
     return (
         <div>
-        <Container >
         <NavbarLogin />
+        <Container >
+    
         <div style={{marginTop:10,backgroundColor:"white",justifyContent:"center"}}>
         <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
         <img src={user.photoURL} height={100} style={{display:"flex",margin:5}} />

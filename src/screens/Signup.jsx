@@ -9,10 +9,13 @@ import NavbarLogin from "../components/NavBarLogin";
 
 function Signup() {
     return (
+        <div>
+                   <NavbarLogin />
         <Container>   
-            <NavbarLogin />
+     
      <RegistrationForm />
         </Container>
+        </div>
 
     );
 }

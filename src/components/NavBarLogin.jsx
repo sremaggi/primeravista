@@ -22,19 +22,21 @@ function NavbarLogin(props) {
     return (
     
             
-            <div style={{marginTop:5,backgroundColor:"#144903",padding:3}}>
+            <NavContainer style={{backgroundColor:"#144903",padding:10,width:"100%" , boxShadow: "2px 2px 5px #999"
+}}>
 
             <Row style={{ display:"flex"}}>
 
-            <Col sm={8} xs={8} md={10} lg={10} xl={10} xxl={10} xxxl={10}  style={{ display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <div style={{alignItems:"start",display:"flex",justifyContent:"center"}}>
-            <SocialButtons size="10" sizeFont="0" />
+            <Col sm={9} xs={9} md={9} lg={9} xl={9} xxl={9} xxxl={9}  style={{ display:"flex",justifyContent:"start"}}>
+            <div style={{display:"flex",justifyContent:"center",alignItems:"center",alignContent:"center"}}>
+            <SocialButtons size="13" sizeFont="0" />
             </div>
             <Link style={{textDecoration:"none",height:"100%",justifyContent:"start",display:"flex"}} to={user?.displayName ? "/home":"/"}>
-            <div style={{display:"flex",justifyContent:"center",color:"white",flexDirection:"row",alignItems:"center",fontSize:9}}>
-            <img src={require('../assets/img/3.jpg') } width={90} height={"100%"} style={{borderRadius:100}}></img>
+            <div style={{display:"flex",justifyContent:"start",color:"white",alignItems:"center",fontSize:9}}>
+     
+            <img src={require('../assets/img/3.jpg') } width={120} height={"100%"} style={{borderRadius:100}}></img>
             <div style={{marginLeft:5,display:"flex",flexDirection:"column"}}>
-              <div style={{display:"flex",fontSize:12}}>
+              <div style={{display:"flex",fontSize:13}}>
               Primera Vista
               </div>
               <div style={{display:"flex",fontSize:7}}>
@@ -55,19 +57,19 @@ function NavbarLogin(props) {
             </Col>
 
             {user?.displayName ? 
-                <Col sm={4} xs={4} md={2} lg={2} xl={2} xxl={2} xxxl={2}  style={{ display:"flex",padding:2}}>
+                <Col sm={3} xs={3} md={3} lg={3} xl={3} xxl={3} xxxl={3}  style={{ display:"flex",padding:2}}>
                 <Link style={{flexDirection:"column",textDecoration:"none",width:"100%",height:"100%",justifyContent:"center",display:"flex"}} to={user?.displayName ? "/profile":"/"}>
                 <div style={{display:"flex",color:"white",flexDirection:"column",justifyContent:"center",fontSize:8}}>
                 <div style={{display:"flex",justifyContent:"center"}}>
                 <img src={user.photoURL} onClick={()=>{
                   navigate("/profile")
-                }} height={50} width={50} style={{display:"flex",justifyContent:"center"}} /> 
+                }} height={60} width={60} style={{display:"flex",justifyContent:"center",borderRadius:100}} /> 
                 </div>
     
-                <div style={{display:"flex",justifyContent:"center"}}>
+                <div style={{display:"flex",justifyContent:"center",width:"100%"}}>
                 {user.displayName.split(" ")[0]}
                 </div>
-                <div style={{display:"flex",justifyContent:"center",fontSize:6}}>
+                <div style={{display:"flex",justifyContent:"center",fontSize:6,width:"100%"}}>
                 Mi perfil
                 </div>
                
@@ -78,13 +80,13 @@ function NavbarLogin(props) {
                 </Col>
             
             :
-            <Col sm={4} xs={4} md={2} lg={2} xl={2} xxl={2} xxxl={2}  style={{ display:"flex"}}>
+            <Col sm={3} xs={3} md={3} lg={3} xl={3} xxl={3} xxxl={3}  style={{ display:"flex"}}>
             <Link style={{flexDirection:"column",textDecoration:"none",width:"100%",height:"100%",justifyContent:"center",display:"flex"}} to={"/signin"}>
-            <div style={{display:"flex",padding:10,color:"white",flexDirection:"column",justifyContent:"center",margin:3,fontSize:8}}>
+            <div style={{display:"flex",padding:1,color:"white",flexDirection:"column",justifyContent:"center",margin:3,fontSize:8}}>
             <div style={{display:"flex",justifyContent:"center"}}>
-                  <FaRegUserCircle size={30} />
+                  <FaRegUserCircle size={35} />
                 </div>
-                <div style={{display:"flex",justifyContent:"center",fontSize:6}}>
+                <div style={{display:"flex",justifyContent:"center",fontSize:6,marginTop:1}}>
                 Iniciar 
                 </div>
                 <div style={{display:"flex",justifyContent:"center",fontSize:6}}>
@@ -100,7 +102,7 @@ function NavbarLogin(props) {
       
       
             </Row>
-            </div>
+            </NavContainer>
     
     );
 }
@@ -109,20 +111,9 @@ export default NavbarLogin;
 
 
 
-const NavContainer = styled.nav`
+const NavContainer = styled.div`
+background: rgb(0,121,1);
+background: linear-gradient(0deg, rgba(0,121,1,1) 0%, rgba(0,66,0,1) 100%);
 
-  padding: .4rem;
-
-  display: flex;
-  justify-content:space-around;
-  a{
-    color: white;
-    text-decoration: none;
-    margin-right: 1rem;
-  }
-  p{
-    height:10 ;
-    color:white
-  }
 `;
 

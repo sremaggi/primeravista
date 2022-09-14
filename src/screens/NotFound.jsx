@@ -8,7 +8,8 @@ import NavbarLogin from "../components/NavBarLogin";
 
 function NotFound() {
 
-          window.location.replace('https://primeravistade.cl');
+    window.location.replace('https://primeravistade.cl');
+
     
     return (
    

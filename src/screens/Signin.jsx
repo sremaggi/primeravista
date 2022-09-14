@@ -24,14 +24,19 @@ function Signin() {
       }
     }
 
- 
+    useEffect(() => {
+      if (user != null) {
+        navigate('/Home');
+      }
+    }, [user]);
 
     return (
 
        <div> 
+             <NavbarLogin />
        <Container> 
     
-        <NavbarLogin />
+   
          <Row style={{justifyContent:"center",margin:2}}>
 
 {

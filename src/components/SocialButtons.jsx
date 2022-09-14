@@ -14,7 +14,7 @@ function SocialButtons(props) {
 
     return (
         
-<Container style={{width:"100%"}}>
+<div style={{width:"100%"}}>
 
 
         
@@ -55,7 +55,7 @@ function SocialButtons(props) {
 
         </a>
         
-       </Container>
+       </div>
 
 
 

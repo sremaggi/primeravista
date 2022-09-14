@@ -224,17 +224,19 @@ editableDateInputs={true}
 onChange={item => setState([item.selection])}
 moveRangeOnFirstSelection={false}
 ranges={state}
-//dayContentRenderer={customDayContent}
+dayContentRenderer={customDayContent}
 minDate={addDays(new Date(),0)}
-maxDate={addDays(new Date(), 70)}
+maxDate={addDays(new Date(), 90)}
 disabledDates={[
-  new Date(2022,8,9),
-  new Date(2022,8,10),
-  new Date(2022,8,11),
+  new Date(2022,8,13),
+  new Date(2022,8,14),
+  new Date(2022,8,15),
   new Date(2022,8,16),
   new Date(2022,8,17),
   new Date(2022,8,18),
   new Date(2022,8,19),
+  new Date(2022,8,30),
+  new Date(2022,9,1),
   new Date(2022,9,7),
   new Date(2022,9,8),
 ]}
@@ -258,7 +260,7 @@ locale={es}
         
         <Row style={{display:"flex",justifyContent:"center"}}>
         {state[0].endDate != null ? new Date(state[0].startDate).getFullYear() :""}/
-        {state[0].endDate != null ? (new Date(state[0].startDate).getMonth() < 10 ? `0${new Date(state[0].startDate).getMonth()}`:new Date(state[0].startDate).getMonth()) :""}
+        {state[0].endDate != null ? (new Date(state[0].startDate).getMonth() +1 < 10 ? `0${new Date(state[0].startDate).getMonth()+1}`:new Date(state[0].startDate).getMonth()+1) :""}
         /{state[0].endDate != null ? (new Date(state[0].startDate).getUTCDate() < 10 ? `0${new Date(state[0].startDate).getUTCDate()}`:new Date(state[0].startDate).getUTCDate())  :""}
         </Row>    
         </Col>
@@ -271,7 +273,7 @@ locale={es}
         
         <Row style={{display:"flex",justifyContent:"center"}}>
         {state[0].endDate != null ? new Date(state[0].endDate).getFullYear() :""}/
-        {state[0].endDate != null ? (new Date(state[0].endDate).getMonth() < 10 ? `0${new Date(state[0].endDate).getMonth()}`:new Date(state[0].endDate).getMonth()) :""}
+        {state[0].endDate != null ? (new Date(state[0].endDate).getMonth()+1 < 10 ? `0${new Date(state[0].endDate).getMonth()+1}`:new Date(state[0].endDate).getMonth()+1) :""}
         /{state[0].endDate != null ? (new Date(state[0].endDate).getUTCDate() < 10 ? `0${new Date(state[0].endDate).getUTCDate()}`:new Date(state[0].endDate).getUTCDate())  :""}
         </Row>    
         </Col>
@@ -298,9 +300,9 @@ locale={es}
     ${ state[0].endDate != null ? 
     (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
     (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
-    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000) *0.90 :
+    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*40000) *0.90 :
     (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
-    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
+    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*40000)
     :""}
     </Col>
 
@@ -328,10 +330,10 @@ locale={es}
             mount: (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
             + (getLowDemand(state)*85000) + (getHighDemand(state)*105000) ,
             startDate:{y:state[0].startDate.getFullYear(),
-              m:state[0].startDate.getMonth(),
+              m:state[0].startDate.getMonth()+1,
               d:state[0].startDate.getUTCDate()},
             finishDate:{y:state[0].endDate.getFullYear(),
-              m:state[0].endDate.getMonth(),
+              m:state[0].endDate.getMonth()+1,
               d:state[0].endDate.getUTCDate()},
             days:{
               hd: getHighDemand(state),
@@ -341,7 +343,7 @@ locale={es}
             }  
           }})
         }}
-    style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}>  Ir a Realizar solicitud</button>
+    style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}>  Ir a Realizar solicitud</button>
  
     :
 
@@ -350,7 +352,7 @@ locale={es}
      alert("Debes \n 1.Iniciar sesión. \n 2.Seleccionar almenos una noche. \n Luego podrás realizar una solicitud")
         
     }}
-    style={{padding:20,backgroundColor:"#9A7D9E",color:"white",fontWeight:"bold"}}> Ir a Realizar solicitud</button>
+    style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}> Ir a Realizar solicitud</button>
   }
 
    
