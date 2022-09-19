@@ -9,6 +9,7 @@ import { UserAuth } from "../context/AuthContext";
 import { collection, addDoc,getDocs} from "firebase/firestore"; 
 import { firestore } from "../firebase";
 
+var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',timeZone: "America/Santiago" };
 
 
 function Request() {
@@ -36,38 +37,38 @@ function Request() {
        <Container style={{marginTop:1,width:"100%"}}>
 
    
-        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#393E3A",borderRadius:100}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:9,color:"white"}}>
-            Completa los detalles de tu solicitud para poder brindarte una mejor experiencia al momento de contactarnos
+        <Row style={{display:"flex",margin:10,padding:10,backgroundColor:"#393E3A",borderRadius:10}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:13,color:"white"}}>
+            Completar Solicitud
             </Col>
          
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#91C08D"}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#42AB06",margin:2}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,color:"white"}}>
             Llegada
             </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            {startDate.y + " / " +  startDate.m + " / "+ startDate.d}
+            <Col style={{display:"flex",justifyContent:"center",color:"white",fontSize:11,alignItems:"center"}}>
+            { new Date(startDate.y,startDate.m-1,startDate.d ).toLocaleString("es-CL", options).toUpperCase()}
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#C09E8D"}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#42AB06",margin:2}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,color:"white"}}>
             Salida
             </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            {finishDate.y + " / " +  finishDate.m + " / "+ finishDate.d}
+            <Col style={{display:"flex",justifyContent:"center",color:"white",fontSize:11}}>
+            {new Date(finishDate.y,finishDate.m-1,finishDate.d ).toLocaleString("es-CL", options).toUpperCase()}
             </Col>
         </Row>
 
-        <Row style={{display:"flex",padding:10,backgroundColor:"#C7FDEB"}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#42AB06",margin:2}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,color:"white"}}>
             Noches totales
             </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
-            {days.hd + days.ld + days.nd}
+            <Col style={{display:"flex",justifyContent:"center",color:"white"}}>
+            {days.hd + days.ld + days.nd -1}
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#DEDEDE"}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#CACACA",color:"black",margin:2}}>
             <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4}  style={{display:"flex",justifyContent:"center",fontSize:15,alignItems:"center"}}>
             A nombre de 
             </Col>
@@ -81,7 +82,7 @@ function Request() {
         />
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#DEDEDE"}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#CACACA",color:"black",margin:2}}>
             <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4}  style={{display:"flex",justifyContent:"center",fontSize:15,alignItems:"center"}}>
             Correo Electrónico
             </Col>
@@ -95,7 +96,7 @@ function Request() {
         />
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#DEDEDE"}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#CACACA",color:"black",margin:2}}>
             <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4}   style={{display:"flex",justifyContent:"center",fontSize:15,alignItems:"center"}}>
             Número de telefono
             </Col>
@@ -109,7 +110,7 @@ function Request() {
         />
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#DEDEDE"}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#CACACA",color:"black",margin:2}}>
             <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4}   style={{display:"flex",justifyContent:"center",fontSize:15,alignItems:"center"}}>
             Cantidad de personas
             </Col>
@@ -123,16 +124,17 @@ function Request() {
         />
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#DEDEDE"}}>
+        <Row style={{display:"flex",padding:10,backgroundColor:"#CACACA",color:"black",margin:2}}>
             <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4} style={{display:"flex",justifyContent:"center",fontSize:15,alignItems:"center"}}>
             Comentario
             </Col>
             <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{display:"flex",justifyContent:"center"}}>
             <textarea
+             placeholder='Iré unos días a descansar con mi familia,llevaré a mi tortuga, es súper tranquila.'
         style={{fontSize:13,padding:10}}
-        maxLength={250}
+        maxLength={300}
         rows={4}
-        cols={20}
+        cols={100}
         id="message"
         name="message"
         value={message}
@@ -140,11 +142,11 @@ function Request() {
         />
             </Col>
         </Row>
-        <Row style={{display:"flex",padding:10,backgroundColor:"#C2C363"}}>
-            <Col  style={{display:"flex",justifyContent:"center",fontSize:15}}>
-            Monto aproximado
+        <Row style={{display:"flex",padding:10,backgroundColor:"#42AB06",margin:2}}>
+            <Col  style={{display:"flex",justifyContent:"center",fontSize:15,color:"white"}}>
+            Total a pagar 
             </Col>
-            <Col style={{display:"flex",justifyContent:"center"}}>
+            <Col style={{display:"flex",justifyContent:"center",color:"white"}}>
             ${(days.hd + days.ld + days.nd)>6 ? mount*0.90 : mount}
             </Col>
         </Row>
@@ -178,8 +180,7 @@ function Request() {
   
                 }
             }}
-            style={{display:"flex",width:"100%",backgroundColor:"red",color:"white",
-            justifyContent:"center",padding:10,fontSize:15}}>Confirmar Solicitud</button> : 
+            style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}>Confirmar Solicitud</button> : 
             <div style={{display:"flex",flexDirection:"column"}}>
                 <div style={{display:"flex",justifyContent:"center"}}>
                 <ReactLoading type={"spinningBubbles"} color={"green"} height={40} width={40} />

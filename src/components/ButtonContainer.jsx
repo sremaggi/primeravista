@@ -2,7 +2,7 @@ import React from "react";
 import {Container,Row,Col} from 'react-grid-system';
 import styled from "styled-components";
 
-import { FcHome,FcCalendar, FcComments, FcMindMap, FcSms, FcLandscape, FcCellPhone } from "react-icons/fc";
+import { FcHome,FcCalendar, FcComments, FcMindMap, FcSms, FcLandscape, FcCellPhone,FcOldTimeCamera,FcPlanner,FcCollaboration } from "react-icons/fc";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ function ButtonContainer() {
       <div  style={{marginTop:2}}>
         <Row   style={{display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
 
-        <Col  sm={5.5} xs={5.5} md={5.5} lg={2.5} xl={2.5} xxl={2.5} xxxl={2.5}  style={{padding:4,borderRadius:5,display:"flex",backgroundColor:"green",margin:2,justifyContent:"center",alignContent:"center",alignItems:"center"}}>
+        <Col  sm={5.5} xs={5.5} md={5.5} lg={5.5} xl={5.5} xxl={5.5} xxxl={5.5}  style={{padding:10 , boxShadow: "2px 2px 5px #999",borderRadius:5,display:"flex",backgroundColor:"#57b251",margin:2,justifyContent:"center",alignContent:"center",alignItems:"center"}}>
 
         <Link to={"/information"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white",width:"100%"}} >
       
@@ -30,12 +30,12 @@ function ButtonContainer() {
     
           </Col>
 
-        <Col  sm={5.5} xs={5.5} md={5.5} lg={2.5} xl={2.5} xxl={2.5} xxxl={2.5}  style={{padding:4,borderRadius:5,backgroundColor:"green",margin:2,display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
+        <Col  sm={5.5} xs={5.5} md={5.5} lg={5.5} xl={5.5} xxl={5.5} xxxl={5.5}  style={{padding:10 , boxShadow: "2px 2px 5px #999",borderRadius:5,backgroundColor:"#57b251",margin:2,display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
  
-        <Link to={"/contact"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white"}} >
+        <Link to={"/contact"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white",width:"100%"}} >
       
               <Row style={{display:"flex",justifyContent:"center"}}>
-              <FaPhoneSquareAlt style={{margin:5,color:"white"}} size={30}/>
+              <FcCollaboration style={{margin:5,color:"white"}} size={30}/>
               </Row> 
               <Row style={{display:"flex",justifyContent:"center",fontSize:15}}>
               Contacto
@@ -45,12 +45,12 @@ function ButtonContainer() {
          
           </Col>
          
-        <Col  sm={5.5} xs={5.5} md={5.5} lg={2.5} xl={2.5} xxl={2.5} xxxl={2.5}  style={{padding:4,borderRadius:5,backgroundColor:"green",margin:2,display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
+        <Col  sm={5.5} xs={5.5} md={5.5} lg={5.5} xl={5.5} xxl={5.5} xxxl={5.5}  style={{padding:10 , boxShadow: "2px 2px 5px #999",borderRadius:5,backgroundColor:"#57b251",margin:2,display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
  
-        <Link to={"/comments"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white"}} >
+        <Link to={"/comments"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white",width:"100%"}} >
       
               <Row style={{display:"flex",justifyContent:"center"}}>
-              <FcSms style={{margin:5,color:"white"}} size={30}/>
+              <FcOldTimeCamera style={{margin:5,color:"white"}} size={30}/>
               </Row> 
               <Row style={{display:"flex",justifyContent:"center",fontSize:15}}>
               Experiencias
@@ -60,12 +60,12 @@ function ButtonContainer() {
              
           </Col>
           
-        <Col  sm={5.5} xs={5.5} md={5.5} lg={2.5} xl={2.5} xxl={2.5} xxxl={2.5}  style={{padding:4,borderRadius:5,backgroundColor:"green",margin:2,display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
+        <Col  sm={5.5} xs={5.5} md={5.5} lg={5.5} xl={5.5} xxl={5.5} xxxl={5.5}  style={{padding:10, boxShadow: "2px 2px 5px #999",borderRadius:5,backgroundColor:"#57b251",margin:2,display:"flex",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
 
-        <Link to={"/bookings"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white"}} >
+        <Link to={"/bookings"} style={{textDecoration:"none",display:"flex",flexDirection:"column",color:"white",width:"100%"}} >
       
               <Row style={{display:"flex",justifyContent:"center"}}>
-              <FcCalendar style={{margin:5,color:"white"}} size={30}/>
+              <FcPlanner style={{margin:5,color:"white"}} size={30}/>
               </Row> 
               <Row style={{display:"flex",justifyContent:"center",fontSize:15}}>
               Reserva

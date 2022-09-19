@@ -38,14 +38,14 @@ function Coments() {
          <NavbarLogin />
        <Container >
       
-       <div style={{display:"flex",justifyContent:"center"}}>
+       <div style={{display:"flex",justifyContent:"center",marginTop:10}}>
        
        <button 
        onClick={()=>{
          (user?.displayName) ? navigate("/comments/create") :
             alert("Debes iniciar sesión para realizar un comentario")
        }}
-       style={{padding:10,backgroundColor:"green",color:"white",fontSize:15}}>Escribir Comentario <BsPencil/>
+       style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}>Escribir Comentario <BsPencil/>
        </button>
 
        </div>

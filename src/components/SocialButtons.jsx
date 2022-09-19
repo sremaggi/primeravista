@@ -22,7 +22,7 @@ function SocialButtons(props) {
 
         <Container style={{display:"flex",justifyContent:"center",width:"50%"}}>
         <Row>
-        <Col style={{display:"flex",flexDirection:"row",fontSize:props.sizeFont,alignContent:"center",alignItems:"center",color:"#D21EFE"}}>
+        <Col style={{display:"flex",flexDirection:"row",fontSize:props.sizeFont,alignContent:"center",alignItems:"center",color:"#A200FF"}}>
         <BsInstagram size={props.size}  style={{display:"flex"}}/>
         Instagram
         </Col> 
@@ -35,7 +35,7 @@ function SocialButtons(props) {
         <Container style={{marginTop:5,display:"flex",justifyContent:"center",width:"50%"}}>
         <Row>
         <Col style={{display:"flex",flexDirection:"row",fontSize:props.sizeFont,alignContent:"center",alignItems:"center",color:"#1E79FE"}}>
-        <GrFacebook size={props.size} style={{display:"flex",color:"#1E79FE"}}/>
+        <GrFacebook size={props.size} style={{display:"flex",color:"#0A009F"}}/>
         Facebook
         </Col> 
         </Row>

@@ -21,23 +21,25 @@ function HomeScreen() {
         <div>
 
         <div style={{width:"100%"}}>
-
-        <NavbarLogin/>
+        <ResponsiveAppBar />
         </div>
  
 
    
 
-            {width > 700 ?
+            {width > 1199 ?
             <Container>
             <Row>    
-            <Col sm={12} xs={12} md={12} lg={12} xl={6} xxl={6} xxxl={6} style={{display:"flex",justifyContent:"start",marginTop:20,flexDirection:"column"}} >
+            <Col sm={12} xs={12} md={12} lg={12} xl={6} xxl={6} xxxl={6} style={{display:"flex",justifyContent:"start",marginTop:20,flexDirection:"column",alignContent:"center",alignItems:"center"}} >
             <Gallery  />
-            {width > 1199 ?<SocialHorizontal /> :""}
+            
             </Col>
-            <Col sm={12} xs={6} md={6} lg={6} xl={6} xxl={6} xxxl={6} style={{marginBottom:10,flexDirection:"column"}}>
+            <Col sm={12} xs={6} md={6} lg={6} xl={6} xxl={6} xxxl={6} style={{display:"flex",marginBottom:10,marginTop:5,flexDirection:"column",justifyContent:"center",alignContent:"center",alignItems:"center"}}>
+            <Row style={{display:"flex",backgroundColor:"#005301",padding:5,borderRadius:2,justifyContent:"center",color:"white",fontSize:10,fontFamily:"cambria"}}>
+              Bienvenid@ a Primera Vista hospedaje asdasdasdas
+            </Row>
             <ButtonContainer />
-            {width > 1199 ?<CalendarComponent /> :""}
+            
             
             </Col>
             </Row>
@@ -49,7 +51,10 @@ function HomeScreen() {
             <Gallery />
             </Col>
               <Col sm={12} xs={12} md={12} lg={6} xl={6} xxl={6} xxxl={6} style={{marginBottom:10}}>
+              <Container>
               <ButtonContainer />
+              </Container>
+           
               </Col>
               </Row>
             }

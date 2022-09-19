@@ -26,17 +26,17 @@ function Profile() {
         <NavbarLogin />
         <Container >
     
-        <div style={{marginTop:10,backgroundColor:"white",justifyContent:"center"}}>
-        <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
+        <div style={{marginTop:10,justifyContent:"center"}}>
+        <Row style={{display:"flex",marginTop:5,justifyContent:"center"}}>
         <img src={user.photoURL} height={100} style={{display:"flex",margin:5}} />
         </Row>
-        <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
+        <Row style={{display:"flex",marginTop:5,justifyContent:"center"}}>
         {user.displayName}
         </Row>
-        <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
+        <Row style={{display:"flex",marginTop:5,justifyContent:"center"}}>
         {user.email}
         </Row>
-        <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
+        <Row style={{display:"flex",marginTop:5,justifyContent:"center"}}>
         <Link to='/'>
 <button style={{backgroundColor:"red",color:"white",padding:10}} onClick={handleSignOut}>Cerrar Sesión</button>
 </Link>
@@ -48,10 +48,10 @@ function Profile() {
           </Row>
           <GetMyReqs />
         {user.email == "seba.rf96@gmail.com" || user.email == "ant.niasbravo@gmail.com" ?
-        <div style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center",flexDirection:"column",padding:10}}>
+        <div style={{display:"flex",marginTop:5,justifyContent:"center",alignItems:"center",flexDirection:"column",padding:10}}>
         Rol: Admin
         <Link 
-        style={{display:"flex",marginTop:5,textDecoration:"none",backgroundColor:"white",justifyContent:"center",flexDirection:"column",padding:10}}
+        style={{display:"flex",marginTop:5,textDecoration:"none",justifyContent:"center",flexDirection:"column",padding:10}}
         to={"/admin"}>
         <button 
     
@@ -60,7 +60,7 @@ function Profile() {
 
         </div>          
         : 
-        <Row style={{display:"flex",marginTop:5,backgroundColor:"white",justifyContent:"center"}}>
+        <Row style={{display:"flex",justifyContent:"center",fontSize:10}}>
          Rol: Usuario
         </Row>
         }

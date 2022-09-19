@@ -121,7 +121,7 @@ function ComentsCreate() {
 
        <Container>
 
-        <Row style={{backgroundColor:"#00537C",color:"white",display:"flex",padding:10,justifyContent:"center",alignItems:"center",fontSize:14,marginTop:10}}>
+        <Row style={{backgroundColor:"#454545",color:"white",display:"flex",padding:10,justifyContent:"center",alignItems:"center",fontSize:14,marginTop:10,borderRadius:10}}>
             Cuentanos que te ha parecido tu experiencia en Primera Vista Hospedaje.
 
             </Row>
@@ -146,7 +146,7 @@ function ComentsCreate() {
             <input style={{height:30,justifyContent:"center",display:"flex"}} type="file" accept="image/*"   onChange={handleChange}/>
             </Col>
             <Col style={{display:"flex",flexDirection:"column",padding:10,justifyContent:"center"}}>
-            <label style={{backgroundColor:"#355037",color:"white",fontSize:12,padding:5,justifyContent:"center",display:"flex"}}>Escoge tu mejor foto en Primera vista hospedaje!</label>
+            <label style={{backgroundColor:"#037D77",color:"white",fontSize:12,padding:5,justifyContent:"center",display:"flex"}}>Adjunta tu mejor foto en Primera Vista</label>
                         
 
 

@@ -22,24 +22,24 @@ function NavbarLogin(props) {
     return (
     
             
-            <NavContainer style={{backgroundColor:"#144903",padding:10,width:"100%" , boxShadow: "2px 2px 5px #999"
+            <NavContainer style={{padding:10,width:"100%" , boxShadow: "2px 2px 5px #999"
 }}>
 
             <Row style={{ display:"flex"}}>
 
             <Col sm={9} xs={9} md={9} lg={9} xl={9} xxl={9} xxxl={9}  style={{ display:"flex",justifyContent:"start"}}>
             <div style={{display:"flex",justifyContent:"center",alignItems:"center",alignContent:"center"}}>
-            <SocialButtons size="13" sizeFont="0" />
+            <SocialButtons size="12" sizeFont="0" />
             </div>
-            <Link style={{textDecoration:"none",height:"100%",justifyContent:"start",display:"flex"}} to={user?.displayName ? "/home":"/"}>
-            <div style={{display:"flex",justifyContent:"start",color:"white",alignItems:"center",fontSize:9}}>
+            <Link style={{textDecoration:"none",height:"100%",justifyContent:"center",display:"flex"}} to={"/"}>
+            <div style={{display:"flex",color:"#FBFFFB",alignItems:"center",fontSize:9}}>
      
-            <img src={require('../assets/img/3.jpg') } width={120} height={"100%"} style={{borderRadius:100}}></img>
+            <img src={require('../assets/img/5.png') } width={100} height={"100%"} style={{borderRadius:100}}></img>
             <div style={{marginLeft:5,display:"flex",flexDirection:"column"}}>
-              <div style={{display:"flex",fontSize:13}}>
+              <div style={{display:"flex",fontSize:16,fontFamily:"American Typewriter",color:"#003403",fontWeight:550}}>
               Primera Vista
               </div>
-              <div style={{display:"flex",fontSize:7}}>
+              <div style={{display:"flex",fontSize:10,color:"#014004",fontFamily:"American Typewriter"}}>
               Increible casa frente al mar
               </div>
        
@@ -63,15 +63,13 @@ function NavbarLogin(props) {
                 <div style={{display:"flex",justifyContent:"center"}}>
                 <img src={user.photoURL} onClick={()=>{
                   navigate("/profile")
-                }} height={60} width={60} style={{display:"flex",justifyContent:"center",borderRadius:100}} /> 
+                }} height={40} width={40} style={{display:"flex",justifyContent:"center",borderRadius:100}} /> 
                 </div>
     
-                <div style={{display:"flex",justifyContent:"center",width:"100%"}}>
+                <div style={{display:"flex",justifyContent:"center",width:"100%",color:"white",marginTop:3}}>
                 {user.displayName.split(" ")[0]}
                 </div>
-                <div style={{display:"flex",justifyContent:"center",fontSize:6,width:"100%"}}>
-                Mi perfil
-                </div>
+      
                
               
                 </div>
@@ -85,12 +83,6 @@ function NavbarLogin(props) {
             <div style={{display:"flex",padding:1,color:"white",flexDirection:"column",justifyContent:"center",margin:3,fontSize:8}}>
             <div style={{display:"flex",justifyContent:"center"}}>
                   <FaRegUserCircle size={35} />
-                </div>
-                <div style={{display:"flex",justifyContent:"center",fontSize:6,marginTop:1}}>
-                Iniciar 
-                </div>
-                <div style={{display:"flex",justifyContent:"center",fontSize:6}}>
-                Sesión
                 </div>
               </div>
             </Link>
@@ -112,8 +104,7 @@ export default NavbarLogin;
 
 
 const NavContainer = styled.div`
-background: rgb(0,121,1);
-background: linear-gradient(0deg, rgba(0,121,1,1) 0%, rgba(0,66,0,1) 100%);
-
+background: rgb(72,196,66);
+background: linear-gradient(163deg, rgba(72,196,66,1) 0%, rgba(72,196,66,1) 51%, rgba(58,158,54,1) 100%);
 `;
 

@@ -26,7 +26,7 @@ function Signin() {
 
     useEffect(() => {
       if (user != null) {
-        navigate('/Home');
+        navigate('/');
       }
     }, [user]);
 

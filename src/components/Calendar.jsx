@@ -10,7 +10,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { UserAuth } from '../context/AuthContext';
 
-
+var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',timeZone: "America/Santiago" };
 
 const bookings = [{
     startDate:new Date(2022,8,16),
@@ -35,6 +35,14 @@ const bookings = [{
   },{
     startDate:new Date(2022,9,29),
     endDate: new Date(2022,9,30),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  }]
+
+  const offerts = [{
+    startDate:new Date(2022,8,23),
+    endDate: new Date(2022,8,25),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
@@ -81,6 +89,31 @@ function getDatesInRange(startDate, endDate) {
 function customDayContent(day) {
     let extraDot = null;
 
+    offerts.forEach(b=>{
+      let dates = getDatesInRange(b.startDate,b.endDate)
+      dates.forEach(d=>{
+          if(
+              day.getFullYear() === d.getFullYear() &&
+              day.getMonth() === d.getMonth() &&
+              day.getDate() === d.getDate()
+            ) {
+            extraDot = (
+              <div
+                style={{
+                  height: "6px",
+                  width: "6px",
+                  borderRadius: "100%",
+                  background: "#00D4C1",
+                  position: "absolute",
+                  top: 2,
+                  right: 2,
+                }}
+              />
+            )
+          }
+      })
+  })
+
     highDemands.forEach(b=>{
         let dates = getDatesInRange(b.startDate,b.endDate)
         dates.forEach(d=>{
@@ -92,10 +125,10 @@ function customDayContent(day) {
               extraDot = (
                 <div
                   style={{
-                    height: "6px",
-                    width: "6px",
+                    height: "8px",
+                    width: "8px",
                     borderRadius: "100%",
-                    background: "orange",
+                    //background: "orange",
                     position: "absolute",
                     top: 2,
                     right: 2,
@@ -120,7 +153,7 @@ function customDayContent(day) {
                     height: "6px",
                     width: "6px",
                     borderRadius: "100%",
-                    background: "yellow",
+                    //background: "yellow",
                     position: "absolute",
                     top: 2,
                     right: 2,
@@ -181,6 +214,28 @@ function customDayContent(day) {
   }
 
 
+  function getOfferts(state){
+    let count = 0
+    let selectedDates = getDatesInRange(state[0].startDate,state[0].endDate)
+    selectedDates.forEach(sd =>{
+        offerts.forEach(lds=>{
+            let o = getDatesInRange(lds.startDate,lds.endDate)
+            o.forEach(ld=>{
+                if(
+                    sd.getFullYear() === ld.getFullYear() &&
+                    sd.getMonth() === ld.getMonth() &&
+                    sd.getDate() === ld.getDate()
+                  ) {
+                    count = count+1
+                  }
+            })
+        })
+    })
+
+    return count
+  }
+
+
 function CalendarComponent() {
   const navigate = useNavigate();
    const {user} = UserAuth();
@@ -193,27 +248,30 @@ function CalendarComponent() {
             showDateDisplay: false,
           }
       ]);
- 
+
 
     return (
         <div>
- <Container style={{backgroundColor:"white"}}>
-               <Row style={{display:"flex",backgroundColor:"white",color:"white",justifyContent:"center",marginTop:10}}>
+ <Container style={{}}>
+               <Row style={{display:"flex",color:"white",justifyContent:"center",marginTop:10}}>
 
-        <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4} style={{flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
-        <Row style={{backgroundColor:"#CDCDCD",display:"flex",width:"100%",justifyContent:"center",padding:1,fontSize:10}}>
-        No disponible
-        </Row>
-        <Row style={{backgroundColor:"#7FA251",display:"flex",width:"100%",justifyContent:"center",color:"white",padding:1,fontSize:10}}>
-          Selección
-        </Row>
-        </Col>
-        <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{backgroundColor:"#00537C",flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:10,color:"white"}}>
+        <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{backgroundColor:"#454545",flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13,color:"white",textJustify:"inter-word",textAlign:"justify",borderRadius:10}}>
         <Row style={{padding:10,margin:2}}>
-        Realiza tu solicitud y nos contactaremos contigo a la brevedad
+        Realiza tu solicitud y nos contactaremos contigo a la brevedad para concretar la reserva.
         </Row>
 
         
+        </Col>
+        <Col sm={4} xs={4} md={4} lg={4} xl={4} xxl={4} xxxl={4} style={{flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13}}>
+        <Row style={{backgroundColor:"#CDCDCD",display:"flex",width:"100%",justifyContent:"center",padding:3,fontSize:10}}>
+        No disponible
+        </Row>
+        <Row style={{backgroundColor:"#7FA251",display:"flex",width:"100%",justifyContent:"center",color:"white",padding:3,fontSize:10}}>
+          Selección
+        </Row>
+        <Row style={{backgroundColor:"#00D4C1",display:"flex",width:"100%",justifyContent:"center",color:"black",padding:3,fontSize:10}}>
+          Oferta
+        </Row>
         </Col>
         </Row>
         </Container>   
@@ -258,10 +316,9 @@ locale={es}
         Llegada
         </Row> 
         
-        <Row style={{display:"flex",justifyContent:"center"}}>
-        {state[0].endDate != null ? new Date(state[0].startDate).getFullYear() :""}/
-        {state[0].endDate != null ? (new Date(state[0].startDate).getMonth() +1 < 10 ? `0${new Date(state[0].startDate).getMonth()+1}`:new Date(state[0].startDate).getMonth()+1) :""}
-        /{state[0].endDate != null ? (new Date(state[0].startDate).getUTCDate() < 10 ? `0${new Date(state[0].startDate).getUTCDate()}`:new Date(state[0].startDate).getUTCDate())  :""}
+        <Row style={{display:"flex",justifyContent:"center",fontSize:10}}>
+        {state[0].endDate != null && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1  ? new Date(state[0].startDate).toLocaleString("es-CL", options).toUpperCase()  :""}
+
         </Row>    
         </Col>
         
@@ -271,17 +328,17 @@ locale={es}
         Salida
         </Row> 
         
-        <Row style={{display:"flex",justifyContent:"center"}}>
-        {state[0].endDate != null ? new Date(state[0].endDate).getFullYear() :""}/
-        {state[0].endDate != null ? (new Date(state[0].endDate).getMonth()+1 < 10 ? `0${new Date(state[0].endDate).getMonth()+1}`:new Date(state[0].endDate).getMonth()+1) :""}
-        /{state[0].endDate != null ? (new Date(state[0].endDate).getUTCDate() < 10 ? `0${new Date(state[0].endDate).getUTCDate()}`:new Date(state[0].endDate).getUTCDate())  :""}
+        <Row style={{display:"flex",justifyContent:"center",fontSize:10}}>
+        {state[0].endDate != null && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1  ? new Date(state[0].endDate).toLocaleString("es-CL", options).toUpperCase() :""}
+
+
         </Row>    
         </Col>
  </Row> 
- <Row style={{backgroundColor:"red",padding:5,borderRadius:100,margin:5,fontSize:10,display:"flex",justifyContent:"center",color:"white"}}>
-        Si reservas más de 5 noches, aplicamos un descuento para tu tarifa
+ <Row style={{backgroundColor:"#454545",padding:10,borderRadius:10,margin:5,fontSize:12,display:"flex",justifyContent:"center",color:"white",textJustify:"inter-word",textAlign:"justify"}}>
+        Por reservas superiores a 5 noches, se aplica un descuento
         </Row>
- <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
+ <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#42AB06",padding:5,color:"white",fontSize:13}}>
     <Col style={{display:"flex",justifyContent:"end"}}>
     Noches Solicitadas
     </Col>
@@ -292,23 +349,25 @@ locale={es}
 
  </Row>
  
- <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
+ <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#42AB06",padding:5,color:"white",fontSize:13}}>
     <Col style={{display:"flex",justifyContent:"end"}}>
-    Monto Aproximado
+    Monto 
     </Col>
     <Col style={{display:"flex",justifyContent:"center"}}>
-    ${ state[0].endDate != null ? 
+    ${ state[0].endDate != null && getOfferts(state) != 3 && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1 ? 
     (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
     (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
     ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*40000) *0.90 :
     (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
     ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*40000)
     :""}
+    {getOfferts(state) == 3 ? 80000 + (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-getOfferts(state))*40000 ):""
+    }
     </Col>
 
 
  </Row>
- <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#454545",padding:5,color:"white",fontSize:13}}>
+ <Row style={{display:"flex",justifyContent:"center",backgroundColor:"#42AB06",padding:5,color:"white",fontSize:13}}>
     <Col style={{display:"flex",justifyContent:"end"}}>
     Descuento
     </Col>
@@ -326,9 +385,15 @@ locale={es}
 
         <button 
         onClick={()=>{
+          let mount;
+          if (getOfferts(state) == 3){
+            mount = 80000
+          }else{
+            mount = (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
+            + (getLowDemand(state)*85000) + (getHighDemand(state)*105000) ;
+          }
           navigate('/bookings/request', {state:{ 
-            mount: (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
-            + (getLowDemand(state)*85000) + (getHighDemand(state)*105000) ,
+            mount: mount,
             startDate:{y:state[0].startDate.getFullYear(),
               m:state[0].startDate.getMonth()+1,
               d:state[0].startDate.getUTCDate()},
@@ -343,16 +408,17 @@ locale={es}
             }  
           }})
         }}
-    style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}>  Ir a Realizar solicitud</button>
+    style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}>  Realizar Solicitud</button>
  
     :
 
         <button 
     onClick={()=>{
-     alert("Debes \n 1.Iniciar sesión. \n 2.Seleccionar almenos una noche. \n Luego podrás realizar una solicitud")
+
+     alert("Debes \n 1.Iniciar sesión. \n 2.Seleccionar al menos una noche. \n Luego podrás realizar una solicitud")
         
     }}
-    style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}> Ir a Realizar solicitud</button>
+    style={{padding:20,backgroundColor:"#037D77",color:"white",fontWeight:"bold"}}> Realizar Solicitud</button>
   }
 
    
