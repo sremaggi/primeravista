@@ -18,6 +18,11 @@ function Bookings() {
     const {user} = UserAuth()
     const {navigate} = useNavigate()
     const [width, height] = UseWindowSize()
+    useEffect(() => {
+        //scroll to top on page load
+        document.body.style.zoom = "100%";
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }, []);
     
     return (
             <div>

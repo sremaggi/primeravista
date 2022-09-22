@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Gallery from "../components/GalleryImage";
 import {Container,Row,Col} from 'react-grid-system';
 import TitleContainer from "../components/TitleContainer";
@@ -9,8 +9,12 @@ import GetMyReqs from "../components/GetMyReq";
 
 
 function Admin() {
-
+    useEffect(() => {
+        //scroll to top on page load
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }, []);
     return (
+
         
         <div style={{width:"100%"}}>
      

@@ -16,7 +16,7 @@ import ResponsiveAppBar from "../components/NavBar";
 
 function HomeScreen() {
     const [width, height] = UseWindowSize()
-    console.log("w: ",width," h: ",height)
+
     return (
         <div>
 

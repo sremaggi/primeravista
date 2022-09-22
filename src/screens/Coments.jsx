@@ -30,7 +30,7 @@ function Coments() {
     const handleMessageChange = event => {
       // 👇️ access textarea value
       setMessage(event.target.value);
-      console.log(event.target.value);
+   
     };
 
     return (
@@ -50,8 +50,9 @@ function Coments() {
 
        </div>
 
+       <div style={{marginBottom:30}}>
        <GetAllMyComments />
-
+       </div>
        </Container>
        </div>
     );

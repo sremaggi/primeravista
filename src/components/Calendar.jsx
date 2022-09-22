@@ -20,6 +20,7 @@ const bookings = [{
     disabled: true,
   }]
 
+  /**
   const highDemands = [{
     startDate:new Date(2022,8,16),
     endDate: new Date(2022,8,19),
@@ -40,13 +41,7 @@ const bookings = [{
     showDateDisplay: false,
   }]
 
-  const offerts = [{
-    startDate:new Date(2022,8,23),
-    endDate: new Date(2022,8,25),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  }]
+
 
   const lowDemands = [{
     startDate:new Date(2022,9,16),
@@ -73,7 +68,15 @@ const bookings = [{
     disabled: true,
     showDateDisplay: false,
   }]
+ */
 
+  const offerts = [{
+    startDate:new Date(2022,8,23),
+    endDate: new Date(2022,8,25),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  }]
 function getDatesInRange(startDate, endDate) {
     const date = new Date(startDate.getTime());
   
@@ -113,6 +116,9 @@ function customDayContent(day) {
           }
       })
   })
+
+
+  /**
 
     highDemands.forEach(b=>{
         let dates = getDatesInRange(b.startDate,b.endDate)
@@ -163,6 +169,7 @@ function customDayContent(day) {
             }
         })
     })
+     */
     return (
       <div>
         {extraDot}
@@ -171,6 +178,7 @@ function customDayContent(day) {
     )
   }
 
+  /**
   function getLowDemand(state){
     let count = 0
     let selectedDates = getDatesInRange(state[0].startDate,state[0].endDate)
@@ -213,7 +221,7 @@ function customDayContent(day) {
     return count
   }
 
-
+ */
   function getOfferts(state){
     let count = 0
     let selectedDates = getDatesInRange(state[0].startDate,state[0].endDate)
@@ -237,6 +245,7 @@ function customDayContent(day) {
 
 
 function CalendarComponent() {
+  document.body.style.zoom = "100%";
   const navigate = useNavigate();
    const {user} = UserAuth();
     const [state, setState] = useState([
@@ -252,7 +261,7 @@ function CalendarComponent() {
 
     return (
         <div>
- <Container style={{}}>
+ <Container style={{width:"100%"}}>
                <Row style={{display:"flex",color:"white",justifyContent:"center",marginTop:10}}>
 
         <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{backgroundColor:"#454545",flexDirection:"column",justifyContent:"center",display:"flex",color:"black",alignItems:"center",fontSize:13,color:"white",textJustify:"inter-word",textAlign:"justify",borderRadius:10}}>
@@ -292,6 +301,9 @@ disabledDates={[
   new Date(2022,8,16),
   new Date(2022,8,17),
   new Date(2022,8,18),
+  new Date(2022,8,24),
+  new Date(2022,8,25),
+  new Date(2022,8,26),
   new Date(2022,8,19),
   new Date(2022,8,30),
   new Date(2022,9,1),
@@ -308,33 +320,34 @@ locale={es}
 
     </div>             
 
-<Container>
+
   
-<Row style={{display:"flex",color:"white",justifyContent:"center",padding:10}}>
-        <Col style={{backgroundColor:"#7FA251",padding:5,fontSize:12}}>
+<Row style={{color:"white",justifyContent:"center",padding:10}}>
+        <Col style={{backgroundColor:"#7FA251",padding:10,fontSize:12}}>
         <Row style={{display:"flex",justifyContent:"center"}}>
         Llegada
         </Row> 
         
-        <Row style={{display:"flex",justifyContent:"center",fontSize:10}}>
+        <Row style={{display:"flex",justifyContent:"center",padding:15,fontSize:9}}>
         {state[0].endDate != null && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1  ? new Date(state[0].startDate).toLocaleString("es-CL", options).toUpperCase()  :""}
 
         </Row>    
         </Col>
         
 
-        <Col style={{backgroundColor:"#C16C6C",padding:5,fontSize:12}}>
+        <Col style={{backgroundColor:"#C16C6C",padding:10,fontSize:12}}>
         <Row style={{display:"flex",justifyContent:"center"}}>
         Salida
         </Row> 
         
-        <Row style={{display:"flex",justifyContent:"center",fontSize:10}}>
+        <Row style={{display:"flex",justifyContent:"center",padding:15,fontSize:9}}>
         {state[0].endDate != null && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1  ? new Date(state[0].endDate).toLocaleString("es-CL", options).toUpperCase() :""}
 
 
         </Row>    
         </Col>
  </Row> 
+ <Container>
  <Row style={{backgroundColor:"#454545",padding:10,borderRadius:10,margin:5,fontSize:12,display:"flex",justifyContent:"center",color:"white",textJustify:"inter-word",textAlign:"justify"}}>
         Por reservas superiores a 5 noches, se aplica un descuento
         </Row>
@@ -356,12 +369,10 @@ locale={es}
     <Col style={{display:"flex",justifyContent:"center"}}>
     ${ state[0].endDate != null && getOfferts(state) != 3 && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1 ? 
     (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
-    (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
-    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*40000) *0.90 :
-    (getLowDemand(state)*85000 + getHighDemand(state)*105000 + 
-    ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*40000)
+    (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000) *0.90 :
+    (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000)
     :""}
-    {getOfferts(state) == 3 ? 80000 + (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-getOfferts(state))*40000 ):""
+    {getOfferts(state) == 3 ? 50000 + (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-getOfferts(state))*60000 ):""
     }
     </Col>
 
@@ -386,11 +397,15 @@ locale={es}
         <button 
         onClick={()=>{
           let mount;
-          if (getOfferts(state) == 3){
-            mount = 80000
+          if (getOfferts(state) == 3 && (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) == 3){
+            mount = 50000
           }else{
-            mount = (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state)))*65000)
-            + (getLowDemand(state)*85000) + (getHighDemand(state)*105000) ;
+            mount =
+            state[0].endDate != null && getOfferts(state) != 3 && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1 ? 
+            (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
+            (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000) *0.90 :
+            (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000)
+            : 50000 + (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-getOfferts(state))*60000 )
           }
           navigate('/bookings/request', {state:{ 
             mount: mount,
@@ -401,9 +416,8 @@ locale={es}
               m:state[0].endDate.getMonth()+1,
               d:state[0].endDate.getUTCDate()},
             days:{
-              hd: getHighDemand(state),
-              ld: getLowDemand(state),
-              nd: ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-(getLowDemand(state)+getHighDemand(state))),
+        
+              nd: ((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)),
               total:((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1
             }  
           }})

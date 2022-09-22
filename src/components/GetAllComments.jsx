@@ -34,7 +34,7 @@ function GetAllMyComments() {
 
 
     return (
-        < div style={{marginTop:10,display:"flex",flexDirection:"column"}}>
+        < div style={{display:"flex",flexDirection:"column"}}>
 
         {documents.map(d => (
   
@@ -53,15 +53,16 @@ function GetAllMyComments() {
 
             <Col sm={6} xs={6} md={6} lg={6} xl={6} xxl={6} xxxl={6} style={{display:"flex",flexDirection:"column",padding:5}}>
             <Row style={{display:"flex",margin:1,fontSize:7}}>
-             <Col style={{display:"flex",justifyContent:"space-between",color:"#EEEEEE",fontSize:10,alignItems:"center"}}>
-             <ReactStars  size={16} value={d.stars} />
+             <Col style={{display:"flex",justifyContent:"center",flexDirection:"column",color:"#EEEEEE",fontSize:7,alignItems:"center"}}>
              {d.timestamp.toLocaleString("es-CL", options).toUpperCase()} 
+             <ReactStars  size={16} value={d.stars} />
+
              </Col>
          
          
             </Row>  
             <Row style={{display:"flex",margin:5}}>
-             <Col style={{display:"flex",color:"white",margin:5,justifyContent:"start",alignItems:"center",fontSize:14,textJustify:"inter-word",textAlign:"justify"}}>
+             <Col style={{display:"flex",color:"white",margin:3,justifyContent:"center",alignItems:"center",fontSize:14,textJustify:"inter-word",textAlign:"justify"}}>
              {d.userName} 
              </Col> 
      

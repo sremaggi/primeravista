@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useLocation,useNavigate } from "react-router-dom";
 import {Container,Row,Col} from 'react-grid-system';
 import styled from "styled-components";
@@ -13,11 +13,17 @@ var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
 
 
 function Request() {
+
+    useEffect(() => {
+        //scroll to top on page load
+        document.body.style.zoom = "100%";
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }, []);
     const navigate = useNavigate();
     const {user} = UserAuth();
     const [name,setName] = useState(user.displayName);
     const [email,setEmail] = useState(user.email);
-    const [qty,setQty] = useState(0);
+    const [qty,setQty] = useState();
     const [message, setMessage] = useState('');
     const [loadDocs,setLoadDocs] = useState(true)
 
@@ -27,7 +33,7 @@ function Request() {
     const handleMessageChange = event => {
         // 👇️ access textarea value
         setMessage(event.target.value);
-        console.log(event.target.value);
+
       };
 
 
@@ -65,7 +71,7 @@ function Request() {
             Noches totales
             </Col>
             <Col style={{display:"flex",justifyContent:"center",color:"white"}}>
-            {days.hd + days.ld + days.nd -1}
+            { days.nd -1}
             </Col>
         </Row>
         <Row style={{display:"flex",padding:10,backgroundColor:"#CACACA",color:"black",margin:2}}>
@@ -117,7 +123,7 @@ function Request() {
             <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{display:"flex"}}>
             <input   
                 style={{padding:10,backgroundColor:"white",height:20,width:"100%"}}
-                placeholder='personas'
+                placeholder='6'
                  type="number" 
                  value={qty}
                  onChange={(e) => setQty(e.target.value)}
@@ -130,7 +136,7 @@ function Request() {
             </Col>
             <Col sm={8} xs={8} md={8} lg={8} xl={8} xxl={8} xxxl={8} style={{display:"flex",justifyContent:"center"}}>
             <textarea
-             placeholder='Iré unos días a descansar con mi familia,llevaré a mi tortuga, es súper tranquila.'
+             placeholder='Iré unos días a descansar con mi familia, llevaré a mi tortuga, es súper tranquila.'
         style={{fontSize:13,padding:10}}
         maxLength={300}
         rows={4}
@@ -147,7 +153,7 @@ function Request() {
             Total a pagar 
             </Col>
             <Col style={{display:"flex",justifyContent:"center",color:"white"}}>
-            ${(days.hd + days.ld + days.nd)>6 ? mount*0.90 : mount}
+            ${mount}
             </Col>
         </Row>
         <Row style={{display:"flex",justifyContent:"center",marginTop:5}}>
@@ -174,7 +180,7 @@ function Request() {
                         setLoadDocs(true)
                         navigate("/profile")
                     }).catch(e=>{
-                        console.log(e)
+             
                         alert("Error insert request ",e)
                     });
   

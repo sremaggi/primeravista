@@ -10,7 +10,7 @@ import { UserAuth } from "../context/AuthContext";
 
 
 
-function InfornmationBedRoom() {
+function InfornmationBedRoom2() {
     const {user} = UserAuth()
     return (
         <div>
@@ -30,26 +30,20 @@ function InfornmationBedRoom() {
         </Col>
 
        </Row>
-       <InfoDescription title="Cama" desc="Súper king" qty="1"  />
+       <InfoDescription title="Cama" desc="Plaza 1/2" qty="3"  />
+       <InfoDescription title="Futón" desc="1 Plaza" qty="1"  />
        <InfoDescription title="Almohada" desc="--" qty="4"  />
        <InfoDescription title="Cojín" desc="Con cobertor" qty="2"  />
-       <InfoDescription title="Sábanas" desc="100% algodón" qty="1"  />
-       <InfoDescription title="Frazada" desc="--" qty="1"  />
-       <InfoDescription title="Plumón" desc="--" qty="1"  />
-       <InfoDescription title="Velador" desc="--" qty="2"  />
-       <InfoDescription title="Sillón" desc="--" qty="1"  />
-       <InfoDescription title="Lámpara" desc="Lámpara de noche" qty="2"  />
-       <InfoDescription title="Calefactor eléctrico" desc="--" qty="2"/>
-       <InfoDescription title="TV" desc="Conexión HDMI" qty="1"/>
-       <InfoDescription title="Chromecast" desc="Versión 3 " qty="1"/>
-       <InfoDescription title="Repelente" desc="Enchufe eléctrico" qty="1"/>
-       <InfoDescription title="Alargador" desc="--" qty="2"/>
+       <InfoDescription title="Sábanas" desc="100% algodón" qty="4"  />
+       <InfoDescription title="Frazada" desc="--" qty="4"  />
+       <InfoDescription title="Plumón" desc="--" qty="4"  />
+       <InfoDescription title="Alargador" desc="--" qty="1"/>
 
        </Container>
        </div>
     );
 }
 
-export default InfornmationBedRoom;
+export default InfornmationBedRoom2;
 
 

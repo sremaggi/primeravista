@@ -8,7 +8,8 @@ import {GoHome } from "react-icons/go";
 import {FaRegUserCircle } from "react-icons/fa";
 import { width } from "@mui/system";
 import SocialButtons from "./SocialButtons";
-
+import { GiLighthouse } from "react-icons/gi";
+import { UseWindowSize } from "../context/UseWidth";
 
 
 
@@ -22,7 +23,7 @@ function NavbarLogin(props) {
     return (
     
             
-            <NavContainer style={{padding:10,width:"100%" , boxShadow: "2px 2px 5px #999"
+            <NavContainer style={{padding:4,width:"100%" , boxShadow: "2px 2px 5px #999"
 }}>
 
             <Row style={{ display:"flex"}}>
@@ -33,25 +34,21 @@ function NavbarLogin(props) {
             </div>
             <Link style={{textDecoration:"none",height:"100%",justifyContent:"center",display:"flex"}} to={"/"}>
             <div style={{display:"flex",color:"#FBFFFB",alignItems:"center",fontSize:9}}>
-     
-            <img src={require('../assets/img/5.png') } width={100} height={"100%"} style={{borderRadius:100}}></img>
+            <div  style={{display:"flex",color:"#FBFFFB",alignItems:"end",fontSize:9}}>
+            <img src={require('../assets/img/6.png') } width={75} height={"80%"} style={{margin:0,}}></img>
+            </div>
+
             <div style={{marginLeft:5,display:"flex",flexDirection:"column"}}>
-              <div style={{display:"flex",fontSize:16,fontFamily:"American Typewriter",color:"#003403",fontWeight:550}}>
-              Primera Vista
+              <div style={{display:"flex",fontSize:15,letterSpacing: '.02rem',fontFamily:"American Typewriter",color:"white",fontWeight:550}}>
+              <h1 style={{fontSize:18,margin:0,fontWeight:"normal",padding:4,backgroundColor:"#037D7740",borderRadius:5}}>Primera Vista</h1>
               </div>
-              <div style={{display:"flex",fontSize:10,color:"#014004",fontFamily:"American Typewriter"}}>
-              Increible casa frente al mar
+              <div style={{display:"flex",fontSize:9,color:"white",fontFamily:"American Typewriter"}}>
+              <h2 style={{fontSize:10,margin:0,fontWeight:"normal",boxShadow: "0px 0px 0px #999",padding:2,color:"#104D02"}}>Increíble casa frente al mar</h2>
               </div>
        
             </div>
             
             </div>
-      
-    
-    
-  
-  
-          
             </Link>
   
             </Col>
@@ -82,7 +79,7 @@ function NavbarLogin(props) {
             <Link style={{flexDirection:"column",textDecoration:"none",width:"100%",height:"100%",justifyContent:"center",display:"flex"}} to={"/signin"}>
             <div style={{display:"flex",padding:1,color:"white",flexDirection:"column",justifyContent:"center",margin:3,fontSize:8}}>
             <div style={{display:"flex",justifyContent:"center"}}>
-                  <FaRegUserCircle size={35} />
+                  <FaRegUserCircle size={32} />
                 </div>
               </div>
             </Link>

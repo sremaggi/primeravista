@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {Container,Row,Col} from 'react-grid-system';
 import NavbarLogin from "../components/NavBarLogin";
@@ -13,6 +13,12 @@ import SocialHorizontal from "../components/SocialHorizontal";
 
 
 function Contact() {
+
+    useEffect(() => {
+        //scroll to top on page load
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }, []);
+
     return (
         <div>
              <NavbarLogin />

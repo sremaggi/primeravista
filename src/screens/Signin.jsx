@@ -46,13 +46,13 @@ function Signin() {
  <GoogleButton title="google" style={{padding:1}} onClick={handleGoogleSignin}>Iniciar Sesión</GoogleButton>
  </div>
  :
- <p style={{fontSize:10,width:"100%",display:"flex",justifyContent:"center"}}>Para iniciar Sesión con google entra directamente en Safari o Chrome</p> 
+ <p style={{fontSize:10,width:"100%",display:"flex",justifyContent:"center"}}>Para iniciar sesión con Google entra directamente en Safari o Chrome</p> 
  }
 </Row>
  
          <DivContainer>
          <Row style={{justifyContent:"center",color:"white",padding:5}}>
-         <img  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2Fkrika3.jpeg?alt=media&token=0609ac50-a4d1-4be3-909a-41c798ba7eab" height={100} width={100} style={{display:"flex",margin:1,borderRadius:100}}/>
+         <img   height={100} width={100} style={{display:"flex",margin:1,borderRadius:100}} src={require('../assets/img/krika3.jpeg')} />
          </Row>
    
          <SigninForm />

@@ -103,32 +103,32 @@ function RegistrationForm() {
         
 
          <div style={{justifyContent:"center",color:"white",padding:5,display:"flex"}}>
-         <img  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2Fkrika3.jpeg?alt=media&token=0609ac50-a4d1-4be3-909a-41c798ba7eab" height={100} width={100} style={{display:"flex",justifyItems:"center",margin:1,borderRadius:100}}/>
+         <img  src={require('../assets/img/krika3.jpeg')}height={100} width={100} style={{display:"flex",justifyItems:"center",margin:1,borderRadius:100}}/>
          </div>
      
         <input   
-                style={{padding:20,backgroundColor:"white",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20,margin:8}}
                 placeholder='Nombre'
                  type="text" 
                  value={name}
                  onChange={(e) => setName(e.target.value)}
         />
                 <input   
-                style={{padding:20,backgroundColor:"white",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20,margin:8}}
                 placeholder='Apellido'
                  type="text" 
                  value={surname}
                  onChange={(e) => setSurname(e.target.value)}
         />
                 <input   
-                style={{padding:20,backgroundColor:"white",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20,margin:8}}
                 placeholder='Teléfono'
                  type="text" 
                  value={phone}
                  onChange={(e) => setPhone(e.target.value)}
         />
                 <input   
-                style={{padding:20,backgroundColor:"white",height:20}}
+                style={{padding:20,backgroundColor:"white",height:20,margin:8}}
                 placeholder='Email'
                  type="text" 
                  value={email}
@@ -138,14 +138,14 @@ function RegistrationForm() {
                         <label style={{fontSize:12,padding:5}}>Foto de perfil</label>
                         <input style={{height:30}} type="file" accept="image/*" onChange={handleChange}/>
                         <input   
-                style={{padding:20,backgroundColor:"white",height:20}}
-                placeholder='Password'
+                style={{padding:20,backgroundColor:"white",height:20,margin:8}}
+                placeholder='Contraseña'
                  type="password" 
                  value={pwd}
                  onChange={(e) => setPwd(e.target.value)}
         />
-        <input placeholder='ConfirmPassword'
-      style={{padding:20,backgroundColor:"white"}}
+        <input placeholder='Confirmar contraseña'
+      style={{padding:20,backgroundColor:"white",margin:8}}
             type="password"
             value={confirmPwd}
             onChange={(e) => setConfirmPwd(e.target.value)}

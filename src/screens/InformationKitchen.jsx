@@ -14,14 +14,10 @@ function InfornmationKitchen() {
     const {user} = UserAuth()
     return (
         <div>
-             <NavbarLogin />
-        <Container>
-
-       
-        <Row style={{display:"flex",justifyContent:"center",fontWeight:"bold",backgroundColor:"#2F5E20",padding:3,color:"white",marginTop:20}}>
-       Cocina
-       </Row>
-       <Row style={{display:"flex",justifyContent:"center",marginTop:3,padding:5,fontSize:14, backgroundColor:"#454545",color:"white"}}>
+  
+  
+  <Container style={{marginBottom:10}}>
+       <Row style={{display:"flex",marginTop:3,padding:5,fontSize:14, backgroundColor:"#454545",color:"white"}}>
         <Col style={{display:"flex",justifyContent:"center"}}>
 
         </Col>
@@ -53,16 +49,7 @@ function InfornmationKitchen() {
        <InfoDescription title="Pelador" desc="--" qty="1"/>
        <InfoDescription title="Aliños" desc="--" qty="--"/>
 
-       <div style={{display:"flex",justifyContent:"center",marginTop:5,width:"100%"}}>
-      
-        <img style={{width:"50%",height:250}} src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1606.jpg?alt=media&token=631ffb04-d56e-4e77-8f27-d59965a7c13e"></img>
-      
-     
-        <img style={{width:"50%",height:250}} src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1433.jpg?alt=media&token=acfffdd3-61b8-44da-93aa-1e62ab3e17ec"></img>
-    
-
-        
-       </div>
+  
        </Container>
        </div>
     );

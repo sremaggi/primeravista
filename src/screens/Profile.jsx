@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext, useEffect} from "react";
 import styled from "styled-components";
 import {Container,Row,Col} from 'react-grid-system';
 import TitleContainer from "../components/TitleContainer";
@@ -12,8 +12,14 @@ import GetMyReqs from "../components/GetMyReq";
 
 
 function Profile() {
+  useEffect(() => {
+    //scroll to top on page load
+    document.body.style.zoom = "100%";
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
     const { user, logOut } = UserAuth();
     const {navigate} = useNavigate();
+    
   const handleSignOut = async () => {
     try {
       await logOut()
