@@ -20,8 +20,24 @@ const bookings = [{
     disabled: true,
   }]
 
-  /**
+
   const highDemands = [{
+    startDate:new Date(2022,11,23),
+    endDate: new Date(2022,11,26),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },{
+    startDate:new Date(2022,11,29),
+    endDate: new Date(2023,0,2),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  }]
+
+
+
+  const lowDemands = [{
     startDate:new Date(2022,8,16),
     endDate: new Date(2022,8,19),
     key: 'selection',
@@ -34,41 +50,20 @@ const bookings = [{
     disabled: true,
     showDateDisplay: false,
   },{
-    startDate:new Date(2022,9,29),
-    endDate: new Date(2022,9,30),
+    startDate:new Date(2022,9,28),
+    endDate: new Date(2022,10,1),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  }
+  ,{
+    startDate:new Date(2022,11,8),
+    endDate: new Date(2022,11,12),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
   }]
 
-
-
-  const lowDemands = [{
-    startDate:new Date(2022,9,16),
-    endDate: new Date(2022,9,16),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  },{
-    startDate:new Date(2022,9,23),
-    endDate: new Date(2022,9,23),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  },{
-    startDate:new Date(2022,10,6),
-    endDate: new Date(2022,10,6),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  },{
-    startDate:new Date(2022,10,13),
-    endDate: new Date(2022,10,13),
-    key: 'selection',
-    disabled: true,
-    showDateDisplay: false,
-  }]
- */
 
   const offerts = [{
     startDate:new Date(2022,8,23),
@@ -77,6 +72,7 @@ const bookings = [{
     disabled: true,
     showDateDisplay: false,
   }]
+
 function getDatesInRange(startDate, endDate) {
     const date = new Date(startDate.getTime());
   
@@ -118,7 +114,7 @@ function customDayContent(day) {
   })
 
 
-  /**
+  
 
     highDemands.forEach(b=>{
         let dates = getDatesInRange(b.startDate,b.endDate)
@@ -134,7 +130,7 @@ function customDayContent(day) {
                     height: "8px",
                     width: "8px",
                     borderRadius: "100%",
-                    //background: "orange",
+                    background: "orange",
                     position: "absolute",
                     top: 2,
                     right: 2,
@@ -159,7 +155,7 @@ function customDayContent(day) {
                     height: "6px",
                     width: "6px",
                     borderRadius: "100%",
-                    //background: "yellow",
+                    background: "yellow",
                     position: "absolute",
                     top: 2,
                     right: 2,
@@ -169,7 +165,7 @@ function customDayContent(day) {
             }
         })
     })
-     */
+  
     return (
       <div>
         {extraDot}
@@ -178,7 +174,7 @@ function customDayContent(day) {
     )
   }
 
-  /**
+
   function getLowDemand(state){
     let count = 0
     let selectedDates = getDatesInRange(state[0].startDate,state[0].endDate)
@@ -197,9 +193,23 @@ function customDayContent(day) {
         })
     })
 
-    return count
+    if (count == 0){
+      return 0
+    }else{
+      return count -1
+    }
+   
   }
 
+  function getSelectedNights(state){
+    let days = (state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)
+    return days;
+  }
+
+  function getNormalDay(state){
+   let days = getSelectedNights(state) - (getLowDemand(state)+getHighDemand(state))
+   return days;
+  }
   function getHighDemand(state){
     let count = 0
     let selectedDates = getDatesInRange(state[0].startDate,state[0].endDate)
@@ -218,10 +228,14 @@ function customDayContent(day) {
         })
     })
 
-    return count
+    if (count == 0){
+      return 0
+    }else{
+      return count -1
+    }
   }
 
- */
+
   function getOfferts(state){
     let count = 0
     let selectedDates = getDatesInRange(state[0].startDate,state[0].endDate)
@@ -250,8 +264,8 @@ function CalendarComponent() {
    const {user} = UserAuth();
     const [state, setState] = useState([
         {
-            startDate:new Date(2022,8,1),
-            endDate: new Date(2022,8,1),
+            startDate:new Date(2022,9,1),
+            endDate: new Date(2022,9,1),
             key: 'selection',
             color:'#7FA251',
             showDateDisplay: false,
@@ -288,12 +302,13 @@ function CalendarComponent() {
     <DateRange
 
 editableDateInputs={true}
-onChange={item => setState([item.selection])}
+onChange={item => setState([item.selection].concat())}
 moveRangeOnFirstSelection={false}
-ranges={state}
-dayContentRenderer={customDayContent}
+ranges={state} 
+
+//dayContentRenderer={customDayContent}
 minDate={addDays(new Date(),0)}
-maxDate={addDays(new Date(), 90)}
+maxDate={addDays(new Date(), 120)}
 disabledDates={[
   new Date(2022,8,13),
   new Date(2022,8,14),
@@ -305,15 +320,34 @@ disabledDates={[
   new Date(2022,8,25),
   new Date(2022,8,26),
   new Date(2022,8,19),
-  new Date(2022,8,30),
   new Date(2022,9,1),
+  new Date(2022,9,2),
   new Date(2022,9,7),
   new Date(2022,9,8),
+  new Date(2022,9,14),
+  new Date(2022,9,15),
+  new Date(2022,9,16),
+  new Date(2022,9,17),
+  new Date(2022,9,21),
+  new Date(2022,9,22),
+  new Date(2022,9,23),
+    new Date(2022,9,29),
+    new Date(2022,9,30),
+    new Date(2022,9,31),
+    new Date(2022,10,1),
+  new Date(2022,11,29),
+  new Date(2022,11,30),
+  new Date(2022,11,31),
+  new Date(2023,0,1),
+  new Date(2023,0,2),
+  new Date(2023,0,3),
+  new Date(2023,0,4),
+  new Date(2023,0,5),
 ]}
 direction="vertical"
 color="#FFF4D1"
 scroll={{ enabled: true,
-
+calendarWidth:"100px"
 }}
 locale={es}
 />
@@ -356,7 +390,7 @@ locale={es}
     Noches Solicitadas
     </Col>
     <Col style={{display:"flex",justifyContent:"center"}}>
-    { ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))}
+    {getSelectedNights(state)}
     </Col>
 
 
@@ -367,13 +401,12 @@ locale={es}
     Monto 
     </Col>
     <Col style={{display:"flex",justifyContent:"center"}}>
-    ${ state[0].endDate != null && getOfferts(state) != 3 && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1 ? 
-    (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
-    (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000) *0.90 :
-    (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000)
+    ${ state[0].endDate != null ? 
+    getSelectedNights(state) > 5 ?
+    (getNormalDay(state)*70000 + getLowDemand(state)*90000 + getHighDemand(state)*120000) *0.90 :
+    (getNormalDay(state)*70000 + getLowDemand(state)*90000 + getHighDemand(state)*120000)
     :""}
-    {getOfferts(state) == 3 ? 50000 + (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-getOfferts(state))*60000 ):""
-    }
+ 
     </Col>
 
 
@@ -397,18 +430,11 @@ locale={es}
         <button 
         onClick={()=>{
           let mount;
-          if (getOfferts(state) == 3 && (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) == 3){
-            mount = 50000
-          }else{
-            mount =
-            state[0].endDate != null && getOfferts(state) != 3 && ((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24)) >= 1 ? 
-            (((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1) > 6 ?
-            (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000) *0.90 :
-            (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))))*60000)
-            : 50000 + (((((state[0].endDate.getTime() - state[0].startDate.getTime())/ (1000 * 3600 * 24))+1)-getOfferts(state))*60000 )
-          }
+      
           navigate('/bookings/request', {state:{ 
-            mount: mount,
+            mount:     getSelectedNights(state) > 5 ?
+            (getNormalDay(state)*70000 + getLowDemand(state)*90000 + getHighDemand(state)*120000) *0.90 :
+            (getNormalDay(state)*70000 + getLowDemand(state)*90000 + getHighDemand(state)*120000),
             startDate:{y:state[0].startDate.getFullYear(),
               m:state[0].startDate.getMonth()+1,
               d:state[0].startDate.getUTCDate()},

@@ -8,6 +8,7 @@
     "os": false
   },
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
@@ -20,6 +21,7 @@
     "@testing-library/user-event": "^13.5.0",
     "date-fns": "^2.29.2",
     "dotenv": "^16.0.1",
+    "emailjs-com": "^3.2.0",
     "firebase": "^9.9.3",
     "fs": "0.0.1-security",
     "gapi-script": "^1.2.0",

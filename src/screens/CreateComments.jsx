@@ -132,7 +132,7 @@ function ComentsCreate() {
         <Row> 
         <textarea
         style={{fontSize:13,padding:10}}
-        maxLength={250}
+        maxLength={350}
         rows={5}
         cols={99999}
         id="message"

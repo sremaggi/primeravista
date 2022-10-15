@@ -8,6 +8,20 @@ import ReactLoading from 'react-loading';
 import { UserAuth } from "../context/AuthContext";
 import { collection, addDoc,getDocs} from "firebase/firestore"; 
 import { firestore } from "../firebase";
+import emailjs from "emailjs-com";
+
+const {REACT_APP_EMAIL_KEY,REACT_APP_TEMPLATE_ID,REACT_APP_API_KEY_EMAILJS} = process.env
+
+const handleSubmit = (e) => {
+    e.preventDefault(); // Prevents default refresh by the browser
+    emailjs.sendForm(`gmail`, REACT_APP_TEMPLATE_ID, e.target, REACT_APP_EMAIL_KEY)
+    .then((result) => {
+    alert("Message Sent, We will get back to you shortly", result.text);
+    },
+    (error) => {
+    alert("An error occurred, Please try again", error.text);
+    });
+    };
 
 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',timeZone: "America/Santiago" };
 
@@ -177,6 +191,7 @@ function Request() {
                     
                     } ).then(()=>{
                         alert("Solicitud enviada correctamente")
+
                         setLoadDocs(true)
                         navigate("/profile")
                     }).catch(e=>{

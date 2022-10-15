@@ -30,6 +30,7 @@ function GetAllRequest() {
         <Container>
   
         {documents.map(d => (
+          <Container>
         <Row  style={{backgroundColor:"grey",display:"flex",justifyContent:"center",marginTop:20,padding:3,color:"white",fontSize:10,flexDirection:"column"}}>
           id: {d.id} 
           <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:10,padding:3,color:"white",fontSize:10}}>
@@ -64,7 +65,7 @@ function GetAllRequest() {
             </Col>
     
             <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#B3D5D3    ",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
+            <Row style={{backgroundColor:"#B3D5D3    ",display:"flex",padding:5,justifyContent:"center",fontSize:10,color:"black"}}>
             Telefono: {d.user.phone} 
             </Row>
             <Row style={{backgroundColor:"white",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
@@ -75,7 +76,10 @@ function GetAllRequest() {
           <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:1,padding:3,color:"white",fontSize:10}}>
               {d.user.qty} Personas
           </Row>
-          <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:1,padding:3,color:"white",fontSize:8}}>
+          <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:1,padding:3,color:"white",fontSize:10}}>
+              ${d.mount} 
+          </Row>
+          <Row style={{backgroundColor:"#273A2B",display:"flex",justifyContent:"center",marginTop:1,padding:6,color:"white",fontSize:9}}>
               {d.msg} 
           </Row>
           {loadApr ? 
@@ -99,13 +103,13 @@ function GetAllRequest() {
                   </Row>
           :
           <div style={{display:"flex",justifyContent:"center"}}>
-          <ReactLoading type={"spinningBubbles"} color={"green"} height={10} width={10} />
+          <ReactLoading type={"spinningBubbles"} color={"green"} height={30} width={30} />
           </div>
           }
 
 
           </Row>
-
+          </Container>
         ))}
                 <div style={{display:"flex",justifyContent:"center",marginTop:10}}>
             {loadDocs ? "" :<ReactLoading type={"spinningBubbles"} color={"green"} height={40} width={40} />}

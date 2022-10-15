@@ -5,8 +5,6 @@ import { Carousel } from 'react-responsive-carousel';
 import { Col } from "react-grid-system";
 import ReactLoading from 'react-loading';
 import MyImage from "./LoadImage";
-import { LazyLoadImage, trackWindowScroll }
-  from 'react-lazy-load-image-component';
 
 const sleep = ms => new Promise(
     resolve => setTimeout(resolve, ms)
@@ -24,23 +22,24 @@ function Gallery() {
 
         return (
 
-            <div style={{display:"flex",marginTop:4,borderRadius:100}}>
+            <div style={{display:"flex",marginTop:4,borderRadius:100,width:"100%"}}>
                 
                         {loadImages?
                         <Carousel      showIndicators={true}  showThumbs={false} showStatus={false} interval="3000" transitionTime="50" infiniteLoop>
-                
+                       <div>
+                        <img height={450}  style={{borderRadius:5}} src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1449.jpg?alt=media&token=7633838d-ac9c-440a-9174-fd72ca190f1a" alt=""  />
+                        <p style={{backgroundColor:"green"}}  className="legend">Patio lateral</p>
+                    </div>
                 <div>   
-                        <LazyLoadImage  effect="blur"  height={450}  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1630.jpg?alt=media&token=5b06921d-010c-4984-8a39-ae93f7a7fd78" />
+                  
+                        <img  height={450}  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1630.jpg?alt=media&token=5b06921d-010c-4984-8a39-ae93f7a7fd78" alt="" />
                         <p style={{backgroundColor:"green"}} className="legend">Entrada</p>
                     </div>
                 <div>
                         <img  height={450}  style={{borderRadius:5}}  src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2Fimages%2FIMG_2537.jpg?alt=media&token=b86c0087-f047-4f3a-b81c-ea9b17ed43fc" alt="" />
                         <p style={{backgroundColor:"green"}} className="legend">Fachada principal</p>
                     </div>
-                    <div>
-                        <img height={450}  style={{borderRadius:5}} src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1449.jpg?alt=media&token=7633838d-ac9c-440a-9174-fd72ca190f1a" alt=""  />
-                        <p style={{backgroundColor:"green"}}  className="legend">Patio lateral</p>
-                    </div>
+             
                     
                     <div>
                         <img height={450}  style={{borderRadius:5}} src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1590.jpg?alt=media&token=6a1e3ff3-d095-49b9-b243-c4aeb8448770" alt="" />
@@ -67,11 +66,7 @@ function Gallery() {
                         <p style={{backgroundColor:"green"}}  className="legend">Habitación</p>
                     </div>
                 </Carousel>
-                        :
-
-                        <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                        <ReactLoading  type={"spinningBubbles"} color={"green"} height={20} width={20} />
-                        </div>
+                        :""
                     }
                 
             </div>

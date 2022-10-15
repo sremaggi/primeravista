@@ -39,7 +39,7 @@ function NavbarLogin(props) {
             </div>
 
             <div style={{marginLeft:5,display:"flex",flexDirection:"column"}}>
-              <div style={{display:"flex",fontSize:15,letterSpacing: '.02rem',fontFamily:"American Typewriter",color:"white",fontWeight:550}}>
+              <div style={{display:"flex",fontSize:15,letterSpacing: '.04rem',fontFamily:"American Typewriter",color:"white",fontWeight:550}}>
               <h1 style={{fontSize:18,margin:0,fontWeight:"normal",padding:4,backgroundColor:"#037D7740",borderRadius:5}}>Primera Vista</h1>
               </div>
               <div style={{display:"flex",fontSize:9,color:"white",fontFamily:"American Typewriter"}}>
@@ -56,14 +56,14 @@ function NavbarLogin(props) {
             {user?.displayName ? 
                 <Col sm={3} xs={3} md={3} lg={3} xl={3} xxl={3} xxxl={3}  style={{ display:"flex",padding:2}}>
                 <Link style={{flexDirection:"column",textDecoration:"none",width:"100%",height:"100%",justifyContent:"center",display:"flex"}} to={user?.displayName ? "/profile":"/"}>
-                <div style={{display:"flex",color:"white",flexDirection:"column",justifyContent:"center",fontSize:8}}>
+                <div style={{display:"flex",color:"white",flexDirection:"column",justifyContent:"center",fontSize:10}}>
                 <div style={{display:"flex",justifyContent:"center"}}>
                 <img src={user.photoURL} onClick={()=>{
                   navigate("/profile")
                 }} height={40} width={40} style={{display:"flex",justifyContent:"center",borderRadius:100}} /> 
                 </div>
     
-                <div style={{display:"flex",justifyContent:"center",width:"100%",color:"white",marginTop:3}}>
+                <div style={{display:"flex",justifyContent:"center",width:"100%",color:"white",marginTop:3,letterSpacing: '.02rem'}}>
                 {user.displayName.split(" ")[0]}
                 </div>
       
