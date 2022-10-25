@@ -1,37 +1,79 @@
-import React, { useEffect } from "react";
-import Gallery from "../components/GalleryImage";
-import {Container,Row,Col} from 'react-grid-system';
-import TitleContainer from "../components/TitleContainer";
-import ButtonContainer from "../components/ButtonContainer";
-import NavbarLogin from "../components/NavBarLogin";
-import GetAllReqs from "../components/GetAllRequest";
-import GetMyReqs from "../components/GetMyReq";
-
+import React, { useEffect } from 'react'
+import { Container, Row } from 'react-grid-system'
+import { useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import NavbarLogin from '../components/NavBarLogin'
 
 function Admin() {
-    useEffect(() => {
-        //scroll to top on page load
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
-    return (
-
-        
-        <div style={{width:"100%"}}>
-     
-     <NavbarLogin title="Primera Vista" />
-     <Container>
-        <Row style={{display:"flex",justifyContent:"center",marginTop:10,fontSize:15,backgroundColor:"purple",color:"white",padding:10}}>
-            Gestión Solicitudes
+  const navigate = useNavigate()
+  useEffect(() => {
+    // scroll to top on page load
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [])
+  return (
+    <div style={{ width: '100%' }}>
+      <NavbarLogin title="Primera Vista" />
+      <Container>
+        <Row
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: 10,
+            fontSize: 15,
+            backgroundColor: 'purple',
+            color: 'white',
+            padding: 10,
+          }}
+        >
+          Gestión Solicitudes
         </Row>
-     <GetAllReqs />
-     </Container>
-       
-       </div>
 
-    );
+        <Row
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: 2,
+            fontSize: 15,
+            color: 'white',
+            padding: 10,
+          }}
+        >
+          <Button
+            onClick={() => {
+              navigate('/admin/requests', { state: { status: true } })
+            }}
+            style={styles.adminButton}
+          >
+            {' '}
+            Aprobadas{' '}
+          </Button>
+
+          <Button
+            onClick={() => {
+              navigate('/admin/requests', { state: { status: false } })
+            }}
+            style={styles.adminButton}
+          >
+            {' '}
+            Pendientes{' '}
+          </Button>
+        </Row>
+      </Container>
+    </div>
+  )
 }
 
-export default Admin;
+export default Admin
 
-
-
+const styles = {
+  adminButton: {
+    backgroundColor: 'green',
+    borderWidth: 1,
+    borderColor: 'purple',
+    padding: 20,
+    color: 'white',
+    fontSize: 10,
+    width: '100%',
+    margin: 5,
+  },
+}
