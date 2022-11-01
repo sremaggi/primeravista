@@ -26,11 +26,11 @@ function Bookings() {
       <NavbarLogin />
       {width > 733 ? (
         <Container>
-          <CalendarComponent months="1.5" orientation="vertical" />
+          <CalendarComponent months="1.2" orientation="vertical" />
         </Container>
       ) : (
         <Container>
-        <CalendarComponent months="1.5" orientation="vertical" />
+        <CalendarComponent months="1.2" orientation="vertical" />
       </Container>
       )}
     </div>

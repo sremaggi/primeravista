@@ -6,6 +6,12 @@ import { Col, Container, Row } from "react-grid-system";
 import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from 'react-loading';
 
+const options = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'America/Santiago',
+}
 
 function GetMyReqs() {
     const navigate = useNavigate()
@@ -45,9 +51,9 @@ function GetMyReqs() {
             LLegada
             </Row>
             <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-            {(d.startDate.y )+" "} 
-            / {(d.startDate.d > 10 ? d.startDate.m+" " : `0${d.startDate.m} `)} 
-             / {(d.startDate.d > 10 ? d.startDate.d+" " : `0${d.startDate.d}`)}
+            {new Date(d.startDate.y, d.startDate.m -1, d.startDate.d)
+                  .toLocaleString('es-CL', options)
+                  .toUpperCase()}
             </Row>
 
             </Col>
@@ -57,9 +63,9 @@ function GetMyReqs() {
             Salida 
             </Row>
             <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-            {(d.startDate.y )+" "} 
-            / {(d.finishDate.d > 10 ? d.finishDate.m+" " : `0${d.finishDate.m} `)} 
-             / {(d.finishDate.d > 10 ? d.finishDate.d+" " : `0${d.finishDate.d}`)}
+            {new Date(d.finishDate.y, d.finishDate.m -1, d.finishDate.d)
+                  .toLocaleString('es-CL', options)
+                  .toUpperCase()}
             </Row>
 
             </Col>
@@ -68,9 +74,28 @@ function GetMyReqs() {
             <Row style={{backgroundColor:"#B3D5D3    ",display:"flex",padding:5,justifyContent:"center",fontSize:8}}>
             Telefono: {d.user.phone} 
             </Row>
-            <Row style={{backgroundColor:"white",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-             {d.approved == true ? <div style={{color:"green",fontWeight:"bold"}}> { "Aceptado!"}</div>:<div style={{color:"orange",fontWeight:"bold"}}>{" "+ " En espera"}</div>} 
-            </Row>
+            <Row
+                  style={{
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    padding: 5,
+                    justifyContent: 'center',
+                    fontSize: 10,
+                  }}
+                >
+                  {d.approved === true ? (
+                    <div style={{ color: 'green', fontWeight: 'bold' }}>
+                      {' '}
+                      Aceptado!
+                    </div>
+                  ) : ( d.rejected === true ? 
+                    <div style={{ color: 'red', fontWeight: 'bold' }}>
+                      {' ' + ' Rechazado'}
+                    </div>
+                  : <div style={{ color: 'orange', fontWeight: 'bold' }}>
+                  {' ' + ' En espera'}
+                </div>)}
+                </Row>
             </Col>
           </Row>
 

@@ -309,7 +309,7 @@ function CalendarComponent(props) {
             borderRadius: 10,
           }}
         >
-          <Row style={{ padding: 10, margin: 2 }}>
+          <Row style={{ padding: 3, margin: 1 }}>
             Realiza tu solicitud y nos contactaremos contigo a la brevedad para
             concretar la reserva.
           </Row>
@@ -414,7 +414,12 @@ function CalendarComponent(props) {
             new Date(2022, 9, 29),
             new Date(2022, 9, 30),
             new Date(2022, 9, 31),
-            new Date(2022, 10, 1),
+            new Date(2022, 10, 6),
+            new Date(2022, 10, 7),
+            new Date(2022, 10, 8),
+            new Date(2022, 10, 9),
+            new Date(2022, 10, 19),
+            new Date(2022, 10, 10),
             new Date(2022, 11, 29),
             new Date(2022, 11, 30),
             new Date(2022, 11, 31),
@@ -423,6 +428,15 @@ function CalendarComponent(props) {
             new Date(2023, 0, 3),
             new Date(2023, 0, 4),
             new Date(2023, 0, 5),
+            new Date(2023, 0, 6),
+            new Date(2023, 0, 7),
+            new Date(2023, 0, 8),
+            new Date(2023, 0, 9),
+            new Date(2023, 0, 10),
+            new Date(2023, 0, 11),
+            new Date(2023, 0, 12),
+            new Date(2023, 0, 13),
+            new Date(2023, 0, 14),
           ]}
           direction={props.orientation}
           color="#FFF4D1"
@@ -608,6 +622,7 @@ function CalendarComponent(props) {
                 backgroundColor: '#037D77',
                 color: 'white',
                 fontWeight: 'bold',
+                marginBottom:50
               }}
             >
               {' '}
@@ -625,6 +640,7 @@ function CalendarComponent(props) {
                 backgroundColor: '#037D77',
                 color: 'white',
                 fontWeight: 'bold',
+                marginBottom:50
               }}
             >
               {' '}

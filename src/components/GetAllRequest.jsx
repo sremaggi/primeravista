@@ -12,9 +12,16 @@ import ReactLoading from 'react-loading'
 import { UserAuth } from '../context/AuthContext'
 import { firestore } from '../firebase'
 
+const options = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'America/Santiago',
+}
+
 function GetAllRequest(props) {
   const [documents, setDocuments] = useState([])
-  const [loadDocs, setLoadDocs] = useState(false)
+  const [loadDocs, setLoadDocs] = useState(true)
   const [loadApr, setLoadApr] = useState(true)
   const { user } = UserAuth()
   // Firebase Collection Reference query
@@ -110,14 +117,10 @@ function GetAllRequest(props) {
                     fontSize: 10,
                   }}
                 >
-                  {`${d.startDate.y} `}/{' '}
-                  {d.startDate.d > 10
-                    ? `${d.startDate.m} `
-                    : `0${d.startDate.m} `}
-                  /{' '}
-                  {d.startDate.d > 10
-                    ? `${d.startDate.d} `
-                    : `0${d.startDate.d}`}
+                  {new Date(d.startDate.y, d.startDate.m -1, d.startDate.d)
+                  .toLocaleString('es-CL', options)
+                  .toUpperCase()}
+             
                 </Row>
               </Col>
 
@@ -149,14 +152,9 @@ function GetAllRequest(props) {
                     fontSize: 10,
                   }}
                 >
-                  {`${d.startDate.y} `}/{' '}
-                  {d.finishDate.d > 10
-                    ? `${d.finishDate.m} `
-                    : `0${d.finishDate.m} `}
-                  /{' '}
-                  {d.finishDate.d > 10
-                    ? `${d.finishDate.d} `
-                    : `0${d.finishDate.d}`}
+                  {new Date(d.finishDate.y, d.finishDate.m -1, d.finishDate.d)
+                  .toLocaleString('es-CL', options)
+                  .toUpperCase()}
                 </Row>
               </Col>
 
@@ -194,11 +192,13 @@ function GetAllRequest(props) {
                       {' '}
                       Aceptado!
                     </div>
-                  ) : (
-                    <div style={{ color: 'orange', fontWeight: 'bold' }}>
-                      {' ' + ' En espera'}
+                  ) : ( d.rejected === true ? 
+                    <div style={{ color: 'red', fontWeight: 'bold' }}>
+                      {' ' + ' Rechazado'}
                     </div>
-                  )}
+                  : <div style={{ color: 'orange', fontWeight: 'bold' }}>
+                  {' ' + ' En espera'}
+                </div>)}
                 </Row>
               </Col>
             </Row>
@@ -241,8 +241,9 @@ function GetAllRequest(props) {
             >
               {d.msg}
             </Row>
-            {loadApr ? (
+            {loadApr && d.approved == false ? (
               <Row>
+                <Col>
                 <button
                   onClick={() => {
                     setLoadApr(false)
@@ -260,28 +261,48 @@ function GetAllRequest(props) {
                   style={{
                     width: '100%',
                     padding: 10,
-                    backgroundColor: 'red',
+                    backgroundColor: 'green',
                     color: 'white',
                   }}
                 >
                   Aprobar
                 </button>
+                </Col>
+                <Col>
+                <button
+                  onClick={() => {
+                    setLoadApr(false)
+                    const docRef = doc(firestore, 'requests', d.id)
+                    d.rejected = true
+                    updateDoc(docRef, d)
+                      .then(() => {
+                        alert('Rechazado exitoso')
+                        setLoadApr(true)
+                      })
+                      .catch((e) => {
+                        alert(e)
+                      })
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: 10,
+                    backgroundColor: 'red',
+                    color: 'white',
+                  }}
+                >
+                  Rechazar
+                </button>
+                </Col>
               </Row>
+              
             ) : (
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <ReactLoading
-                  type="spinningBubbles"
-                  color="green"
-                  height={30}
-                  width={30}
-                />
-              </div>
+             ''
             )}
           </Row>
         </Container>
       ))}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-        {loadDocs ? (
+        {loadDocs  ? (
           ''
         ) : (
           <ReactLoading

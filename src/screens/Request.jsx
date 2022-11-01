@@ -37,7 +37,7 @@ function Request() {
   const [phone, setPhone] = useState('')
   const { state } = useLocation()
   const { mount, startDate, finishDate, nights, rangeDates } = state
-  console.log(state)
+  //console.log(state)
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
   }
@@ -432,7 +432,7 @@ function Request() {
               xxxl={8}
               style={{ display: 'flex', alignItems: 'center' }}
             >
-              <div style={{ margin: 3 }}>(+569)</div>
+              <div style={{ margin: 5 }}>(+56)</div>
               <input
                 style={styles.inputContainer}
                 placeholder="Telefono"
