@@ -37,6 +37,7 @@ function Request() {
   const [phone, setPhone] = useState('')
   const { state } = useLocation()
   const { mount, startDate, finishDate, nights, rangeDates } = state
+  const [mountState, setMountState] = useState(mount)
   //console.log(state)
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
@@ -60,13 +61,13 @@ function Request() {
             console.log(result.text)
 
             addDoc(collection(firestore, 'requests'), {
-              mount,
+              mount : mountState,
               startDate,
               finishDate,
               nights,
               user: {
-                name: user.displayName,
-                email: user.email,
+                name: name,
+                email: email,
                 phone,
                 qty,
               },
@@ -294,7 +295,6 @@ function Request() {
               }}
             >
               <input
-                readOnly
                 type="text"
                 style={styles.inputContainer}
                 name="nights"
@@ -567,13 +567,22 @@ function Request() {
               }}
             >
               <div style={{ margin: 5 }}>$</div>
-              <input
-                readOnly
-                type="text"
-                style={styles.inputContainer}
-                name="mount"
-                value={mount}
-              />
+              {user.email === 'seba.rf96@gmail.com' ||
+          user.email === 'ant.niasbravo@gmail.com' ?          <input
+            type="text"
+            style={styles.inputContainer}
+            name="mount"
+            value={mountState}
+            onChange={(e) => setMountState(e.target.value)}
+          />:          <input
+          readOnly
+            type="text"
+            style={styles.inputContainer}
+            name="mount"
+            value={mountState}
+            onChange={(e) => setMountState(e.target.value)}
+          />}
+    
             </Col>
           </Row>
           {loadDocs ? (

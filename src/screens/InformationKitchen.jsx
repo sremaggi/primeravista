@@ -7,6 +7,7 @@ import Navbar from "../components/NavBar";
 import NavbarLogin from "../components/NavBarLogin";
 import TitleContainer from "../components/TitleContainer";
 import { UserAuth } from "../context/AuthContext";
+import { Carousel } from 'react-responsive-carousel'
 
 
 
@@ -17,6 +18,46 @@ function InfornmationKitchen() {
   
   
   <Container style={{marginBottom:10}}>
+  <Carousel
+          showIndicators
+          showThumbs={false}
+          showStatus={false}
+          interval="3000"
+          transitionTime="50"
+          infiniteLoop
+        >
+
+        <div>
+            <img
+              height={350}
+              style={{ borderRadius: 5,objectFit:"cover"  }}
+              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fkitchen%2Fcocina1.jpeg?alt=media&token=3a324f7e-3dc1-4274-b51e-72a1d885fd78"
+              alt=""
+            />
+         
+          </div>
+
+        <div>
+            <img
+              height={350}
+              style={{ borderRadius: 5 ,objectFit:"cover" }}
+              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fkitchen%2Fcocina2.jpeg?alt=media&token=f76d6129-5b45-48d3-8369-b8cee7f80f7c"
+              alt=""
+            />
+         
+          </div>
+
+        <div>
+            <img
+              height={350}
+              style={{ borderRadius: 5 ,objectFit:"cover" }}
+              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fkitchen%2Fcocina3.jpeg?alt=media&token=0be73fce-81da-4a12-9dd2-dd91db4fb167"
+              alt=""
+            />
+         
+          </div>
+
+        </Carousel>
        <Row style={{display:"flex",marginTop:3,padding:5,fontSize:14, backgroundColor:"#454545",color:"white"}}>
         <Col style={{display:"flex",justifyContent:"center"}}>
 

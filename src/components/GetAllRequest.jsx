@@ -6,11 +6,13 @@ import {
   getDocs,
   updateDoc,
   doc,
+  orderBy
 } from 'firebase/firestore'
 import { Col, Container, Row } from 'react-grid-system'
 import ReactLoading from 'react-loading'
 import { UserAuth } from '../context/AuthContext'
 import { firestore } from '../firebase'
+import RequestPreview from './RequestPreview'
 
 const options = {
   year: 'numeric',
@@ -29,7 +31,7 @@ function GetAllRequest(props) {
   if (user?.displayName) {
     const q = query(
       collection(firestore, 'requests'),
-      where('approved', '==', props.status),
+      where('approved', '==', props.status)
     )
     const getDocuments = async () => {
       const data = await getDocs(q)
@@ -42,10 +44,10 @@ function GetAllRequest(props) {
   return (
     <Container>
       {documents.map((d) => (
-        <Container>
+
           <Row
             style={{
-              backgroundColor: 'grey',
+              backgroundColor:"#363636",
               display: 'flex',
               justifyContent: 'center',
               marginTop: 20,
@@ -55,192 +57,27 @@ function GetAllRequest(props) {
               flexDirection: 'column',
             }}
           >
+           
             id: {d.id}
+       
+            <RequestPreview  doc={d} ></RequestPreview>
             <Row
               style={{
-                backgroundColor: '#273A2B',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 10,
-                padding: 3,
-                color: 'white',
-                fontSize: 10,
-              }}
-            >
-              {d.user.name}
-            </Row>
-            <Row
-              style={{
-                backgroundColor: '#273A2B',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 1,
-                padding: 3,
-                color: 'white',
-                fontSize: 10,
-              }}
-            >
-              {d.user.email}
-            </Row>
-            <Row
-              style={{
-                backgroundColor: '#E3E3E3',
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}
-            >
-              <Col
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-around',
-                  padding: 10,
-                }}
-              >
-                <Row
-                  style={{
-                    backgroundColor: '#8BC088',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                  }}
-                >
-                  LLegada
-                </Row>
-                <Row
-                  style={{
-                    backgroundColor: '#8BC088',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                  }}
-                >
-                  {new Date(d.startDate.y, d.startDate.m -1, d.startDate.d)
-                  .toLocaleString('es-CL', options)
-                  .toUpperCase()}
-             
-                </Row>
-              </Col>
-
-              <Col
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-around',
-                  padding: 10,
-                }}
-              >
-                <Row
-                  style={{
-                    backgroundColor: '#B26C41',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                  }}
-                >
-                  Salida
-                </Row>
-                <Row
-                  style={{
-                    backgroundColor: '#B26C41',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                  }}
-                >
-                  {new Date(d.finishDate.y, d.finishDate.m -1, d.finishDate.d)
-                  .toLocaleString('es-CL', options)
-                  .toUpperCase()}
-                </Row>
-              </Col>
-
-              <Col
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-around',
-                  padding: 10,
-                }}
-              >
-                <Row
-                  style={{
-                    backgroundColor: '#B3D5D3    ',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: 'black',
-                  }}
-                >
-                  Telefono: {d.user.phone}
-                </Row>
-                <Row
-                  style={{
-                    backgroundColor: 'white',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                  }}
-                >
-                  {d.approved === true ? (
-                    <div style={{ color: 'green', fontWeight: 'bold' }}>
-                      {' '}
-                      Aceptado!
-                    </div>
-                  ) : ( d.rejected === true ? 
-                    <div style={{ color: 'red', fontWeight: 'bold' }}>
-                      {' ' + ' Rechazado'}
-                    </div>
-                  : <div style={{ color: 'orange', fontWeight: 'bold' }}>
-                  {' ' + ' En espera'}
-                </div>)}
-                </Row>
-              </Col>
-            </Row>
-            <Row
-              style={{
-                backgroundColor: '#273A2B',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 1,
-                padding: 3,
-                color: 'white',
-                fontSize: 10,
-              }}
-            >
-              {d.user.qty} Personas
-            </Row>
-            <Row
-              style={{
-                backgroundColor: '#273A2B',
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 1,
-                padding: 3,
-                color: 'white',
-                fontSize: 10,
-              }}
-            >
-              ${d.mount}
-            </Row>
-            <Row
-              style={{
-                backgroundColor: '#273A2B',
                 display: 'flex',
                 justifyContent: 'center',
                 marginTop: 1,
                 padding: 6,
                 color: 'white',
                 fontSize: 9,
+                marginBottom:10,
               }}
             >
-              {d.msg}
+              <Container>{d.msg}</Container>
+
+         
+             
             </Row>
+
             {loadApr && d.approved == false ? (
               <Row>
                 <Col>
@@ -293,13 +130,16 @@ function GetAllRequest(props) {
                   Rechazar
                 </button>
                 </Col>
+                
               </Row>
               
             ) : (
              ''
             )}
+            
           </Row>
-        </Container>
+          
+
       ))}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
         {loadDocs  ? (
@@ -313,6 +153,7 @@ function GetAllRequest(props) {
           />
         )}
       </div>
+      
     </Container>
   )
 }

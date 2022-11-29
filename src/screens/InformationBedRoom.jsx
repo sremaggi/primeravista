@@ -7,7 +7,7 @@ import Navbar from "../components/NavBar";
 import NavbarLogin from "../components/NavBarLogin";
 import TitleContainer from "../components/TitleContainer";
 import { UserAuth } from "../context/AuthContext";
-
+import { Carousel } from 'react-responsive-carousel'
 
 
 function InfornmationBedRoom() {
@@ -16,7 +16,26 @@ function InfornmationBedRoom() {
         <div>
      
         <Container style={{marginBottom:10}}>
+        <Carousel
+          showIndicators
+          showThumbs={false}
+          showStatus={false}
+          interval="3000"
+          transitionTime="50"
+          infiniteLoop
+        >
 
+        <div>
+            <img
+              height={350}
+              style={{ borderRadius: 5,objectFit:"cover" }}
+              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1621.jpg?alt=media&token=1e6efb0f-7e91-41d5-ad26-2c64f51fbd68"
+              alt=""
+            />
+         
+          </div>
+
+        </Carousel>
 
        <Row style={{display:"flex",justifyContent:"center",marginTop:3,padding:5,fontSize:14, backgroundColor:"#454545",color:"white"}}>
         <Col style={{display:"flex",justifyContent:"center"}}>

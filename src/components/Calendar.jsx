@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { UserAuth } from '../context/AuthContext'
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { firestore } from "../firebase";
+import { UseWindowSize } from '../context/UseWidth'
 
 const options = {
   weekday: 'long',
@@ -16,15 +19,22 @@ const options = {
   timeZone: 'America/Santiago',
 }
 
-const bookings = [
-  {
-    startDate: new Date(2022, 9, 24),
-    endDate: new Date(2022, 9, 26),
-    key: 'selection',
-    color: 'red',
-    disabled: true,
-  },
-]
+function getBookings(requests){
+  let bookings = [];
+  requests.forEach(r=>{
+    let rangeRequests = getDatesInRange(new Date(r.startDate.y, r.startDate.m -1, r.startDate.d),new Date(r.finishDate.y, r.finishDate.m-1,r.finishDate.d))
+    rangeRequests.shift()
+    rangeRequests.pop()
+    bookings = bookings.concat(rangeRequests)
+  })
+
+
+return bookings
+  
+
+}
+
+const bookings = getDatesInRange(new Date(2022, 11, 5),new Date(2022, 11, 8))
 
 const highDemands = [
   {
@@ -67,7 +77,14 @@ const lowDemands = [
   },
   {
     startDate: new Date(2022, 11, 8),
-    endDate: new Date(2022, 11, 12),
+    endDate: new Date(2022, 11, 22),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },
+  {
+    startDate: new Date(2023, 0, 16),
+    endDate: new Date(2023, 1, 28),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
@@ -264,9 +281,12 @@ function getOfferts(state) {
 }
 
 function CalendarComponent(props) {
+
   document.body.style.zoom = '100%'
   const navigate = useNavigate()
   const { user } = UserAuth()
+  const [loadDocs, setLoadDocs] = useState(true)
+  const [bookings, setBookings] = useState([])
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -276,6 +296,23 @@ function CalendarComponent(props) {
       showDateDisplay: false,
     }
   ])
+
+  const [documents, setDocuments] = useState([]);
+  const q = query(collection(firestore, "requests"),where('approved', '==', true),where('approved', '==', true))
+  const getDocuments = async () => {
+    try{
+      const data = await getDocs(q);
+      setDocuments(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      setLoadDocs(true)
+    }catch(e){
+      console.log(e)
+    }
+  }
+  
+  getDocuments()
+
+  //console.log( documents)
+
 
   return (
     <div>
@@ -356,19 +393,6 @@ function CalendarComponent(props) {
           >
             Selección
           </Row>
-          <Row
-            style={{
-              backgroundColor: '#00D4C1',
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-              color: 'black',
-              padding: 3,
-              fontSize: 10,
-            }}
-          >
-            Oferta
-          </Row>
         </Col>
       </Row>
 
@@ -386,41 +410,12 @@ function CalendarComponent(props) {
           onChange={(item) => setState([item.selection].concat())}
           moveRangeOnFirstSelection={false}
           ranges={state}
-          // dayContentRenderer={customDayContent}
+          //dayContentRenderer={customDayContent}
           minDate={addDays(new Date(), 0)}
-          maxDate={addDays(new Date(), 120)}
-          disabledDates={[
-            new Date(2022, 8, 13),
-            new Date(2022, 8, 14),
-            new Date(2022, 8, 15),
-            new Date(2022, 8, 16),
-            new Date(2022, 8, 17),
-            new Date(2022, 8, 18),
-            new Date(2022, 8, 24),
-            new Date(2022, 8, 25),
-            new Date(2022, 8, 26),
-            new Date(2022, 8, 19),
-            new Date(2022, 9, 1),
-            new Date(2022, 9, 2),
-            new Date(2022, 9, 7),
-            new Date(2022, 9, 8),
-            new Date(2022, 9, 14),
-            new Date(2022, 9, 15),
-            new Date(2022, 9, 16),
-            new Date(2022, 9, 17),
-            new Date(2022, 9, 21),
-            new Date(2022, 9, 22),
-            new Date(2022, 9, 23),
-            new Date(2022, 9, 29),
-            new Date(2022, 9, 30),
-            new Date(2022, 9, 31),
-            new Date(2022, 10, 6),
-            new Date(2022, 10, 7),
-            new Date(2022, 10, 8),
-            new Date(2022, 10, 9),
-            new Date(2022, 10, 19),
-            new Date(2022, 10, 10),
-            new Date(2022, 11, 29),
+          maxDate={addDays(new Date(), 150)}
+          disabledDates={
+            getBookings(documents).concat(
+            [new Date(2022, 11, 29),
             new Date(2022, 11, 30),
             new Date(2022, 11, 31),
             new Date(2023, 0, 1),
@@ -437,7 +432,31 @@ function CalendarComponent(props) {
             new Date(2023, 0, 12),
             new Date(2023, 0, 13),
             new Date(2023, 0, 14),
-          ]}
+            new Date(2023, 0, 29),
+            new Date(2023, 0, 30),
+            new Date(2023, 0, 31),
+            new Date(2023, 1, 1),
+            new Date(2023, 1, 2),
+            new Date(2023, 1, 3),
+            new Date(2023, 1, 4),
+            new Date(2023, 1, 5),
+            new Date(2023, 1, 6),
+            new Date(2023, 1, 7),
+            new Date(2023, 1, 8),
+            new Date(2023, 1, 9),
+            new Date(2023, 1, 10),
+            new Date(2023, 1, 11),
+            new Date(2023, 1, 12),
+            new Date(2023, 1, 13),
+            new Date(2023, 1, 14),
+            new Date(2023, 1, 15),
+            new Date(2023, 1, 16),
+            new Date(2023, 1, 17),
+            new Date(2023, 1, 18)
+            ])
+
+
+          }
           direction={props.orientation}
           color="#FFF4D1"
           scroll={{
@@ -548,12 +567,12 @@ function CalendarComponent(props) {
             {state[0].endDate != null
               ? getSelectedNights(state) > 5
                 ? (getNormalDay(state) * 90000 +
-                    getLowDemand(state) * 110000 +
-                    getHighDemand(state) * 150000) *
+                    getLowDemand(state) * 105000 +
+                    getHighDemand(state) * 125000) *
                   0.9
                 : getNormalDay(state) * 90000 +
-                  getLowDemand(state) * 110000 +
-                  getHighDemand(state) * 150000
+                  getLowDemand(state) * 105000 +
+                  getHighDemand(state) * 125000
               : ''}
           </Col>
         </Row>
@@ -593,12 +612,12 @@ function CalendarComponent(props) {
                     mount:
                       getSelectedNights(state) > 5
                         ? (getNormalDay(state) * 90000 +
-                            getLowDemand(state) * 110000 +
-                            getHighDemand(state) * 150000) *
+                            getLowDemand(state) * 105000 +
+                            getHighDemand(state) * 125000) *
                           0.9
                         : getNormalDay(state) * 90000 +
-                          getLowDemand(state) * 110000 +
-                          getHighDemand(state) * 150000,
+                          getLowDemand(state) * 105000 +
+                          getHighDemand(state) * 125000,
                     startDate: {
                       y: state[0].startDate.getFullYear(),
                       m: state[0].startDate.getMonth() + 1,

@@ -55,7 +55,7 @@ function InfoContainer(props) {
           color: 'white',
           justifyContent: 'center',
           marginTop: 10,
-          padding: 15,
+          padding: 7,
           fontSize: 15,
         }}
       >
@@ -71,6 +71,7 @@ function InfoContainer(props) {
           border: 'none',
           backgroundColor: '#F3F3F3',
           marginTop: 5,
+          marginBottom:5
         }}
       >
         <Row
@@ -103,6 +104,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -137,6 +139,7 @@ function InfoContainer(props) {
             marginTop: 2,
             padding: 7,
             fontSize: 15,
+            marginBottom:5
           }}
         >
           Espacio común
@@ -150,6 +153,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -182,6 +186,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -214,6 +219,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -246,6 +252,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -278,6 +285,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -312,6 +320,7 @@ function InfoContainer(props) {
             marginTop: 2,
             padding: 7,
             fontSize: 15,
+            marginBottom:5
           }}
         >
           Exterior
@@ -325,6 +334,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -357,6 +367,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row
@@ -389,6 +400,7 @@ function InfoContainer(props) {
           width: '100%',
           backgroundColor: '#F3F3F3',
           border: 'none',
+          marginBottom:5
         }}
       >
         <Row

@@ -111,17 +111,6 @@ function Gallery() {
               Cocina
             </p>
           </div>
-          <div>
-            <img
-              height={450}
-              style={{ borderRadius: 5 }}
-              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2FIMG-1621.jpg?alt=media&token=1e6efb0f-7e91-41d5-ad26-2c64f51fbd68"
-              alt=""
-            />
-            <p style={{ backgroundColor: 'green' }} className="legend">
-              Habitación
-            </p>
-          </div>
         </Carousel>
       ) : (
         ''

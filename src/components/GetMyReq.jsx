@@ -5,6 +5,7 @@ import { UserAuth } from "../context/AuthContext";
 import { Col, Container, Row } from "react-grid-system";
 import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from 'react-loading';
+import RequestPreview from "./RequestPreview";
 
 const options = {
   year: 'numeric',
@@ -44,61 +45,8 @@ function GetMyReqs() {
         <Container>
   
         {documents.map(d => (
-        <Link to={"/myRequest"} state={{ doc: d }} style={{textDecoration:"none",color:"black"}}>
-          <Row style={{backgroundColor:"#E3E3E3",display:"flex",justifyContent:"space-around"}}>
-            <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-            LLegada
-            </Row>
-            <Row style={{backgroundColor:"#8BC088",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-            {new Date(d.startDate.y, d.startDate.m -1, d.startDate.d)
-                  .toLocaleString('es-CL', options)
-                  .toUpperCase()}
-            </Row>
-
-            </Col>
-
-            <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-            Salida 
-            </Row>
-            <Row style={{backgroundColor:"#B26C41",display:"flex",padding:5,justifyContent:"center",fontSize:10}}>
-            {new Date(d.finishDate.y, d.finishDate.m -1, d.finishDate.d)
-                  .toLocaleString('es-CL', options)
-                  .toUpperCase()}
-            </Row>
-
-            </Col>
-    
-            <Col style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:10}}>
-            <Row style={{backgroundColor:"#B3D5D3    ",display:"flex",padding:5,justifyContent:"center",fontSize:8}}>
-            Telefono: {d.user.phone} 
-            </Row>
-            <Row
-                  style={{
-                    backgroundColor: 'white',
-                    display: 'flex',
-                    padding: 5,
-                    justifyContent: 'center',
-                    fontSize: 10,
-                  }}
-                >
-                  {d.approved === true ? (
-                    <div style={{ color: 'green', fontWeight: 'bold' }}>
-                      {' '}
-                      Aceptado!
-                    </div>
-                  ) : ( d.rejected === true ? 
-                    <div style={{ color: 'red', fontWeight: 'bold' }}>
-                      {' ' + ' Rechazado'}
-                    </div>
-                  : <div style={{ color: 'orange', fontWeight: 'bold' }}>
-                  {' ' + ' En espera'}
-                </div>)}
-                </Row>
-            </Col>
-          </Row>
-
+        <Link to={"/myRequest"} state={{ doc: d }} style={{textDecoration:"none",color:"black",marginTop:10}}>
+          <RequestPreview  doc={d} ></RequestPreview>
           </Link>
 
         ))}
