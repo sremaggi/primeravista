@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react'
-import Button from 'react-bootstrap/Button'
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Alert from '@mui/material/Alert';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { FcNext } from 'react-icons/fc'
@@ -12,15 +15,11 @@ import {
   GiCityCar,
   GiRoundTable,
 } from 'react-icons/gi'
-import { FaToilet } from 'react-icons/fa'
+import { GiCookingPot } from 'react-icons/gi'
+import { TbToiletPaper } from 'react-icons/tb'
 import { RiHotelBedLine } from 'react-icons/ri'
 import { WiSunrise } from 'react-icons/wi'
 import { MdOutlineYard } from 'react-icons/md'
-import { render } from '@testing-library/react'
-import MyVerticallyCenteredModal from './CenterModal'
-import InfoDescription from './infoDescription'
-import Gallery from './GalleryImage'
-import InfoImageContainer from './InfoImage'
 import InfornmationBedRoom from '../screens/InformationBedRoom'
 import InfornmationBathRoom from '../screens/informationBathRoom'
 import InfornmationKitchen from '../screens/InformationKitchen'
@@ -31,10 +30,10 @@ import InformationDesktop from '../screens/informationDesktop'
 import InformationParking from '../screens/informationParking'
 import InformationUpGarden from '../screens/informationUpGarden'
 import InformationDownGarden from '../screens/informationDownGarden'
+import TitleContainer from './TitleContainer'
+import SubTitleContainer from './SubTitleContainer';
 
 function InfoContainer(props) {
-  const [loadDocs, setLoadDocs] = useState(true)
-  const [loadImages, setLoadImages] = useState(true)
   const [bedroom, clickBedRoom] = React.useState(false)
   const [bedroom2, clickBedRoom2] = React.useState(false)
   const [bathroom, clickBathRoom] = React.useState(false)
@@ -47,386 +46,227 @@ function InfoContainer(props) {
   const [downGarden, clickDownGarden] = React.useState(false)
 
   return (
-    <div style={{ backgroundColor: '#9DC289', marginTop: 10, padding: 10 }}>
-      <Row
-        style={{
-          display: 'flex',
-          backgroundColor: '#454545',
-          color: 'white',
-          justifyContent: 'center',
-          marginTop: 10,
-          padding: 7,
-          fontSize: 15,
-        }}
+
+      <Container>
+      <Container><Alert severity="success">Capacidad 6 Personas</Alert></Container>
+     
+    <Box   style={{justifyContent:"center",alignContent:"center"}} sx={{
+      display: 'flex',
+      '& > *': {
+        m: 1,
+      },
+    }}>
+         <ButtonGroup
+        orientation="horizontal"
+        
+   
       >
-        Capacidad 6 personas
-      </Row>
-      <button
-        to="/information/bedroom"
-        onClick={() => clickBedRoom(!bedroom)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          border: 'none',
-          backgroundColor: '#F3F3F3',
-          marginTop: 5,
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
+       
+      <Button
+       startIcon={<GiBed size={25} style={styles.icon} /> }
+       variant={bedroom?"contained":"outlined"}
+       color={"success"}
+        size="small"
+        style={styles.infoButton}
+        onClick={() =>{
+        clickBathRoom(false)
+        clickKitchen(false)
+        clickBedRoom(!bedroom)}}
         >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <GiBed size={40} style={{ margin: 10 }} /> Habitación
-          </Col>
-        </Row>
-      </button>
+      Habitación 
+      </Button>
+      <Button
+      startIcon={<TbToiletPaper size={25} style={styles.icon} />}
+      variant={bathroom?"contained":"outlined"}
+      color={"success"}
+      size="small"
+      onClick={() => {
+          clickBedRoom(false)
+          clickKitchen(false)
+          clickBathRoom(!bathroom)}}
+        style={styles.infoButton}
+      >
+             Baño
+      </Button>
+      
+      <Button
+        startIcon={<GiCookingPot size={25} style={styles.icon} />}
+        variant={kitchen?"contained":"outlined"}
+        color={"success"}
+        size="small"
+        onClick={() => {
+          clickBathRoom(false)
+          clickBedRoom(false)
+          clickKitchen(!kitchen)}}
+        style={styles.infoButton}
+      >
+        Cocina
+      </Button>
+      </ButtonGroup>
+      </Box>
       {bedroom ? <InfornmationBedRoom /> : ''}
-      <button
-        onClick={() => clickBathRoom(!bathroom)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <FaToilet size={35} style={{ margin: 10 }} /> Baño
-          </Col>
-        </Row>
-      </button>
       {bathroom ? <InfornmationBathRoom /> : ''}
-      <Container>
-        <Row
-          style={{
-            display: 'flex',
-            backgroundColor: '#454545',
-            color: 'white',
-            justifyContent: 'center',
-            marginTop: 2,
-            padding: 7,
-            fontSize: 15,
-            marginBottom:5
-          }}
-        >
-          Espacio común
-        </Row>
-      </Container>
-      <button
-        onClick={() => clickKitchen(!kitchen)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <GiRiceCooker size={35} style={{ margin: 10 }} /> Cocina
-          </Col>
-        </Row>
-      </button>
       {kitchen ? <InfornmationKitchen /> : ''}
-      <button
-        onClick={() => clickBedRoom2(!bedroom2)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
+     <Box   style={{justifyContent:"center",alignContent:"center",justifyContent:"space-around"}} sx={{
+      display: 'flex',
+      '& > *': {
+        m: 1,
+      },
+    }}>
+     <ButtonGroup
+        orientation="horizontal"
+        
+   
       >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <RiHotelBedLine size={35} style={{ margin: 10 }} /> Habitación común
-          </Col>
-        </Row>
-      </button>
+
+     
+      <Button
+           startIcon={<RiHotelBedLine size={25} style={styles.icon} />}
+           variant={bedroom2?"contained":"outlined"}
+           color={"success"}
+           size="small"
+        onClick={() => {
+          clickLiving(false)
+          clickDinnerRoom(false)
+          clickDestkop(false)
+          clickBedRoom2(!bedroom2)}}
+        style={styles.infoButton}
+      > Camas
+      </Button>
+      
+      <Button
+       startIcon={<GiSofa size={25} style={styles.icon} />}
+       variant={living?"contained":"outlined"}
+       color={"success"}
+       size="small"
+        onClick={() => {
+          clickDestkop(false)
+          clickBedRoom2(false)
+          clickDinnerRoom(false)
+          clickLiving(!living)}}
+        style={styles.infoButton}
+      >
+      Living
+      </Button>
+      <Button
+          startIcon={<GiRoundTable size={25} style={styles.icon} />}
+          variant={dinnerRoom?"contained":"outlined"}
+          color={"success"}
+          size="small"
+        onClick={() => {
+          clickLiving(false)
+          clickDestkop(false)
+          clickBedRoom2(false)
+          clickDinnerRoom(!dinnerRoom)}}
+        style={styles.infoButton}
+      >
+        Comedor
+      </Button>
+      <Button
+            startIcon={<GiDesk size={25} style={styles.icon} />}
+            variant={desktop?"contained":"outlined"}
+            color={"success"}
+            size="small"
+        onClick={() => {
+          clickLiving(false)
+          clickBedRoom2(false)
+          clickDinnerRoom(false)
+          clickDestkop(!desktop)}}
+        style={styles.infoButton}
+      >
+       Escritorio
+      </Button>
+      </ButtonGroup>
+      </Box>
       {bedroom2 ? <InfornmationBedRoom2 /> : ''}
-      <button
-        onClick={() => clickLiving(!living)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <GiSofa size={35} style={{ margin: 10 }} /> Living
-          </Col>
-        </Row>
-      </button>
       {living ? <InfornmationLiving /> : ''}
-      <button
-        onClick={() => clickDinnerRoom(!dinnerRoom)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <GiRoundTable size={35} style={{ margin: 10 }} /> Comedor
-          </Col>
-        </Row>
-      </button>
       {dinnerRoom ? <InformationDinnerRoom /> : ''}
-      <button
-        onClick={() => clickDestkop(!desktop)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <GiDesk size={35} style={{ margin: 10 }} /> Escritorio
-          </Col>
-        </Row>
-      </button>
       {desktop ? <InformationDesktop /> : ''}
-      <Container>
-        <Row
-          style={{
-            display: 'flex',
-            backgroundColor: '#454545',
-            color: 'white',
-            justifyContent: 'center',
-            marginTop: 2,
-            padding: 7,
-            fontSize: 15,
-            marginBottom:5
-          }}
-        >
-          Exterior
-        </Row>
-      </Container>
-      <button
-        onClick={() => clickParking(!parking)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
+
+        <SubTitleContainer title="Exterior"/>
+
+        <Box   style={{justifyContent:"center",alignContent:"center",justifyContent:"space-around"}} sx={{
+      display: 'flex',
+      '& > *': {
+        m: 1,
+      },
+    }}>
+     <ButtonGroup
+        orientation="horizontal"
+        
+   
       >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <GiCityCar size={40} style={{ margin: 10 }} /> Estacionamiento
-          </Col>
-        </Row>
-      </button>
+      <Button
+           startIcon={<GiCityCar size={25} style={styles.icon} />}
+           variant={parking?"contained":"outlined"}
+           color={"success"}
+           size="small"
+        onClick={() => {
+          clickUpGarden(false)
+          clickDownGarden(false)
+          clickParking(!parking)}}
+        style={styles.infoButton}
+      >
+        Estacionamiento
+      </Button>
+      
+      <Button
+              startIcon={<WiSunrise size={25} style={styles.icon} />}
+              variant={upGarden?"contained":"outlined"}
+              color={"success"}
+              size="small"
+        onClick={() => {
+          clickDownGarden(false)
+          clickParking(false)
+          clickUpGarden(!upGarden)}}
+        style={styles.infoButton}
+      >
+       Patio lateral
+      </Button>
+      
+      <Button
+          startIcon={<MdOutlineYard size={25} style={styles.icon} />}
+          variant={downGarden?"contained":"outlined"}
+          color={"success"}
+          size="small"
+        onClick={() =>{
+          clickParking(false)
+          clickUpGarden(false)
+          clickDownGarden(!downGarden)}}
+        style={styles.infoButton}
+      >
+        Patio inferior
+      </Button>
+      </ButtonGroup>
+      </Box>
       {parking ? <InformationParking /> : ''}
-      <button
-        onClick={() => clickUpGarden(!upGarden)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <WiSunrise size={40} style={{ margin: 10 }} /> Patio lateral
-          </Col>
-        </Row>
-      </button>
       {upGarden ? <InformationUpGarden /> : ''}
-      <button
-        onClick={() => clickDownGarden(!downGarden)}
-        style={{
-          textDecoration: 'none',
-          color: 'green',
-          width: '100%',
-          backgroundColor: '#F3F3F3',
-          border: 'none',
-          marginBottom:5
-        }}
-      >
-        <Row
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: 3,
-            padding: 10,
-            fontSize: 15,
-          }}
-        >
-          <Col
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <MdOutlineYard size={40} style={{ margin: 10 }} /> Patio inferior
-          </Col>
-        </Row>
-      </button>
       {downGarden ? <InformationDownGarden /> : ''}
-    </div>
+      </Container>
   )
 }
 
 export default InfoContainer
+
+
+const styles = {
+  icon:{},
+  infoButton:{
+     boxShadow: "1px 1px 4px #999",
+     fontSize: 12,
+      marginRight:3,
+      marginLeft:3,
+      borderRadius:10,
+      textDecoration: 'none',
+      justifyContent:'center',
+    
+  },
+  infoRow:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems:'center',
+   margin:2,
+    padding: 1,
+    fontSize: 12,
+  }
+}

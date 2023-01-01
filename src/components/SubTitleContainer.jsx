@@ -7,34 +7,36 @@ import { UserAuth } from "../context/AuthContext";
 
 
 
-function TitleContainer(props) {
+function SubTitleContainer(props) {
     const {user}= UserAuth();
 
     return (
         <Container>
+        <Container style={{display: 'flex', justifyContent: 'center'}}>
         <Row
         style={{
          boxShadow: "2px 2px 5px #999",
           display: 'flex',
-          backgroundColor: 'darkslategray',
+          backgroundColor:"lightslategray",
           color: 'white',
           borderRadius:4,
+          width:"70%",
           justifyContent: 'center',
           marginTop: 5,
           marginBottom:5,
-          padding: 10,
+          padding: 4,
           fontSize: 15,
         }}
       >
       {props.title}
       </Row>
       </Container>
-
+      </Container>
 
     );
 }
 
-export default TitleContainer;
+export default SubTitleContainer;
 
 const SubTitle = styled.p `
 font-family: "cursive";

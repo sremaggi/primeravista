@@ -30,7 +30,7 @@ function InformationDownGarden() {
         <div>
             <img
               height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
+              style={{ borderRadius: 5,objectFit:"fill" }}
               src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fpatiolateral%2Fpa1.jpeg?alt=media&token=42fc60dc-cd30-4ab4-8451-f67e4ab3a7d5"
               alt=""
             />
@@ -39,7 +39,7 @@ function InformationDownGarden() {
           <div>
             <img
               height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
+              style={{ borderRadius: 5,objectFit:"fill" }}
               src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fpatiolateral%2Fpa2.jpeg?alt=media&token=0c264ecd-eb24-4e10-b152-a8fc3623c79a"
               alt=""
             />

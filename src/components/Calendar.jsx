@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 import { DateRange } from 'react-date-range'
 import { es } from 'date-fns/locale'
 import { Container, Row, Col } from 'react-grid-system'
@@ -10,6 +12,8 @@ import { UserAuth } from '../context/AuthContext'
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
 import { UseWindowSize } from '../context/UseWidth'
+import TitleContainer from './TitleContainer';
+import SubTitleContainer from './SubTitleContainer';
 
 const options = {
   weekday: 'long',
@@ -316,89 +320,14 @@ function CalendarComponent(props) {
 
   return (
     <div>
-       <Container style={{width:"100%"}}>
-      <Row
-        style={{
-          display: 'flex',
-          color: 'white',
-          justifyContent: 'center',
-          marginTop: 10,
-        }}
-      >
-        <Col
-          sm={8}
-          xs={8}
-          md={8}
-          lg={8}
-          xl={8}
-          xxl={8}
-          xxxl={8}
-          style={{
-            backgroundColor: '#454545',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: 13,
-            color: 'white',
-            textJustify: 'inter-word',
-            textAlign: 'justify',
-            borderRadius: 10,
-          }}
-        >
-          <Row style={{ padding: 3, margin: 1 }}>
-            Realiza tu solicitud y nos contactaremos contigo a la brevedad para
-            concretar la reserva.
-          </Row>
-        </Col>
-        <Col
-          sm={4}
-          xs={4}
-          md={4}
-          lg={4}
-          xl={4}
-          xxl={4}
-          xxxl={4}
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            display: 'flex',
-            color: 'black',
-            alignItems: 'center',
-            fontSize: 13,
-          }}
-        >
-          <Row
-            style={{
-              backgroundColor: '#CDCDCD',
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-              padding: 3,
-              fontSize: 10,
-            }}
-          >
-            No disponible
-          </Row>
-          <Row
-            style={{
-              backgroundColor: '#7FA251',
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-              color: 'white',
-              padding: 3,
-              fontSize: 10,
-            }}
-          >
-            Selección
-          </Row>
-        </Col>
-      </Row>
+    
+    <TitleContainer title="Calendario de reservas" />
+    <Alert severity="warning">Realiza tu solicitud, y nos contactaremos contigo a la brevedad.</Alert>
 
       <div
         style={{
           display: 'flex',
+          marginTop:4,
           justifyContent: 'center',
           backgroundColor: 'white',
         }}
@@ -517,28 +446,14 @@ function CalendarComponent(props) {
         </Col>
       </Row>
       <Container>
-        <Row
-          style={{
-            backgroundColor: '#454545',
-            padding: 10,
-            borderRadius: 10,
-            margin: 5,
-            fontSize: 12,
-            display: 'flex',
-            justifyContent: 'center',
-            color: 'white',
-            textJustify: 'inter-word',
-            textAlign: 'justify',
-          }}
-        >
-          Por reservas superiores a 5 noches, se aplica un descuento
-        </Row>
+      <Alert severity="info">Por reservar sobre 5 noches, se aplica un descuento.</Alert>
         <Row
           style={{
             display: 'flex',
             justifyContent: 'center',
-            backgroundColor: '#42AB06',
+            backgroundColor: 'darkslategray',
             padding: 5,
+            marginTop:10,
             color: 'white',
             fontSize: 13,
           }}
@@ -555,7 +470,7 @@ function CalendarComponent(props) {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            backgroundColor: '#42AB06',
+            backgroundColor: 'darkslategray',
             padding: 5,
             color: 'white',
             fontSize: 13,
@@ -580,7 +495,7 @@ function CalendarComponent(props) {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            backgroundColor: '#42AB06',
+            backgroundColor: 'darkslategray',
             padding: 5,
             color: 'white',
             fontSize: 13,
@@ -605,7 +520,11 @@ function CalendarComponent(props) {
             (1000 * 3600 * 24) +
             1 >
             1 ? (
-            <button
+      
+            <Button
+            variant="contained"
+            color={"success"}
+             size="large"
               onClick={() => {
                 navigate('/bookings/request', {
                   state: {
@@ -637,38 +556,35 @@ function CalendarComponent(props) {
                 })
               }}
               style={{
-                padding: 20,
-                backgroundColor: '#037D77',
-                color: 'white',
-                fontWeight: 'bold',
-                marginBottom:50
-              }}
+                margin:20,
+              
+               }}
             >
               {' '}
               Realizar Solicitud
-            </button>
+            </Button>
           ) : (
-            <button
+            <Button
+            variant="contained"
+            color={"success"}
+             size="large"
               onClick={() => {
                 alert(
                   'Debes \n 1.Iniciar sesión. \n 2.Seleccionar al menos una noche. \n Luego podrás realizar una solicitud',
                 )
               }}
               style={{
-                padding: 20,
-                backgroundColor: '#037D77',
-                color: 'white',
-                fontWeight: 'bold',
-                marginBottom:50
+               margin:20,
+             
               }}
             >
               {' '}
               Realizar Solicitud
-            </button>
+            </Button>
           )}
         </Row>
       </Container>
-      </Container>
+  
     </div>
   )
 }

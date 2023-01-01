@@ -18,35 +18,13 @@ function InfornmationBathRoom() {
           showIndicators
           showThumbs={false}
           showStatus={false}
-          interval="3000"
-          transitionTime="50"
           infiniteLoop
       
         >
-
-        <div>
-            <img
-              height={350}
-              width={350}
-              style={{ borderRadius: 5}}
-              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fbathroom%2Fb1.jpeg?alt=media&token=7e7e6052-e231-4f26-8e9b-629f4f45a239"
-           
-            />
-         
-          </div>
           <div>
             <img
               height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
-              src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fbathroom%2Fb2.jpeg?alt=media&token=c2a8ec65-0473-4011-83d2-b355b6e9502f"
-           
-            />
-         
-          </div>
-          <div>
-            <img
-              height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
+              style={{ borderRadius: 5,objectFit:"fill" }}
               src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fbathroom%2Fb3.jpeg?alt=media&token=2f34c94d-be13-4bc3-b2ae-b265bab8da6d"
               
             />

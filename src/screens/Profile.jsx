@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import NavbarLogin from '../components/NavBarLogin'
 import { UserAuth } from '../context/AuthContext'
 import GetMyReqs from '../components/GetMyReq'
+import TitleContainer from '../components/TitleContainer'
 
 function Profile() {
   useEffect(() => {
@@ -24,6 +25,8 @@ function Profile() {
   return (
     <div>
       <NavbarLogin />
+      <TitleContainer title="Mi Perfil"/>
+    
       <Container>
         <div style={{ marginTop: 10, justifyContent: 'center' }}>
           <Row

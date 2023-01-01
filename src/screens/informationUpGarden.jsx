@@ -30,7 +30,7 @@ function InformationUpGarden() {
         <div>
             <img
               height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
+              style={{ borderRadius: 5,objectFit:"fill" }}
               src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fpatiolateral%2Fp1.jpeg?alt=media&token=629f2671-694a-4e64-8033-b12981c53b67"
               alt=""
             />
@@ -39,7 +39,7 @@ function InformationUpGarden() {
           <div>
             <img
               height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
+              style={{ borderRadius: 5,objectFit:"fill" }}
               src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fpatiolateral%2Fp2.jpeg?alt=media&token=7c15ec32-f9d3-4b8c-bc81-62e0ac831c84"
               alt=""
             />
@@ -48,7 +48,7 @@ function InformationUpGarden() {
           <div>
             <img
               height={350}
-              style={{ borderRadius: 5,objectFit:"cover" }}
+              style={{ borderRadius: 5,objectFit:"fill" }}
               src="https://firebasestorage.googleapis.com/v0/b/primeravista-50b01.appspot.com/o/assests%2FhomeImages%2Fpatiolateral%2Fp3.jpeg?alt=media&token=b5b0f281-5636-456f-b64f-814700323e3c"
               alt=""
             />

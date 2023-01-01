@@ -37,6 +37,7 @@ function Coments() {
       <div>
          <NavbarLogin />
        <Container >
+       <TitleContainer title="Comentarios"/>
       
        <div style={{display:"flex",justifyContent:"center",marginTop:10}}>
        

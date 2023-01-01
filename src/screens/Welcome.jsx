@@ -81,7 +81,7 @@ function WelcomeScreen() {
                   textAlign: 'justify',
                 }}
               >
-                Bienvenid@ a hospedaje Primera Vista, aquí encuentrarás toda la
+                Bienvenid@ a hospedaje Primera Vista, aquí encontrarás toda la
                 información respecto a la casa y podrás crear tu perfil para
                 realizar una reserva o un comentario. Además, facilitamos el
                 canal de comunicación en la pestaña de contacto, con el fin de
