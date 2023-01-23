@@ -89,6 +89,25 @@ function InfoContainer(props) {
              Baño
       </Button>
       
+
+      </ButtonGroup>
+      </Box>
+      {bedroom ? <InfornmationBedRoom /> : ''}
+      {bathroom ? <InfornmationBathRoom /> : ''}
+      <Box   style={{justifyContent:"center",alignContent:"center"}} sx={{
+      display: 'flex',
+      '& > *': {
+        m: 1,
+      },
+    }}>
+         <ButtonGroup
+        orientation="horizontal"
+        
+   
+      >
+       
+
+      
       <Button
         startIcon={<GiCookingPot size={25} style={styles.icon} />}
         variant={kitchen?"contained":"outlined"}
@@ -104,8 +123,6 @@ function InfoContainer(props) {
       </Button>
       </ButtonGroup>
       </Box>
-      {bedroom ? <InfornmationBedRoom /> : ''}
-      {bathroom ? <InfornmationBathRoom /> : ''}
       {kitchen ? <InfornmationKitchen /> : ''}
      <Box   style={{justifyContent:"center",alignContent:"center",justifyContent:"space-around"}} sx={{
       display: 'flex',
@@ -148,6 +165,23 @@ function InfoContainer(props) {
       >
       Living
       </Button>
+
+      </ButtonGroup>
+      </Box>
+      {bedroom2 ? <InfornmationBedRoom2 /> : ''}
+      {living ? <InfornmationLiving /> : ''}
+      <Box   style={{justifyContent:"center",alignContent:"center",justifyContent:"space-around"}} sx={{
+      display: 'flex',
+      '& > *': {
+        m: 1,
+      },
+    }}>
+     <ButtonGroup
+        orientation="horizontal"
+        
+   
+      >
+      
       <Button
           startIcon={<GiRoundTable size={25} style={styles.icon} />}
           variant={dinnerRoom?"contained":"outlined"}
@@ -178,8 +212,6 @@ function InfoContainer(props) {
       </Button>
       </ButtonGroup>
       </Box>
-      {bedroom2 ? <InfornmationBedRoom2 /> : ''}
-      {living ? <InfornmationLiving /> : ''}
       {dinnerRoom ? <InformationDinnerRoom /> : ''}
       {desktop ? <InformationDesktop /> : ''}
 
@@ -192,8 +224,8 @@ function InfoContainer(props) {
       },
     }}>
      <ButtonGroup
-        orientation="horizontal"
-        
+        orientation="vertical"
+        style={{margin:10}}
    
       >
       <Button

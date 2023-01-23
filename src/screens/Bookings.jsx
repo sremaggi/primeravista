@@ -10,6 +10,7 @@ import CalendarComponent from '../components/Calendar'
 import { UserAuth } from '../context/AuthContext'
 import { UseWindowSize } from '../context/UseWidth'
 import Gallery from '../components/GalleryImage'
+import StaticDateRangePickerDemo from '../components/CalendarMUI'
 
 function Bookings() {
   const { user } = UserAuth()

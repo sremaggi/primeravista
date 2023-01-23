@@ -6,8 +6,8 @@ import { es } from 'date-fns/locale'
 import { Container, Row, Col } from 'react-grid-system'
 import { addDays, format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
-import 'react-date-range/dist/styles.css' // main style file
-import 'react-date-range/dist/theme/default.css' // theme css file
+//import 'react-date-range/dist/styles.css' // main style file
+//import 'react-date-range/dist/theme/default.css' // theme css file
 import { UserAuth } from '../context/AuthContext'
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
@@ -51,6 +51,39 @@ const highDemands = [
   {
     startDate: new Date(2022, 11, 29),
     endDate: new Date(2023, 0, 2),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },  {
+    startDate: new Date(2023, 2, 3),
+    endDate: new Date(2023, 2, 5),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },
+  {
+    startDate: new Date(2023, 2, 10),
+    endDate: new Date(2023, 2, 12),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },
+  {
+    startDate: new Date(2023, 2, 17),
+    endDate: new Date(2023, 2, 19),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  }, {
+    startDate: new Date(2023, 2, 24),
+    endDate: new Date(2023, 2, 26),
+    key: 'selection',
+    disabled: true,
+    showDateDisplay: false,
+  },
+  {
+    startDate: new Date(2023, 2, 31),
+    endDate: new Date(2023, 3, 2),
     key: 'selection',
     disabled: true,
     showDateDisplay: false,
@@ -263,26 +296,6 @@ function getHighDemand(state) {
   return count - 1
 }
 
-function getOfferts(state) {
-  let count = 0
-  const selectedDates = getDatesInRange(state[0].startDate, state[0].endDate)
-  selectedDates.forEach((sd) => {
-    offerts.forEach((lds) => {
-      const o = getDatesInRange(lds.startDate, lds.endDate)
-      o.forEach((ld) => {
-        if (
-          sd.getFullYear() === ld.getFullYear() &&
-          sd.getMonth() === ld.getMonth() &&
-          sd.getDate() === ld.getDate()
-        ) {
-          count += 1
-        }
-      })
-    })
-  })
-
-  return count
-}
 
 function CalendarComponent(props) {
 
@@ -322,24 +335,21 @@ function CalendarComponent(props) {
     <div>
     
     <TitleContainer title="Calendario de reservas" />
-    <Alert severity="warning">Realiza tu solicitud, y nos contactaremos contigo a la brevedad.</Alert>
+    <Alert severity="success">Realiza tu solicitud, y nos contactaremos contigo a la brevedad.</Alert>
 
       <div
         style={{
           display: 'flex',
           marginTop:4,
-          justifyContent: 'center',
-          backgroundColor: 'white',
+          justifyContent: 'center'
         }}
       >
         <DateRange
-          editableDateInputs
-          showDateDisplay
-          months={props.months}
-          onChange={(item) => setState([item.selection].concat())}
+      editableDateInputs={true}
           moveRangeOnFirstSelection={false}
+          onChange={(item) => setState([item.selection].concat())}
           ranges={state}
-          //dayContentRenderer={customDayContent}
+          dayContentRenderer={customDayContent}
           minDate={addDays(new Date(), 0)}
           maxDate={addDays(new Date(), 150)}
           disabledDates={
@@ -361,9 +371,10 @@ function CalendarComponent(props) {
             new Date(2023, 0, 12),
             new Date(2023, 0, 13),
             new Date(2023, 0, 14),
-            new Date(2023, 0, 29),
-            new Date(2023, 0, 30),
-            new Date(2023, 0, 31),
+            new Date(2023, 0, 16),
+            new Date(2023, 0, 19),
+            new Date(2023, 0, 22),
+            new Date(2023, 0, 28),
             new Date(2023, 1, 1),
             new Date(2023, 1, 2),
             new Date(2023, 1, 3),
@@ -377,21 +388,21 @@ function CalendarComponent(props) {
             new Date(2023, 1, 11),
             new Date(2023, 1, 12),
             new Date(2023, 1, 13),
-            new Date(2023, 1, 14),
-            new Date(2023, 1, 15),
-            new Date(2023, 1, 16),
-            new Date(2023, 1, 17),
-            new Date(2023, 1, 18)
-            ])
+            new Date(2023, 1, 20),
+            new Date(2023, 1, 28),
+            new Date(2023, 2, 2), 
+            new Date(2023, 3, 1), 
+          ])
 
 
           }
-          direction={props.orientation}
+          direction={"vertical"}
           color="#FFF4D1"
           scroll={{
             enabled: true
 
           }}
+
           locale={es}
         />
       </div>
@@ -481,13 +492,13 @@ function CalendarComponent(props) {
             $
             {state[0].endDate != null
               ? getSelectedNights(state) > 5
-                ? (getNormalDay(state) * 90000 +
-                    getLowDemand(state) * 105000 +
-                    getHighDemand(state) * 125000) *
+                ? (getNormalDay(state) * 75000 +
+                    getLowDemand(state) * 85000 +
+                    getHighDemand(state) * 95000) *
                   0.9
-                : getNormalDay(state) * 90000 +
-                  getLowDemand(state) * 105000 +
-                  getHighDemand(state) * 125000
+                : getNormalDay(state) * 75000 +
+                  getLowDemand(state) * 85000 +
+                  getHighDemand(state) * 95000
               : ''}
           </Col>
         </Row>
@@ -530,13 +541,13 @@ function CalendarComponent(props) {
                   state: {
                     mount:
                       getSelectedNights(state) > 5
-                        ? (getNormalDay(state) * 90000 +
-                            getLowDemand(state) * 105000 +
-                            getHighDemand(state) * 125000) *
+                        ? (getNormalDay(state) * 75000 +
+                            getLowDemand(state) * 85000 +
+                            getHighDemand(state) * 95000) *
                           0.9
-                        : getNormalDay(state) * 90000 +
-                          getLowDemand(state) * 105000 +
-                          getHighDemand(state) * 125000,
+                        : getNormalDay(state) * 75000 +
+                          getLowDemand(state) * 85000 +
+                          getHighDemand(state) * 95000,
                     startDate: {
                       y: state[0].startDate.getFullYear(),
                       m: state[0].startDate.getMonth() + 1,
