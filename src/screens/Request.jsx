@@ -1,67 +1,81 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { Container, Row, Col } from 'react-grid-system'
-import ReactLoading from 'react-loading'
-import { collection, addDoc } from 'firebase/firestore'
-import emailjs from '@emailjs/browser'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-import { firestore } from '../firebase'
-import { UserAuth } from '../context/AuthContext'
-import NavbarLogin from '../components/NavBarLogin'
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Row, Col } from "react-grid-system";
+import ReactLoading from "react-loading";
+import { collection, addDoc } from "firebase/firestore";
+import emailjs from "@emailjs/browser";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { firestore } from "../firebase";
+import { UserAuth } from "../context/AuthContext";
+import NavbarLogin from "../components/NavBarLogin";
 
 const {
   REACT_APP_EMAIL_KEY,
   REACT_APP_TEMPLATE_ID,
   REACT_APP_API_KEY_EMAILJS,
-} = process.env
+} = process.env;
 
 const options = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'America/Santiago',
-}
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "America/Santiago",
+};
 
 function Request() {
-  const form = useRef()
-  const navigate = useNavigate()
-  const { user } = UserAuth()
-  const [name, setName] = useState(user.displayName)
-  const [email, setEmail] = useState(user.email)
-  const [qty, setQty] = useState()
-  const [message, setMessage] = useState('')
-  const [loadDocs, setLoadDocs] = useState(true)
+  const form = useRef();
+  const navigate = useNavigate();
+  const { user } = UserAuth();
+  const [name, setName] = useState(user.displayName);
+  const [email, setEmail] = useState(user.email);
+  const [qty, setQty] = useState(1);
+  const [message, setMessage] = useState("");
+  const [loadDocs, setLoadDocs] = useState(true);
 
-  const [phone, setPhone] = useState('')
-  const { state } = useLocation()
-  const { mount, startDate, finishDate, nights, rangeDates } = state
-  const [mountState, setMountState] = useState(mount)
+  const [phone, setPhone] = useState("");
+  const { state } = useLocation();
+  const { mount, startDate, finishDate, nights, rangeDates } = state;
+  const [mountState, setMountState] = useState(mount);
   //console.log(state)
   const handleMessageChange = (event) => {
-    setMessage(event.target.value)
-  }
+    setMessage(event.target.value);
+  };
   const sendEmail = (e) => {
     if (phone.length <= 6 || qty < 1) {
-      alert('Datos incorrectos!')
-      setLoadDocs(true)
+      alert("Datos incorrectos!");
+      setLoadDocs(true);
     } else {
-      setLoadDocs(false)
-      e.preventDefault()
+      setLoadDocs(false);
+      e.preventDefault();
+      var formData = new FormData(form.current);
+
+      // Establece los valores de los campos
+      let nameArray = name.split(" ");
+
+      for (let index = 0; index < nameArray.length; index++) {
+        // Establece los valores de los campos
+        let key = `name${index}`;
+        console.log(key);
+        formData.set(key, nameArray[index]);
+        console.log(formData);
+      }
+
+      console.log(form.current);
       emailjs
         .sendForm(
           REACT_APP_EMAIL_KEY,
           REACT_APP_TEMPLATE_ID,
           form.current,
-          REACT_APP_API_KEY_EMAILJS,
+          REACT_APP_API_KEY_EMAILJS
         )
         .then(
           (result) => {
-            console.log(result.text)
+            console.log(result.text);
 
-            addDoc(collection(firestore, 'requests'), {
-              mount : mountState,
+            addDoc(collection(firestore, "requests"), {
+              mount: mountState,
               startDate,
               finishDate,
               nights,
@@ -77,36 +91,36 @@ function Request() {
               rage: rangeDates,
             })
               .then(() => {
-                alert('Solicitud enviada correctamente')
-                setLoadDocs(true)
-                navigate('/profile')
+                alert("Solicitud enviada correctamente");
+                setLoadDocs(true);
+                navigate("/profile");
               })
               .catch((er) => {
-                alert('Error insert request ', er)
-                setLoadDocs(true)
-              })
+                alert("Error insert request ", er);
+                setLoadDocs(true);
+              });
           },
           (error) => {
-            console.log(error.text)
-          },
-        )
+            console.log(error.text);
+          }
+        );
     }
-  }
+  };
   useEffect(() => {
     // scroll to top on page load
-    document.body.style.zoom = '100%'
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-  }, [])
+    document.body.style.zoom = "100%";
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
       <NavbarLogin title="Solicitud de Reserva" />
-      <Container style={{ marginTop: 1, width: '100%' }}>
+      <Container style={{ marginTop: 1, width: "100%" }}>
         <>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -117,9 +131,9 @@ function Request() {
             </Modal.Body>
             <Modal.Body>
               {loadDocs ? (
-                ''
+                ""
               ) : (
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
                   <ReactLoading
                     type="spinningBubbles"
                     color="green"
@@ -142,19 +156,19 @@ function Request() {
 
         <Row
           style={{
-            display: 'flex',
+            display: "flex",
             margin: 10,
             padding: 10,
-            backgroundColor: '#393E3A',
+            backgroundColor: "#393E3A",
             borderRadius: 10,
           }}
         >
           <Col
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               fontSize: 13,
-              color: 'white',
+              color: "white",
             }}
           >
             Completar Solicitud
@@ -163,11 +177,11 @@ function Request() {
         <form ref={form} onSubmit={sendEmail}>
           <Row
             style={{
-              display: 'flex',
-              alignContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              alignContent: "center",
+              alignItems: "center",
               padding: 10,
-              backgroundColor: '#42AB06',
+              backgroundColor: "#42AB06",
               margin: 2,
             }}
           >
@@ -180,10 +194,10 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                color: 'white',
+                color: "white",
               }}
             >
               LLegada
@@ -197,9 +211,9 @@ function Request() {
               xxl={8}
               xxxl={8}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                color: 'white',
+                display: "flex",
+                justifyContent: "center",
+                color: "white",
                 fontSize: 11,
               }}
             >
@@ -209,18 +223,18 @@ function Request() {
                 type="text"
                 name="dateI"
                 value={new Date(startDate.y, startDate.m - 1, startDate.d)
-                  .toLocaleString('es-CL', options)
+                  .toLocaleString("es-CL", options)
                   .toUpperCase()}
               ></input>
             </Col>
           </Row>
           <Row
             style={{
-              display: 'flex',
-              alignContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              alignContent: "center",
+              alignItems: "center",
               padding: 10,
-              backgroundColor: '#42AB06',
+              backgroundColor: "#42AB06",
               margin: 2,
             }}
           >
@@ -233,10 +247,10 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                color: 'white',
+                color: "white",
               }}
             >
               Salida
@@ -250,9 +264,9 @@ function Request() {
               xxl={8}
               xxxl={8}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                color: 'white',
+                display: "flex",
+                justifyContent: "center",
+                color: "white",
                 fontSize: 11,
               }}
             >
@@ -262,7 +276,7 @@ function Request() {
                 type="text"
                 name="dateF"
                 value={new Date(finishDate.y, finishDate.m - 1, finishDate.d)
-                  .toLocaleString('es-CL', options)
+                  .toLocaleString("es-CL", options)
                   .toUpperCase()}
               ></input>
             </Col>
@@ -270,28 +284,28 @@ function Request() {
 
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#42AB06',
+              backgroundColor: "#42AB06",
               margin: 2,
             }}
           >
             <Col
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 fontSize: 15,
-                color: 'white',
+                color: "white",
               }}
             >
               Noches totales
             </Col>
             <Col
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                color: 'white',
+                display: "flex",
+                justifyContent: "center",
+                color: "white",
               }}
             >
               <input
@@ -305,10 +319,10 @@ function Request() {
 
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#CACACA',
-              color: 'black',
+              backgroundColor: "#CACACA",
+              color: "black",
               margin: 2,
             }}
           >
@@ -321,13 +335,13 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
-              A nombre de
+              Nombre
             </Col>
             <Col
               sm={8}
@@ -337,7 +351,7 @@ function Request() {
               xl={8}
               xxl={8}
               xxxl={8}
-              style={{ display: 'flex' }}
+              style={{ display: "flex" }}
             >
               <input
                 style={styles.inputContainer}
@@ -349,12 +363,13 @@ function Request() {
               />
             </Col>
           </Row>
+
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#CACACA',
-              color: 'black',
+              backgroundColor: "#CACACA",
+              color: "black",
               margin: 2,
             }}
           >
@@ -367,10 +382,10 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
               Correo Electrónico
@@ -383,7 +398,7 @@ function Request() {
               xl={8}
               xxl={8}
               xxxl={8}
-              style={{ display: 'flex' }}
+              style={{ display: "flex" }}
             >
               <input
                 style={styles.inputContainer}
@@ -398,10 +413,10 @@ function Request() {
 
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#CACACA',
-              color: 'black',
+              backgroundColor: "#CACACA",
+              color: "black",
               margin: 2,
             }}
           >
@@ -414,10 +429,10 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
               Número de telefono
@@ -430,7 +445,7 @@ function Request() {
               xl={8}
               xxl={8}
               xxxl={8}
-              style={{ display: 'flex', alignItems: 'center' }}
+              style={{ display: "flex", alignItems: "center" }}
             >
               <div style={{ margin: 5 }}>(+56)</div>
               <input
@@ -445,10 +460,10 @@ function Request() {
           </Row>
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#CACACA',
-              color: 'black',
+              backgroundColor: "#CACACA",
+              color: "black",
               margin: 2,
             }}
           >
@@ -461,10 +476,10 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
               Cantidad de personas
@@ -477,7 +492,7 @@ function Request() {
               xl={8}
               xxl={8}
               xxxl={8}
-              style={{ display: 'flex' }}
+              style={{ display: "flex" }}
             >
               <input
                 style={styles.inputContainer}
@@ -491,10 +506,10 @@ function Request() {
           </Row>
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#CACACA',
-              color: 'black',
+              backgroundColor: "#CACACA",
+              color: "black",
               margin: 2,
             }}
           >
@@ -507,10 +522,10 @@ function Request() {
               xxl={4}
               xxxl={4}
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 fontSize: 15,
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
               Comentario
@@ -523,7 +538,7 @@ function Request() {
               xl={8}
               xxl={8}
               xxxl={8}
-              style={{ display: 'flex', justifyContent: 'center' }}
+              style={{ display: "flex", justifyContent: "center" }}
             >
               <textarea
                 placeholder="Iré unos días a descansar con mi familia, llevaré a mi tortuga, es súper tranquila."
@@ -540,70 +555,73 @@ function Request() {
           </Row>
           <Row
             style={{
-              display: 'flex',
+              display: "flex",
               padding: 10,
-              backgroundColor: '#42AB06',
+              backgroundColor: "#42AB06",
               margin: 2,
             }}
           >
             <Col
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 fontSize: 15,
-                color: 'white',
+                color: "white",
               }}
             >
               Total a pagar
             </Col>
             <Col
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 margin: 5,
-                color: 'white',
+                color: "white",
               }}
             >
               <div style={{ margin: 5 }}>$</div>
-              {user.email === 'seba.rf96@gmail.com' ||
-          user.email === 'ant.niasbravo@gmail.com' ?          <input
-            type="text"
-            style={styles.inputContainer}
-            name="mount"
-            value={mountState}
-            onChange={(e) => setMountState(e.target.value)}
-          />:          <input
-          readOnly
-            type="text"
-            style={styles.inputContainer}
-            name="mount"
-            value={mountState}
-            onChange={(e) => setMountState(e.target.value)}
-          />}
-    
+              {user.email === "seba.rf96@gmail.com" ||
+              user.email === "ant.niasbravo@gmail.com" ? (
+                <input
+                  type="text"
+                  style={styles.inputContainer}
+                  name="mount"
+                  value={mountState}
+                  onChange={(e) => setMountState(e.target.value)}
+                />
+              ) : (
+                <input
+                  readOnly
+                  type="text"
+                  style={styles.inputContainer}
+                  name="mount"
+                  value={mountState}
+                  onChange={(e) => setMountState(e.target.value)}
+                />
+              )}
             </Col>
           </Row>
           {loadDocs ? (
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
                 marginTop: 20,
               }}
             >
               <Button
                 variant="primary"
-                style={{ backgroundColor: 'green', padding: 20 }}
+                style={{ backgroundColor: "green", padding: 20 }}
                 onClick={handleShow}
               >
                 Confirmar solicitud
               </Button>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
                 <ReactLoading
                   type="spinningBubbles"
                   color="green"
@@ -614,8 +632,8 @@ function Request() {
               <div
                 style={{
                   fontSize: 10,
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 Enviando solicitud
@@ -625,17 +643,17 @@ function Request() {
         </form>
       </Container>
     </div>
-  )
+  );
 }
 
-export default Request
+export default Request;
 
 const styles = {
   inputContainer: {
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     height: 20,
-    width: '100%',
+    width: "100%",
     fontSize: 12,
   },
-}
+};
