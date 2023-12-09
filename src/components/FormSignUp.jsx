@@ -22,8 +22,6 @@ function RegistrationForm() {
     const [surname,setSurname] = useState("");
     const [phone,setPhone] = useState("");
 
-       // progress
-       const [percent, setPercent] = useState(0);
 
     function handleUpload() {
         setLoadDocs(false)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   collection,
   query,
@@ -6,144 +6,160 @@ import {
   getDocs,
   updateDoc,
   doc,
-  orderBy
-} from 'firebase/firestore'
-import { Col, Container, Row } from 'react-grid-system'
-import ReactLoading from 'react-loading'
-import { UserAuth } from '../context/AuthContext'
-import { firestore } from '../firebase'
-import RequestPreview from './RequestPreview'
+  orderBy,
+} from "firebase/firestore";
+import { Col, Container, Row } from "react-grid-system";
+import ReactLoading from "react-loading";
+import { UserAuth } from "../context/AuthContext";
+import { firestore } from "../firebase";
+import RequestPreview from "./RequestPreview";
+import TitleContainer from "./TitleContainer";
 
 const options = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'America/Santiago',
-}
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "America/Santiago",
+};
 
 function GetAllRequest(props) {
-  const [documents, setDocuments] = useState([])
-  const [loadDocs, setLoadDocs] = useState(true)
-  const [loadApr, setLoadApr] = useState(true)
-  const { user } = UserAuth()
-  // Firebase Collection Reference query
+  const [documents, setDocuments] = useState([]);
+  const [loadDocs, setLoadDocs] = useState(true);
+  const [loadApr, setLoadApr] = useState(true);
 
+  const { user } = UserAuth();
+
+  // Firebase Collection Reference query
   if (user?.displayName) {
-    const q = query(
-      collection(firestore, 'requests'),
-      where('approved', '==', props.status)
-    )
-    const getDocuments = async () => {
-      const data = await getDocs(q)
-      setDocuments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-      setLoadDocs(true)
+    let q;
+
+    switch (props.status.title) {
+      case "Aprobadas":
+        q = query(
+          collection(firestore, "requests"),
+          where("approved", "==", true),
+          orderBy("timestamp", "desc")
+        );
+        break;
+      case "Pendientes":
+        q = query(
+          collection(firestore, "requests"),
+          where("approved", "==", false),
+          orderBy("timestamp", "desc")
+        );
+        break;
+      case "Rechazadas":
+        q = query(
+          collection(firestore, "requests"),
+          where("rejected", "==", true),
+          orderBy("timestamp", "desc")
+        );
+        break;
+
+      default:
+        break;
     }
-    getDocuments()
+
+    const getDocuments = async () => {
+      const data = await getDocs(q);
+      setDocuments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setLoadDocs(true);
+    };
+    getDocuments();
   }
 
   return (
     <Container>
+      <TitleContainer title={props.status.title} />
       {documents.map((d) => (
-
+        <Row
+          style={{
+            backgroundColor: "#363636",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 20,
+            padding: 3,
+            color: "white",
+            fontSize: 10,
+            flexDirection: "column",
+          }}
+        >
+          id: {d.id}
+          <RequestPreview doc={d}></RequestPreview>
           <Row
             style={{
-              backgroundColor:"#363636",
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: 20,
-              padding: 3,
-              color: 'white',
-              fontSize: 10,
-              flexDirection: 'column',
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 1,
+              padding: 6,
+              color: "white",
+              fontSize: 9,
+              marginBottom: 10,
             }}
           >
-           
-            id: {d.id}
-       
-            <RequestPreview  doc={d} ></RequestPreview>
-            <Row
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 1,
-                padding: 6,
-                color: 'white',
-                fontSize: 9,
-                marginBottom:10,
-              }}
-            >
-              <Container>{d.msg}</Container>
-
-         
-             
-            </Row>
-
-            {loadApr && d.approved == false ? (
-              <Row>
-                <Col>
+            <Container>{d.msg}</Container>
+          </Row>
+          {loadApr && d.approved == false ? (
+            <Row>
+              <Col>
                 <button
                   onClick={() => {
-                    setLoadApr(false)
-                    const docRef = doc(firestore, 'requests', d.id)
-                    d.approved = true
+                    setLoadApr(false);
+                    const docRef = doc(firestore, "requests", d.id);
+                    d.approved = true;
                     updateDoc(docRef, d)
                       .then(() => {
-                        alert('Aprobado exitoso')
-                        setLoadApr(true)
+                        alert("Aprobado exitoso");
+                        setLoadApr(true);
                       })
                       .catch((e) => {
-                        alert(e)
-                      })
+                        alert(e);
+                      });
                   }}
                   style={{
-                    width: '100%',
+                    width: "100%",
                     padding: 10,
-                    backgroundColor: 'green',
-                    color: 'white',
+                    backgroundColor: "green",
+                    color: "white",
                   }}
                 >
                   Aprobar
                 </button>
-                </Col>
-                <Col>
+              </Col>
+              <Col>
                 <button
                   onClick={() => {
-                    setLoadApr(false)
-                    const docRef = doc(firestore, 'requests', d.id)
-                    d.rejected = true
+                    setLoadApr(false);
+                    const docRef = doc(firestore, "requests", d.id);
+                    d.rejected = true;
                     updateDoc(docRef, d)
                       .then(() => {
-                        alert('Rechazado exitoso')
-                        setLoadApr(true)
+                        alert("Rechazado exitoso");
+                        setLoadApr(true);
                       })
                       .catch((e) => {
-                        alert(e)
-                      })
+                        alert(e);
+                      });
                   }}
                   style={{
-                    width: '100%',
+                    width: "100%",
                     padding: 10,
-                    backgroundColor: 'red',
-                    color: 'white',
+                    backgroundColor: "red",
+                    color: "white",
                   }}
                 >
                   Rechazar
                 </button>
-                </Col>
-                
-              </Row>
-              
-            ) : (
-             ''
-            )}
-            
-          </Row>
-          
-
+              </Col>
+            </Row>
+          ) : (
+            ""
+          )}
+        </Row>
       ))}
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-        {loadDocs  ? (
-          ''
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+        {loadDocs ? (
+          ""
         ) : (
           <ReactLoading
             type="spinningBubbles"
@@ -153,9 +169,8 @@ function GetAllRequest(props) {
           />
         )}
       </div>
-      
     </Container>
-  )
+  );
 }
 
-export default GetAllRequest
+export default GetAllRequest;

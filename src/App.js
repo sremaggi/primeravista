@@ -1,37 +1,44 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
   Link,
   useNavigate,
-} from 'react-router-dom'
-import HomeScreen from './screens/Home'
-import Signin from './screens/Signin'
-import WelcomeScreen from './screens/Welcome'
-import BookingsScreen from './screens/Bookings'
-import Profile from './screens/Profile'
-import Request from './screens/Request'
-import { AuthContextProvider } from './context/AuthContext'
-import Protected from './components/Protected'
-import Signup from './screens/Signup'
-import Coments from './screens/Coments'
-import ComentsCreate from './screens/CreateComments'
-import Information from './screens/Information'
-import NotFound from './screens/NotFound'
-import Contact from './screens/Contact'
-import Admin from './screens/Admin'
-import MyRequest from './screens/MyRequest'
-import InfornmationBedRoom from './screens/InformationBedRoom'
-import AdminRequest from './screens/AdminRequest'
+} from "react-router-dom";
+import HomeScreen from "./screens/Home";
+import Signin from "./screens/Signin";
+import WelcomeScreen from "./screens/Welcome";
+import BookingsScreen from "./screens/Bookings";
+import Profile from "./screens/Profile";
+import Request from "./screens/Request";
+import { AuthContextProvider } from "./context/AuthContext";
+import Protected from "./components/Protected";
+import Signup from "./screens/Signup";
+import Coments from "./screens/Coments";
+import ComentsCreate from "./screens/CreateComments";
+import Information from "./screens/Information";
+import NotFound from "./screens/NotFound";
+import Contact from "./screens/Contact";
+import Admin from "./screens/Admin";
+import MyRequest from "./screens/MyRequest";
+import InfornmationBedRoom from "./screens/InformationBedRoom";
+import AdminRequest from "./screens/AdminRequest";
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const urlParams = new URLSearchParams(window.location.search);
+  const sourceParam = urlParams.get("source");
+
+  if (sourceParam === "instagram") {
+    console.log("INGRESE DESDE INSTAGRAM!!!!!");
+    window.open("https://primeravistade.cl/", "_blank");
+  }
 
   useEffect(() => {
     // scroll to top on page load
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-  }, [])
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <AuthContextProvider>
@@ -102,7 +109,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthContextProvider>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -30,39 +30,28 @@ function Request() {
   const { user } = UserAuth();
   const [name, setName] = useState(user.displayName);
   const [email, setEmail] = useState(user.email);
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(0);
   const [message, setMessage] = useState("");
   const [loadDocs, setLoadDocs] = useState(true);
-
   const [phone, setPhone] = useState("");
   const { state } = useLocation();
   const { mount, startDate, finishDate, nights, rangeDates } = state;
   const [mountState, setMountState] = useState(mount);
+  const [hiddenValueMessage, setHiddenValueMessage] = useState("");
   //console.log(state)
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
+
   const sendEmail = (e) => {
     if (phone.length <= 6 || qty < 1) {
       alert("Datos incorrectos!");
       setLoadDocs(true);
     } else {
       setLoadDocs(false);
+      console.log("FINAL: ", hiddenValueMessage);
       e.preventDefault();
-      var formData = new FormData(form.current);
 
-      // Establece los valores de los campos
-      let nameArray = name.split(" ");
-
-      for (let index = 0; index < nameArray.length; index++) {
-        // Establece los valores de los campos
-        let key = `name${index}`;
-        console.log(key);
-        formData.set(key, nameArray[index]);
-        console.log(formData);
-      }
-
-      console.log(form.current);
       emailjs
         .sendForm(
           REACT_APP_EMAIL_KEY,
@@ -113,9 +102,51 @@ function Request() {
   }, []);
 
   const [show, setShow] = useState(false);
-
+  const formatMessageWsp = (
+    name,
+    email,
+    phone,
+    qty,
+    startDate,
+    finishDate,
+    mount,
+    nights
+  ) => {
+    return `Hola ${
+      name.split(" ")[0]
+    } 🌊🍀 , hemos recibido tu solicitud en Primera Vista Hospedaje, estos son los detalles: \n
+*Nombre:* ${name} \n
+*Email:* ${email} \n
+*Cantidad de Personas:* ${qty} \n
+*Teléfono:* ${phone} \n
+*Noches:* ${nights} \n
+*Fecha Inicio:* ${new Date(startDate.y, startDate.m - 1, startDate.d)
+      .toLocaleString("es-CL", options)
+      .toUpperCase()} \n
+*Fecha Salida:* ${new Date(finishDate.y, finishDate.m - 1, finishDate.d)
+      .toLocaleString("es-CL", options)
+      .toUpperCase()} \n
+*Monto:* $${mount} \n
+*Abono:* $${Math.floor(mount * 0.25)} \n
+Para dejar la reserva concretada a tu nombre, solicitamos un abono del 25%, el resto esperamos recibirlo cuando lleguen a la casa 😅 quedo atenta a tus comentarios`;
+  };
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    if (name == "" || email == "" || qty < 1 || phone.length <= 6) {
+      alert("Datos incompletos en el formulario");
+    } else {
+      setShow(true);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+    // Realiza cualquier validación adicional antes de enviar el formulario
+
+    // Envía el formulario
+    form.current.submit();
+  };
 
   return (
     <div>
@@ -147,7 +178,7 @@ function Request() {
               <Button variant="secondary" onClick={handleClose}>
                 Cerrar
               </Button>
-              <Button variant="primary" type="submit" onClick={sendEmail}>
+              <Button variant="primary" onClick={sendEmail}>
                 Confirmar Solicitud
               </Button>
             </Modal.Footer>
@@ -174,7 +205,7 @@ function Request() {
             Completar Solicitud
           </Col>
         </Row>
-        <form ref={form} onSubmit={sendEmail}>
+        <form ref={form}>
           <Row
             style={{
               display: "flex",
@@ -454,7 +485,27 @@ function Request() {
                 name="phone"
                 type="text"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => {
+                  setPhone(e.target.value.replace(/\s+/g, ""));
+                  const encodedMessage = encodeURIComponent(
+                    formatMessageWsp(
+                      name,
+                      email,
+                      phone,
+                      qty,
+                      startDate,
+                      finishDate,
+                      mountState,
+                      nights
+                    )
+                  );
+                  const whatsappLink = `https://api.whatsapp.com/send?phone=${phone.replace(
+                    /\s+/g,
+                    ""
+                  )}&text=${encodedMessage}`;
+                  setHiddenValueMessage(whatsappLink);
+                  console.log(hiddenValueMessage);
+                }}
               />
             </Col>
           </Row>
@@ -496,11 +547,28 @@ function Request() {
             >
               <input
                 style={styles.inputContainer}
-                placeholder="6"
                 name="qty"
                 type="number"
+                placeholder="4"
                 value={qty}
-                onChange={(e) => setQty(e.target.value)}
+                onChange={(e) => {
+                  setQty(e.target.value);
+                  const encodedMessage = encodeURIComponent(
+                    formatMessageWsp(
+                      name,
+                      email,
+                      phone,
+                      qty,
+                      startDate,
+                      finishDate,
+                      mountState,
+                      nights
+                    )
+                  );
+                  const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+                  setHiddenValueMessage(whatsappLink);
+                  console.log(hiddenValueMessage);
+                }}
               />
             </Col>
           </Row>
@@ -581,6 +649,20 @@ function Request() {
                 color: "white",
               }}
             >
+              {/** WSP LINK SET */}
+              <input
+                type="hidden"
+                name="messageLink"
+                value={hiddenValueMessage}
+              />
+              <input
+                type="hidden"
+                name="abono"
+                value={() => {
+                  return Math.floor(mountState * 0.2);
+                }}
+              />
+
               <div style={{ margin: 5 }}>$</div>
               {user.email === "seba.rf96@gmail.com" ||
               user.email === "ant.niasbravo@gmail.com" ? (
@@ -589,7 +671,24 @@ function Request() {
                   style={styles.inputContainer}
                   name="mount"
                   value={mountState}
-                  onChange={(e) => setMountState(e.target.value)}
+                  onChange={(e) => {
+                    setMountState(e.target.value);
+                    const encodedMessage = encodeURIComponent(
+                      formatMessageWsp(
+                        name,
+                        email,
+                        phone,
+                        qty,
+                        startDate,
+                        finishDate,
+                        mountState,
+                        nights
+                      )
+                    );
+                    const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+                    setHiddenValueMessage(whatsappLink);
+                    console.log(hiddenValueMessage);
+                  }}
                 />
               ) : (
                 <input
@@ -598,11 +697,29 @@ function Request() {
                   style={styles.inputContainer}
                   name="mount"
                   value={mountState}
-                  onChange={(e) => setMountState(e.target.value)}
+                  onChange={(e) => {
+                    setMountState(e.target.value);
+                    const encodedMessage = encodeURIComponent(
+                      formatMessageWsp(
+                        name,
+                        email,
+                        phone,
+                        qty,
+                        startDate,
+                        finishDate,
+                        mountState,
+                        nights
+                      )
+                    );
+                    const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+                    setHiddenValueMessage(whatsappLink);
+                    console.log(hiddenValueMessage);
+                  }}
                 />
               )}
             </Col>
           </Row>
+
           {loadDocs ? (
             <div
               style={{
@@ -613,8 +730,29 @@ function Request() {
             >
               <Button
                 variant="primary"
-                style={{ backgroundColor: "green", padding: 20 }}
-                onClick={handleShow}
+                style={{
+                  backgroundColor: "green",
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  marginBottom: 50,
+                }}
+                onClick={() => {
+                  const encodedMessage = encodeURIComponent(
+                    formatMessageWsp(
+                      name,
+                      email,
+                      phone,
+                      qty,
+                      startDate,
+                      finishDate,
+                      mountState,
+                      nights
+                    )
+                  );
+                  const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+                  setHiddenValueMessage(whatsappLink);
+                  handleShow();
+                }}
               >
                 Confirmar solicitud
               </Button>
